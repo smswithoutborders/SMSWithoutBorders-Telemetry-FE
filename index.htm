@@ -12,154 +12,78 @@
     <title>Afkanerd Chart</title>
 </head>
 
-<body>
     <div class="container-fluid">
-
         <div class="row pt-3">
             <div>
                 <h1 class="title">SMS Without Borders data visualization</h1>
             </div>
             <hr>
 
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@fat">Months</button>
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@fat">Dates</button>
-
-
-                                    <div class="modal fade" id="exampleModal" id="Months" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel" id="label-head">select range in Months</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-
-                                        <div class="modal-body">
-                                            <div class="mb-3">
-                                                <label for="message-text" class="col-form-label">From:</label>
-                                                <select>
-                                                    <option>January</option>
-                                                    <option>Febuary</option>
-                                                    <option>March</option>
-                                                    <option>April</option>
-                                                    <option>May</option>
-                                                    <option>June</option>
-                                                    <option>July</option>
-                                                    <option>August</option>
-                                                    <option>September</option>
-                                                    <option>October</option>
-                                                    <option>November</option>
-                                                    <option>December</option>
-                                                  </select>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="message-text" class="col-form-label">To:</label>
-                                                <select>
-                                                    <option>January</option>
-                                                    <option>Febuary</option>
-                                                    <option>March</option>
-                                                    <option>April</option>
-                                                    <option>May</option>
-                                                    <option>June</option>
-                                                    <option>July</option>
-                                                    <option>August</option>
-                                                    <option>September</option>
-                                                    <option>October</option>
-                                                    <option>November</option>
-                                                    <option>December</option>
-                                                  </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-primary">Send message</button>
-                                        </div>
-                                        </div>
-                                    </div>
-                                    </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            <!-- Filter --
+            <!-- Filter -->
             <div id="demo" class="col pb-2">
-                <label class="form-label">Filter</label>
 
-                <select class="form-select">
-                    <option selected> Choose a category</option>
-                    <option value="1" onclick="myMonth()" id="months">Months</option>
-                    <option value="2" onclick="myDate()" id="date"> Date</option>
-                  </select>
-    <!--testing earea here-
+                <div class="row">
+                    <div class="col-sm-3">
+                        <label>Filter:</label>
+                          <div class="card">
+                            <div class="card-body">
+                              <h5 class="card-title">Choose category</h5>
+                              <hr>
+                             
+                              <div class="btn-group">
+                                <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown">Mobile Phones</button>
+                                <ul class="dropdown-menu">
+                                  <li><a class="dropdown-item" href="#">Android</a></li>
+                                  <li><a class="dropdown-item" href="#">Iphone</a></li>
+                                </ul>
+                            
+                              </div>
+                                <hr>
+                                <a href="#" class="btn btn-primary">Enter</a>
+                                </div>
+                            </div>
+                      
+                    </div>
+
+                    <div class="col-sm-3">
+                        <label>Type:</label>
+                        <div class="card">
+                            <div class="card-body">
+                              <h5 class="card-title">Choose a Data type</h5>
+                              <hr>
+
+                              <div class="btn-group">
+                                <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown">Mobile Phones</button>
+                                <ul class="dropdown-menu">
+                                  <li><a class="dropdown-item" href="#">Android</a></li>
+                                  <li><a class="dropdown-item" href="#">Iphone</a></li>
+                                </ul>
+                            
+                              </div>
+                            </div>
+                          </div>
+                    </div>
+                  
 
 
-                <label class="form-label">Type</label>
 
-                <select class="form-select" aria-label="Default select example">
-                    <option selected> Choose a category</option>
-                    <option value="1" onclick="myMonth()" id="months">Signed Up Users</option>
-                    <option value="2" onclick="myDate()" id="date">Active User </option>
-                </select>   
-
-            </div>
-            <!--
-            <select>
+                    <!--<div class="btn-group">
+                        <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown">TV</button>
+                        <ul class="dropdown-menu">
+                          <li><a class="dropdown-item" href="#">Samsung</a></li>
+                          <li><a class="dropdown-item" href="#">LG</a></li>
+                        </ul>
+                      
+                        <div class="btn-group">
+                          <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown">Mobile Phones</button>
+                          <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Android</a></li>
+                            <li><a class="dropdown-item" href="#">Iphone</a></li>
+                          </ul>
+                      
+                        </div>
+                      </div>
+            <--<select>
                 <option>January</option>
                 <option>Febuary</option>
                 <option>March</option>
@@ -174,9 +98,8 @@
                 <option>December</option>
               </select>-->
 
-
              <!-- Table  -->
-             <div class="col-md-4">
+             <div class="col-md-6">
                 <table class="table table-bordered border-dark">
                     <thead>
                       <tr>
@@ -215,7 +138,7 @@
                 <!--  -->
     
         </div>
-
+<hr>
 
             <div class="row justify-content-start">
             <div class="col-md-4  ">
