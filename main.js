@@ -162,4 +162,8 @@ function run(month_type) {
 
     xhttp.open("GET", "https://6047e344b801a40017ccd1df.mockapi.io/api/metrics", true);
     xhttp.send();
+<<<<<<< HEAD
 }
+=======
+};
+>>>>>>> Mildred-branch
