@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" sizes="32x32 64x64" href="assets/favicon (1).ico" />
+    <title>Afkanerd Chart</title>
+</head>
+
+    <div class="container-fluid">
+        <div class="row pt-3">
+            <div>
+                <h1 class="title">SMS Without Borders data visualization</h1>
+            </div>
+            <hr class="line">
+
+            <!-- Filter -->
+            <div id="demo" class="col pb-2">
+
+                <div class="row">
+                    <div class="col-sm-3">
+                        <label>Filter:</label>
+                          <div class="card">
+                            <div class="card-body">
+                              <h5 class="card-title">Choose category</h5>
+                              <hr>
+                              <div class="btn-group">
+                                <button type="button" class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown"> Choose category</button>
+                                <ul class="dropdown-menu">
+                                    <!--sub dropdown-->
+                                    <li>
+                                      <a class="dropdown-item" href="#">
+                                        Months &raquo;
+                                      </a>
+                                      <ul class="dropdown-menu dropdown-submenu">
+
+                                        <li>
+                                            <select>
+                                              <option>January</option>
+                                              <option>Febuary</option>
+                                              <option>March</option>
+                                              <option>April</option>
+                                              <option>May</option>
+                                              <option>June</option>
+                                              <option>July</option>
+                                              <option>August</option>
+                                              <option>September</option>
+                                              <option>October</option>
+                                              <option>November</option>
+                                              <option>December</option>
+                                            </select>                                                                    
+                                        </li>                          
+                                                                             
+                                      </ul>
+                                    </li>
+                                    <!--end of subdropdown-->
+                                  <li><a class="dropdown-item" href="#">Date</a></li>
+                                </ul>
+                              </div>
+                            </div>
+                    </div>
+                    </div>
+
+                    <div class="col-sm-3">
+                        <label>Type:</label>
+                        <div class="card">
+                            <div class="card-body">
+                              <h5 class="card-title">Choose a Data type</h5>
+                              <hr>
+                              <div class="btn-group">
+                                <button type="button" class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown">select One</button>
+                                <ul class="dropdown-menu">
+                                  <li><a class="dropdown-item" href="#">Signed-up Users</a></li>
+                                  <li><a class="dropdown-item" href="#">Active Users</a></li>
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+                    </div>
+                  
+             <!-- Table  -->
+             <div class="col-md-6">
+                <table class="table table-bordered border-dark">
+                    <thead>
+                      <tr>
+                        <th scope="col">Month</th>
+                        <th scope="col">Signed Up Users</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>January</td>
+                        <td>80</td>
+                      </tr>
+                      <tr>
+                        <td>Febuary</td>
+                        <td>60</td>
+                      </tr>
+                      <tr>
+                        <td>March</td>
+                        <td>150</td>
+                      </tr>
+                      <tr>
+                        <td>April</td>
+                        <td>56</td>
+                      </tr>
+                      <tr>
+                        <td>May</td>
+                        <td>79</td>
+                      </tr>
+                      <tr>
+                        <td>June</td>
+                        <td>68</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+        </div>
+        </div>
+        </div>
+
+<hr class="line">
+
+
+
+
+            <div class="row justify-content-start">
+            <div class="col-md-4  ">
+
+                <!-- Chart display -->
+                
+                <div id="line_div">
+                    <div class="d-flex justify-content-center">
+                        <div class="spinner-grow text-light" style="width: 4rem; height: 4rem;" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <div class="spinner-grow text-light" style="width: 4rem; height: 4rem;" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <div class="spinner-grow text-light" style="width: 4rem; height: 4rem;" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+                </div>
+
+                <div class="col-md-4 ">
+
+                <div id="bar_div">
+                    <div class="d-flex justify-content-center">
+                        <div class="spinner-grow text-light" style="width: 4rem; height: 4rem;" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <div class="spinner-grow text-light" style="width: 4rem; height: 4rem;" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <div class="spinner-grow text-light" style="width: 4rem; height: 4rem;" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--  -->
+
+    </div>
+</div>
+    <!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript"></script>
+    <!-- My JS -->
+
+    <script src="main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
+    </script>
+</body>
+
+</html>
