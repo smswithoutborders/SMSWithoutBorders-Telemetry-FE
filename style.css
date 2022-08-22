@@ -1,5 +1,6 @@
 body {
-    background-image: url(assets/blurry-gradient-haikei\(1\).svg);
+    /* background-image: url(assets/blurry-gradient-haikei\(1\).svg); */
+    background-color: #ffffff;
     background-repeat: no-repeat;
     background-size: cover;
     height: fit-content;
