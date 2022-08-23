@@ -78,16 +78,16 @@
         <select id="type" class="btn btn-light shadow w-75 mb-4">
           <option value="">Choose a Data Type</option>
           <option value="signup">Signed-up Users</option>
-          <option value="active">Active Users</option>
+          <option id="active" value="active">Active Users</option>
           <option value="recovery">Recovered accounts</option>
           <option value="publisher">Published</option>
         </select><br>
 
-        <button id="filter" class="btn btn-secondary btn-lg mt-5 w-75 shadow">Filter</button>
+        <button onclick="plotFunction()" id="filter" type="submit" class="btn btn-secondary btn-lg mt-5 w-75 shadow">Filter</button>
 
       </div>
 
-      <!-- tables -->
+      <!-- table -->
       <div class="col-md-5 ms-auto">
         <h6>Table showing signed users From January to July</h6>
         <table class="table table-bordered table-sm border-secondary text-center">
