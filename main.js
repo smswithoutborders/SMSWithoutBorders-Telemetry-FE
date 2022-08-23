@@ -1,171 +1,168 @@
+function plotFunction() {
 // Default
 // Load google API
 google.charts.load('current', {
     'packages': ['corechart']
 });
 // get months input type
+let input = document.getElementById("type")
+
+run(input.value)
+
+input.addEventListener("change", () => {
+    run(input.value)
+})
 
 
-// filter.addEventListener("click", () => {
-//     for (var i = 0; i < category_day.length; i++) {
-//         category_day[i].style.display = "None";
-//     }
-// })
+function run(type) {
+    let xhttp = new XMLHttpRequest();
 
-// run(input.value)
+    // Make AJAX call
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            let entry = JSON.parse(this.responseText);
 
-// input.addEventListener("change", () => {
-//     run(input.value)
-// })
+            let headers = [
+                "Month",
+                "Users"
+            ]
 
-// function run(month_type) {
-//     let xhttp = new XMLHttpRequest();
+            // call chart function
+            line();
+            bar();
 
-//     // Make AJAX call
-//     xhttp.onreadystatechange = function () {
-//         if (this.readyState == 4 && this.status == 200) {
-//             let entry = JSON.parse(this.responseText);
+            function line() {
+                // Set a callback to run when the Google Visualization API is loaded.
+                google.charts.setOnLoadCallback(drawChart);
 
-//             let headers = [
-//                 "Month",
-//                 "Users"
-//             ]
+                function drawChart() {
+                    result = []
 
-//             // call chart function
-//             line();
-//             bar();
+                    // Condition for month types
+                    if (type == "active") {
+                        result.push(headers);
 
-//             function line() {
-//                 // Set a callback to run when the Google Visualization API is loaded.
-//                 google.charts.setOnLoadCallback(drawChart);
+                        entry.map(function (element) {
+                            data = []
 
-//                 function drawChart() {
-//                     result = []
+                            data.push(element.Month);
+                            data.push(element.users);
 
-//                     // Condition for month types
-//                     if (month_type == "all") {
-//                         result.push(headers);
+                            result.push(data);
+                        })
 
-//                         entry.map(function (element) {
-//                             data = []
+                    } else {
+                        result.push([
+                            entry[0].Month,
+                            entry[0].users
+                        ])
 
-//                             data.push(element.Month);
-//                             data.push(element.users);
+                        entry.map(function (element) {
+                            if (element.Type == type) {
+                                data = []
 
-//                             result.push(data);
-//                         })
-
-//                     } else {
-//                         result.push([
-//                             entry[0].Month,
-//                             entry[0].users
-//                         ])
-
-//                         entry.map(function (element) {
-//                             if (element.Days == month_type) {
-//                                 data = []
-
-//                                 data.push(element.Month);
-//                                 data.push(element.users);
+                                data.push(element.Month);
+                                data.push(element.users);
 
 
-//                                 result.push(data);
-//                             }
-//                         })
-//                     }
+                                result.push(data);
+                            }
+                        })
+                    }
 
-//                     var data = google.visualization.arrayToDataTable(
-//                         result
-//                     );
+                    var data = google.visualization.arrayToDataTable(
+                        result
+                    );
 
-//                     // Set chart options
-//                     var options = {
-//                         vAxis: {
-//                             title: 'Days',
-//                             format: '0',
-//                             minValue: 0
-//                         },
-//                         hAxis: {
-//                             title: 'Months'
-//                         },
-//                         'title': 'Monthly Subscribers Visualization',
-//                         height: 200
-//                     };
+                    // Set chart options
+                    var options = {
+                        vAxis: {
+                            title: 'Days',
+                            format: '0',
+                            minValue: 0
+                        },
+                        hAxis: {
+                            title: 'Months'
+                        },
+                        'title': 'Monthly Subscribers Visualization',
+                        height: 250
+                    };
 
-//                     // Instantiate and draw our chart, passing in some options.
-//                     var chart = new google.visualization.LineChart(document.getElementById('line_div'));
+                    // Instantiate and draw our chart, passing in some options.
+                    var chart = new google.visualization.LineChart(document.getElementById('line_div'));
 
-//                     chart.draw(data, options);
-//                 }
-//             }
+                    chart.draw(data, options);
+                }
+            }
 
-//             function bar() {
-//                 // Set a callback to run when the Google Visualization API is loaded.
-//                 google.charts.setOnLoadCallback(drawChart);
-
-
-//                 function drawChart() {
-//                     result = []
-
-//                     // Condition for month types
-//                     if (month_type == "all") {
-//                         result.push(headers);
-
-//                         entry.map(function (element) {
-//                             data = []
-
-//                             data.push(element.Month);
-//                             data.push(element.users);
-
-//                             result.push(data);
-//                         })
-
-//                     } else {
-//                         result.push([
-//                             entry[0].Month,
-//                             entry[0].users
-//                         ])
-
-//                         entry.map(function (element) {
-//                             if (element.Days == month_type) {
-//                                 data = []
-
-//                                 data.push(element.Month);
-//                                 data.push(element.users);
+            function bar() {
+                // Set a callback to run when the Google Visualization API is loaded.
+                google.charts.setOnLoadCallback(drawChart);
 
 
-//                                 result.push(data);
-//                             }
-//                         })
-//                     }
+                function drawChart() {
+                    result = []
 
-//                     var data = google.visualization.arrayToDataTable(
-//                         result
-//                     );
-//                     // Set chart options
-//                     var options = {
-//                         vAxis: {
-//                             title: 'Days',
-//                             format: '0'
-//                         },
+                    // Condition for month types
+                    if (type == "active") {
+                        result.push(headers);
 
-//                         hAxis: {
-//                             title: 'Months',
-//                             minValue: 0
-//                         },
-//                         'title': 'Monthly Subscribers Visualization',
-//                         height: 200
-//                     };
+                        entry.map(function (element) {
+                            data = []
 
-//                     // Instantiate and draw our chart, passing in some options.
-//                     var chart = new google.visualization.BarChart(document.getElementById('bar_div'));
+                            data.push(element.Month);
+                            data.push(element.users);
 
-//                     chart.draw(data, options);
-//                 }
-//             }
-//         }
-//     };
+                            result.push(data);
+                        })
 
-//     xhttp.open("GET", "https://6047e344b801a40017ccd1df.mockapi.io/api/metrics", true);
-//     xhttp.send();
-// }
+                    } else {
+                        result.push([
+                            entry[0].Month,
+                            entry[0].users
+                        ])
+
+                        entry.map(function (element) {
+                            if (element.Type == type) {
+                                data = []
+
+                                data.push(element.Month);
+                                data.push(element.users);
+
+
+                                result.push(data);
+                            }
+                        })
+                    }
+
+                    var data = google.visualization.arrayToDataTable(
+                        result
+                    );
+                    // Set chart options
+                    var options = {
+                        vAxis: {
+                            title: 'Days',
+                            format: '0'
+                        },
+
+                        hAxis: {
+                            title: 'Months',
+                            minValue: 0
+                        },
+                        'title': 'Monthly Subscribers Visualization',
+                        height: 250
+                    };
+
+                    // Instantiate and draw our chart, passing in some options.
+                    var chart = new google.visualization.BarChart(document.getElementById('bar_div'));
+
+                    chart.draw(data, options);
+                }
+            }
+        }
+    };
+
+    xhttp.open("GET", "https://6047e344b801a40017ccd1df.mockapi.io/api/metrics", true);
+    xhttp.send();
+}
+}
