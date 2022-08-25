@@ -23,16 +23,17 @@ function plotFunction() {
         let category = document.getElementById("category");
         let start_month = document.getElementById("start_month");
         let end_month = document.getElementById("end_month");
+        let type = document.getElementById("type");
 
-        let filter = (category, start_month, end_month) => {
+        let filter = (category, start_month, end_month, type) => {
           if (category == "months") {
-            filter_months(start_month, end_month);
+            filter_months(start_month, end_month, type);
           }
         };
 
-        filter(category.value, start_month.value, end_month.value);
+        filter(category.value, start_month.value, end_month.value, type.value);
 
-        function filter_months(start_month, end_month) {
+        function filter_months(start_month, end_month, type) {
           const month = [
             "January",
             "February",
@@ -62,7 +63,8 @@ function plotFunction() {
               new Date(element.date).getFullYear() <=
                 new Date(end_month).getFullYear() &&
               new Date(element.date).getMonth() <=
-                new Date(end_month).getMonth()
+                new Date(end_month).getMonth() &&
+              element.type == type
             ) {
               filter_data.push(month[new Date(element.date).getMonth()]);
             }
