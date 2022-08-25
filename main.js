@@ -24,14 +24,32 @@ function plotFunction() {
         let start_month = document.getElementById("start_month");
         let end_month = document.getElementById("end_month");
         let type = document.getElementById("type");
+        let start_date = document.getElementById("start_date");
+        let end_date = document.getElementById("end_date");
 
-        let filter = (category, start_month, end_month, type) => {
+        let filter = (
+          category,
+          start_month,
+          end_month,
+          type,
+          start_date,
+          end_date
+        ) => {
           if (category == "months") {
             filter_months(start_month, end_month, type);
+          } else {
+            filter_days(start_date, end_date, type);
           }
         };
 
-        filter(category.value, start_month.value, end_month.value, type.value);
+        filter(
+          category.value,
+          start_month.value,
+          end_month.value,
+          type.value,
+          start_date.value,
+          end_date.value
+        );
 
         function filter_months(start_month, end_month, type) {
           const month = [
@@ -67,6 +85,32 @@ function plotFunction() {
               element.type == type
             ) {
               filter_data.push(month[new Date(element.date).getMonth()]);
+            }
+          });
+          let data = {};
+
+          filter_data.forEach((element) => {
+            data[element] = (data[element] || 0) + 1;
+          });
+
+          let result = Object.keys(data).map((key) => {
+            return [key, data[key]];
+          });
+          console.log(result);
+          // document.getElementById("length").innerHTML = result;
+        }
+
+        function filter_days(start_date, end_date, type) {
+          let filter_data = [];
+          console.log(start_date);
+          console.log(end_date);
+          entry.forEach((element) => {
+            if (
+              new Date(element.date) >= new Date(start_date) &&
+              new Date(element.date) <= new Date(end_date) &&
+              element.type == type
+            ) {
+              filter_data.push(new Date(element.date));
             }
           });
           let data = {};
