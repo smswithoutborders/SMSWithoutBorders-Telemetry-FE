@@ -21,15 +21,18 @@ function plotFunction() {
       if (this.readyState == 4 && this.status == 200) {
         let entry = JSON.parse(this.responseText);
         let category = document.getElementById("category");
+        let start_month = document.getElementById("start_month");
+        let end_month = document.getElementById("end_month");
 
-        let filter = (category, from, to, type) => {
+        let filter = (category, start_month, end_month) => {
           if (category == "months") {
-            filter_months();
+            filter_months(start_month, end_month);
           }
         };
-        filter(category.value);
 
-        function filter_months() {
+        filter(category.value, start_month.value, end_month.value);
+
+        function filter_months(start_month, end_month) {
           const month = [
             "January",
             "February",
@@ -47,11 +50,19 @@ function plotFunction() {
 
           let filter_data = [];
 
+          console.log(start_month);
+          console.log(end_month);
+
           entry.forEach((element) => {
             if (
-              new Date(element.date) > new Date("2022-02-01") &&
-              new Date(element.date) < new Date("2022-08-19") &&
-              element.type == "active"
+              new Date(element.date).getFullYear() >=
+                new Date(start_month).getFullYear() &&
+              new Date(element.date).getMonth() >=
+                new Date(start_month).getMonth() &&
+              new Date(element.date).getFullYear() <=
+                new Date(end_month).getFullYear() &&
+              new Date(element.date).getMonth() <=
+                new Date(end_month).getMonth()
             ) {
               filter_data.push(month[new Date(element.date).getMonth()]);
             }
@@ -66,7 +77,7 @@ function plotFunction() {
             return [key, data[key]];
           });
           console.log(result);
-          document.getElementById("length").innerHTML = result;
+          // document.getElementById("length").innerHTML = result;
         }
 
         let headers = ["Month", "Users"];
