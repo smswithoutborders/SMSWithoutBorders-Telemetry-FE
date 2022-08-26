@@ -96,14 +96,23 @@ function plotFunction() {
           let result = Object.keys(data).map((key) => {
             return [key, data[key]];
           });
-          console.log(result);
-          // document.getElementById("length").innerHTML = result;
+
+          document.getElementById("length").innerHTML = result;
+
+          let table_header = document.getElementById("table_header");
+          table_header.textContent = type;
+          table_header.innerHTML = `<span >Table showing </span>`;
+          table_header.insertAdjacentText("beforeend", type);
+          table_header.insertAdjacentHTML("beforeend", `<span> users</code>`);
+
+          let heading = document.getElementById("heading");
+          heading.textContent = type;
+          heading.insertAdjacentHTML("beforeend", `<span> users</code>`);
         }
 
         function filter_days(start_date, end_date, type) {
           let filter_data = [];
-          console.log(start_date);
-          console.log(end_date);
+
           entry.forEach((element) => {
             if (
               new Date(element.date) >= new Date(start_date) &&
@@ -122,7 +131,6 @@ function plotFunction() {
           let result = Object.keys(data).map((key) => {
             return [key, data[key]];
           });
-          console.log(result);
           document.getElementById("length").innerHTML = result;
 
           let table_header = document.getElementById("table_header");
