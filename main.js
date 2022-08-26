@@ -36,13 +36,13 @@ function plotFunction() {
           end_date
         ) => {
           if (category == "months") {
-            filter_months(start_month, end_month, type);
+            return filter_months(start_month, end_month, type);
           } else {
-            filter_days(start_date, end_date, type);
+            return filter_days(start_date, end_date, type);
           }
         };
 
-        filter(
+        let filter_data = filter(
           category.value,
           start_month.value,
           end_month.value,
@@ -75,13 +75,13 @@ function plotFunction() {
           entry.forEach((element) => {
             if (
               new Date(element.date).getFullYear() >=
-                new Date(start_month).getFullYear() &&
+              new Date(start_month).getFullYear() &&
               new Date(element.date).getMonth() >=
-                new Date(start_month).getMonth() &&
+              new Date(start_month).getMonth() &&
               new Date(element.date).getFullYear() <=
-                new Date(end_month).getFullYear() &&
+              new Date(end_month).getFullYear() &&
               new Date(element.date).getMonth() <=
-                new Date(end_month).getMonth() &&
+              new Date(end_month).getMonth() &&
               element.type == type
             ) {
               filter_data.push(month[new Date(element.date).getMonth()]);
@@ -97,17 +97,7 @@ function plotFunction() {
             return [key, data[key]];
           });
 
-          document.getElementById("length").innerHTML = result;
-
-          let table_header = document.getElementById("table_header");
-          table_header.textContent = type;
-          table_header.innerHTML = `<span >Table showing </span>`;
-          table_header.insertAdjacentText("beforeend", type);
-          table_header.insertAdjacentHTML("beforeend", `<span> users</code>`);
-
-          let heading = document.getElementById("heading");
-          heading.textContent = type;
-          heading.insertAdjacentHTML("beforeend", `<span> users</code>`);
+          return result
         }
 
         function filter_days(start_date, end_date, type) {
@@ -131,60 +121,27 @@ function plotFunction() {
           let result = Object.keys(data).map((key) => {
             return [key, data[key]];
           });
-          document.getElementById("length").innerHTML = result;
 
-          let table_header = document.getElementById("table_header");
-          table_header.textContent = type;
-          table_header.innerHTML = `<span >Table showing </span>`;
-          table_header.insertAdjacentText("beforeend", type);
-          table_header.insertAdjacentHTML("beforeend", `<span> users</code>`);
-
-          let heading = document.getElementById("heading");
-          heading.textContent = type;
-          heading.insertAdjacentHTML("beforeend", `<span> users</code>`);
+          return result
         }
+
 
         let headers = ["Month", "Users"];
 
         // call chart function
-        line();
-        bar();
+        document.getElementById("length").innerHTML = filter_data;
+        filter_data.unshift(headers)
 
-        function line() {
+        line(filter_data);
+        bar(filter_data);
+
+        function line(data) {
           // Set a callback to run when the Google Visualization API is loaded.
           google.charts.setOnLoadCallback(drawChart);
-
+          
           function drawChart() {
-            result = [];
 
-            // Condition for month types
-            if (type == "active") {
-              result.push(headers);
-
-              entry.map(function (element) {
-                data = [];
-
-                data.push(element.Month);
-                data.push(element.users);
-
-                result.push(data);
-              });
-            } else {
-              result.push([entry[0].Month, entry[0].users]);
-
-              entry.map(function (element) {
-                if (element.Type == type) {
-                  data = [];
-
-                  data.push(element.Month);
-                  data.push(element.users);
-
-                  result.push(data);
-                }
-              });
-            }
-
-            var data = google.visualization.arrayToDataTable(result);
+            var result = google.visualization.arrayToDataTable(data);
 
             // Set chart options
             var options = {
@@ -205,55 +162,26 @@ function plotFunction() {
               document.getElementById("line_div")
             );
 
-            chart.draw(data, options);
+            chart.draw(result, options);
           }
         }
 
-        function bar() {
+        function bar(data) {
           // Set a callback to run when the Google Visualization API is loaded.
           google.charts.setOnLoadCallback(drawChart);
-
           function drawChart() {
-            result = [];
 
-            // Condition for month types
-            if (type == "active") {
-              result.push(headers);
+            var result = google.visualization.arrayToDataTable(data);
 
-              entry.map(function (element) {
-                data = [];
-
-                data.push(element.Month);
-                data.push(element.users);
-
-                result.push(data);
-              });
-            } else {
-              result.push([entry[0].Month, entry[0].users]);
-
-              entry.map(function (element) {
-                if (element.Type == type) {
-                  data = [];
-
-                  data.push(element.Month);
-                  data.push(element.users);
-
-                  result.push(data);
-                }
-              });
-            }
-
-            var data = google.visualization.arrayToDataTable(result);
             // Set chart options
             var options = {
               vAxis: {
                 title: "Days",
                 format: "0",
+                minValue: 0,
               },
-
               hAxis: {
                 title: "Months",
-                minValue: 0,
               },
               title: "Monthly Subscribers Visualization",
               height: 250,
@@ -264,7 +192,7 @@ function plotFunction() {
               document.getElementById("bar_div")
             );
 
-            chart.draw(data, options);
+            chart.draw(result, options);
           }
         }
       }
