@@ -1,32 +1,17 @@
-function plotFunction() {
   // Default
   // Load google API
   google.charts.load("current", {
     packages: ["corechart"],
   });
-  // get months input type
-  let input = document.getElementById("type");
 
-  run(input.value);
-
-  input.addEventListener("change", () => {
-    run(input.value);
-  });
-
-  function run(type) {
+  function run(category, start_month, end_month, start_date, end_date, table_data, table_head, type) {
     let xhttp = new XMLHttpRequest();
 
     // Make AJAX call
     xhttp.onreadystatechange = function () {
       if (this.readyState == 4 && this.status == 200) {
         let entry = JSON.parse(this.responseText);
-        let category = document.getElementById("category");
-        let start_month = document.getElementById("start_month");
-        let end_month = document.getElementById("end_month");
-        let type = document.getElementById("type");
-        let start_date = document.getElementById("start_date");
-        let end_date = document.getElementById("end_date");
-
+    
         let filter = (
           category,
           start_month,
@@ -37,18 +22,18 @@ function plotFunction() {
         ) => {
           if (category == "months") {
             return filter_months(start_month, end_month, type);
-          } else {
+          } else if (category == "days") {
             return filter_days(start_date, end_date, type);
           }
         };
 
         let filter_data = filter(
-          category.value,
-          start_month.value,
-          end_month.value,
-          type.value,
-          start_date.value,
-          end_date.value
+          category,
+          start_month,
+          end_month,
+          type,
+          start_date,
+          end_date
         );
 
         function filter_months(start_month, end_month, type) {
@@ -125,11 +110,17 @@ function plotFunction() {
           return result
         }
 
+        let headers = [category.toUpperCase(), type.toUpperCase()];
 
-        let headers = ["Month", "Users"];
+        // table
+        table_head.innerHTML = `<tr><th scope="col">${headers[0]}</th><th scope="col">${headers[1]}</th></tr>`
+        table_data.innerHTML = ""
+
+        filter_data.forEach((item) => {
+          table_data.innerHTML += `<tr><td>${item[0]}</td><td>${item[1]}</td></tr>`
+        })
 
         // call chart function
-        document.getElementById("length").innerHTML = filter_data;
         filter_data.unshift(headers)
 
         line(filter_data);
@@ -138,7 +129,7 @@ function plotFunction() {
         function line(data) {
           // Set a callback to run when the Google Visualization API is loaded.
           google.charts.setOnLoadCallback(drawChart);
-          
+
           function drawChart() {
 
             var result = google.visualization.arrayToDataTable(data);
@@ -146,7 +137,7 @@ function plotFunction() {
             // Set chart options
             var options = {
               vAxis: {
-                title: "Days",
+                title: headers[1],
                 format: "0",
                 minValue: 0,
               },
@@ -169,6 +160,7 @@ function plotFunction() {
         function bar(data) {
           // Set a callback to run when the Google Visualization API is loaded.
           google.charts.setOnLoadCallback(drawChart);
+
           function drawChart() {
 
             var result = google.visualization.arrayToDataTable(data);
@@ -176,12 +168,12 @@ function plotFunction() {
             // Set chart options
             var options = {
               vAxis: {
-                title: "Days",
+                title: headers[1],
                 format: "0",
                 minValue: 0,
               },
               hAxis: {
-                title: "Months",
+                title: "",
               },
               title: "Monthly Subscribers Visualization",
               height: 250,
@@ -205,4 +197,3 @@ function plotFunction() {
     );
     xhttp.send();
   }
-}
