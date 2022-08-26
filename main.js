@@ -123,7 +123,17 @@ function plotFunction() {
             return [key, data[key]];
           });
           console.log(result);
-          // document.getElementById("length").innerHTML = result;
+          document.getElementById("length").innerHTML = result;
+
+          let table_header = document.getElementById("table_header");
+          table_header.textContent = type;
+          table_header.innerHTML = `<span >Table showing </span>`;
+          table_header.insertAdjacentText("beforeend", type);
+          table_header.insertAdjacentHTML("beforeend", `<span> users</code>`);
+
+          let heading = document.getElementById("heading");
+          heading.textContent = type;
+          heading.insertAdjacentHTML("beforeend", `<span> users</code>`);
         }
 
         let headers = ["Month", "Users"];

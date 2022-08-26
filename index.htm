@@ -53,7 +53,6 @@
               <small class="me-5">From</small><small class="ms-2"></small
               ><small class="ms-5">To</small><br />
 
-              
               <input id="start_date" type="date" class="shadow" />
               <input id="end_date" type="date" class="shadow" />
             </div>
@@ -82,14 +81,14 @@
 
         <!-- table -->
         <div class="col-md-5 ms-auto">
-          <h6>Table showing signed users From January to July</h6>
+          <h6 id="table_header">Table showing number of users</h6>
           <table
             class="table table-bordered table-sm border-secondary text-center"
           >
             <thead class="table-light border-dark">
               <tr>
                 <th scope="col">Month</th>
-                <th scope="col">Signed Up Users</th>
+                <th id="heading" scope="col"></th>
               </tr>
             </thead>
             <tbody>
@@ -122,6 +121,7 @@
         </div>
       </div>
     </div>
+    <div id="length"></div>
 
     <div class="row justify-content-start mt-5">
       <div class="col-md-4">
