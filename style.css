@@ -1,5 +1,6 @@
 body {
-    background-color: white;
+    background-image: url(assets/blob-scene-haikei\(1\).svg);
+    /* background-color: white; */
     background-repeat: no-repeat;
     background-size: cover;
     height: fit-content;
@@ -33,4 +34,8 @@ body {
 
 .category_day {
     display: none;
+}
+
+.bot:hover {
+    background-color: rgb(18, 146, 251);
 }
