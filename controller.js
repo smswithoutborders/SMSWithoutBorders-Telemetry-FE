@@ -1,4 +1,4 @@
-let filter = document.getElementById("filter")
+let filter_btn = document.getElementById("filter")
 let category = document.getElementById("category")
 let type = document.getElementById("type")
 let category_day = document.getElementsByClassName("category_day")
@@ -10,8 +10,10 @@ let end_date = document.getElementById("end_date");
 let table_data = document.getElementById("table_data");
 let table_head = document.getElementById("table_head");
 
-filter.addEventListener("click", () => {
-    run(category.value, start_month.value, end_month.value, start_date.value, end_date.value, table_data, table_head, type.value);
+const URL = "https://62ffa49234344b6431fe43fc.mockapi.io/statistics"
+
+filter_btn.addEventListener("click", () => {
+    fetchData(URL, category.value, start_month.value, end_month.value, start_date.value, end_date.value, table_data, table_head, type.value);
 });
 
 category.addEventListener("change", () => {
