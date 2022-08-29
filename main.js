@@ -74,7 +74,7 @@ function filter_days(entry, start_date, end_date, type) {
       new Date(element.date) <= new Date(end_date) &&
       element.type == type
     ) {
-      filter_data.push(new Date(element.date));
+      filter_data.push(new Date(element.date).toDateString());
     }
   });
   let data = {};
