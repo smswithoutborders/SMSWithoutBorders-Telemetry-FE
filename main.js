@@ -68,7 +68,6 @@ function filter_months(entry, start_month, end_month, type) {
       element.type == type
     ) {
       filter_data.push(month[new Date(element.date).getMonth()]);
-      console.log(new Date(element.date).getTime());
     }
   });
 
@@ -141,7 +140,7 @@ function line(data) {
         minValue: 0,
       },
       hAxis: {
-        title: data[0][0],
+        title: "Months",
       },
       title: "Monthly Subscribers Visualization",
       height: 250,
@@ -171,7 +170,7 @@ function bar(data) {
         minValue: 0,
       },
       hAxis: {
-        title: data[0][0],
+        title: "",
       },
       title: "Monthly Subscribers Visualization",
       height: 250,
