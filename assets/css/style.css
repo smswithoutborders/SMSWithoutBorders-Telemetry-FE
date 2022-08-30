@@ -1,40 +1,40 @@
 body {
-    background-image: url(/assets/images/blob-scene-haikei.svg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: fit-content;
+  background-image: url(/assets/images/blob-scene-haikei.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: fit-content;
 }
 
 .row {
-    justify-content: center;
+  justify-content: center;
 }
 
 .form-control {
-    width: 119px;
+  width: 119px;
 }
 
 @media only screen and (max-width: 600px) {
-    .form-control {
-        width: 100px;
-        height: fit-content;
-    }
+  .form-control {
+    width: 100px;
+    height: fit-content;
+  }
 }
 
 .title {
-    font-family: Ubuntu, sans-serif;
-    color: rgb(28, 92, 228);
-    font-weight: bold;
-    font-size: 30px;
+  font-family: Ubuntu, sans-serif;
+  color: rgb(28, 92, 228);
+  font-weight: bold;
+  font-size: 30px;
 }
 
 #category_month {
-    display: none;
+  display: none;
 }
 
 #category_day {
-    display: none;
+  display: none;
 }
 
 .bot:hover {
-    background-color: rgb(18, 146, 251);
+  background-color: rgb(18, 146, 251);
 }
