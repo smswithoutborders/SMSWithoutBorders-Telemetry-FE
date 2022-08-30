@@ -114,7 +114,7 @@ function line(data) {
         minValue: 0,
       },
       hAxis: {
-        title: "Months",
+        title: data[0][0],
       },
       title: "Monthly Subscribers Visualization",
       height: 250,
@@ -145,7 +145,7 @@ function bar(data) {
         minValue: 0,
       },
       hAxis: {
-        title: "",
+        title: data[0][0],
       },
       title: "Monthly Subscribers Visualization",
       height: 250,
