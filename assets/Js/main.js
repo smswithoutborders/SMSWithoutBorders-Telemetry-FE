@@ -3,20 +3,41 @@ google.charts.load("current", {
   packages: ["corechart"],
 });
 
-function fetchData(url, category, start_month, end_month, start_date, end_date, table_data, table_head, type) {
+function fetchData(
+  url,
+  category,
+  start_month,
+  end_month,
+  start_date,
+  end_date,
+  table_data,
+  table_head,
+  type
+) {
   let xhttp = new XMLHttpRequest();
 
   // Make AJAX call
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
       let entry = JSON.parse(this.responseText);
-      run(entry, category, start_month, end_month, start_date, end_date, table_data, table_head, type);
+
+      run(
+        entry,
+        category,
+        start_month,
+        end_month,
+        start_date,
+        end_date,
+        table_data,
+        table_head,
+        type
+      );
     }
   };
 
   xhttp.open("GET", url, true);
   xhttp.send();
-};
+}
 
 function filter_months(entry, start_month, end_month, type) {
   const month = [
@@ -39,16 +60,15 @@ function filter_months(entry, start_month, end_month, type) {
   entry.forEach((element) => {
     if (
       new Date(element.date).getFullYear() >=
-      new Date(start_month).getFullYear() &&
-      new Date(element.date).getMonth() >=
-      new Date(start_month).getMonth() &&
+        new Date(start_month).getFullYear() &&
+      new Date(element.date).getMonth() >= new Date(start_month).getMonth() &&
       new Date(element.date).getFullYear() <=
-      new Date(end_month).getFullYear() &&
-      new Date(element.date).getMonth() <=
-      new Date(end_month).getMonth() &&
+        new Date(end_month).getFullYear() &&
+      new Date(element.date).getMonth() <= new Date(end_month).getMonth() &&
       element.type == type
     ) {
       filter_data.push(month[new Date(element.date).getMonth()]);
+      console.log(new Date(element.date).getTime());
     }
   });
 
@@ -62,7 +82,7 @@ function filter_months(entry, start_month, end_month, type) {
     return [key, data[key]];
   });
 
-  return result
+  return result;
 }
 
 function filter_days(entry, start_date, end_date, type) {
@@ -70,8 +90,8 @@ function filter_days(entry, start_date, end_date, type) {
 
   entry.forEach((element) => {
     if (
-      new Date(element.date) >= new Date(start_date) &&
-      new Date(element.date) <= new Date(end_date) &&
+      new Date(element.date).getDate() >= new Date(start_date).getDate() &&
+      new Date(element.date).getDate() <= new Date(end_date).getDate() &&
       element.type == type
     ) {
       filter_data.push(new Date(element.date).toDateString());
@@ -87,23 +107,30 @@ function filter_days(entry, start_date, end_date, type) {
     return [key, data[key]];
   });
 
-  return result
+  return result;
 }
 
-function filter(entry, category, start_month, end_month, type, start_date, end_date) {
+function filter(
+  entry,
+  category,
+  start_month,
+  end_month,
+  type,
+  start_date,
+  end_date
+) {
   if (category == "months") {
     return filter_months(entry, start_month, end_month, type);
   } else if (category == "days") {
     return filter_days(entry, start_date, end_date, type);
   }
-};
+}
 
 function line(data) {
   // Set a callback to run when the Google Visualization API is loaded.
   google.charts.setOnLoadCallback(drawChart);
 
   function drawChart() {
-
     var result = google.visualization.arrayToDataTable(data);
 
     // Set chart options
@@ -134,7 +161,6 @@ function bar(data) {
   google.charts.setOnLoadCallback(drawChart);
 
   function drawChart() {
-
     var result = google.visualization.arrayToDataTable(data);
 
     // Set chart options
@@ -160,19 +186,37 @@ function bar(data) {
   }
 }
 
-function run(data, category, start_month, end_month, start_date, end_date, table_data, table_head, type) {
+function run(
+  data,
+  category,
+  start_month,
+  end_month,
+  start_date,
+  end_date,
+  table_data,
+  table_head,
+  type
+) {
   let headers = [category.toUpperCase(), type.toUpperCase()];
-  let filter_data = filter(data, category, start_month, end_month, type, start_date, end_date);
+  let filter_data = filter(
+    data,
+    category,
+    start_month,
+    end_month,
+    type,
+    start_date,
+    end_date
+  );
 
   // table
-  table_head.innerHTML = `<tr><th scope="col">${headers[0]}</th><th scope="col">${headers[1]}</th></tr>`
-  table_data.innerHTML = ""
+  table_head.innerHTML = `<tr><th scope="col">${headers[0]}</th><th scope="col">${headers[1]}</th></tr>`;
+  table_data.innerHTML = "";
 
   filter_data.forEach((item) => {
-    table_data.innerHTML += `<tr><td>${item[0]}</td><td>${item[1]}</td></tr>`
-  })
+    table_data.innerHTML += `<tr><td>${item[0]}</td><td>${item[1]}</td></tr>`;
+  });
 
-  filter_data.unshift(headers)
+  filter_data.unshift(headers);
 
   line(filter_data);
   bar(filter_data);
