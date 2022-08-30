@@ -28,11 +28,11 @@ body {
     font-size: 30px;
 }
 
-.category_month {
+#category_month {
     display: none;
 }
 
-.category_day {
+#category_day {
     display: none;
 }
 
