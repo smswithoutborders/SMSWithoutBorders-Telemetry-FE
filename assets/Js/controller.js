@@ -16,7 +16,7 @@ window.onload = () => {
     if (category.value == "months") {
         category_month.style.display = "block";
         category_day.style.display = "none";
-        
+
         fetchData(URL, category.value, start_month.value, end_month.value, start_date.value, end_date.value, table_data, table_head, type.value);
     } else if (category.value == "days") {
         category_day.style.display = "block";
