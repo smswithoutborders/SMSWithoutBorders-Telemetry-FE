@@ -58,17 +58,16 @@ function filter_months(entry, start_month, end_month, type) {
   let filter_data = [];
 
   entry.forEach((element) => {
+    let search_month = new Date(element.date).toLocaleDateString()
+    let start_month_modified = new Date(start_month).toLocaleDateString()
+    let end_month_modified = new Date(new Date(end_month).getFullYear(), new Date(end_month).getMonth() + 1, 0).toLocaleDateString()
+
     if (
-      new Date(element.date).getFullYear() >=
-        new Date(start_month).getFullYear() &&
-      new Date(element.date).getMonth() >= new Date(start_month).getMonth() &&
-      new Date(element.date).getFullYear() <=
-        new Date(end_month).getFullYear() &&
-      new Date(element.date).getMonth() <= new Date(end_month).getMonth() &&
+      new Date(search_month) >= new Date(start_month_modified) &&
+      new Date(search_month) <= new Date(end_month_modified) &&
       element.type == type
     ) {
       filter_data.push(month[new Date(element.date).getMonth()]);
-      console.log(new Date(element.date).getTime());
     }
   });
 
@@ -89,9 +88,13 @@ function filter_days(entry, start_date, end_date, type) {
   let filter_data = [];
 
   entry.forEach((element) => {
+    let search_date = new Date(element.date).toLocaleDateString()
+    let start_date_modified = new Date(start_date).toLocaleDateString()
+    let end_date_modified = new Date(end_date).toLocaleDateString()
+
     if (
-      new Date(element.date).getDate() >= new Date(start_date).getDate() &&
-      new Date(element.date).getDate() <= new Date(end_date).getDate() &&
+      new Date(search_date) >= new Date(start_date_modified) &&
+      new Date(search_date) <= new Date(end_date_modified) &&
       element.type == type
     ) {
       filter_data.push(new Date(element.date).toDateString());
@@ -127,62 +130,70 @@ function filter(
 }
 
 function line(data) {
-  // Set a callback to run when the Google Visualization API is loaded.
-  google.charts.setOnLoadCallback(drawChart);
+  if (data.length < 2) {
+    document.getElementById("line_div").innerHTML = `<h5 class="text-danger text-center ">Sorry No Data To Display!</h5>`
+  } else {
+    // Set a callback to run when the Google Visualization API is loaded.
+    google.charts.setOnLoadCallback(drawChart);
 
-  function drawChart() {
-    var result = google.visualization.arrayToDataTable(data);
+    function drawChart() {
+      var result = google.visualization.arrayToDataTable(data);
 
-    // Set chart options
-    var options = {
-      vAxis: {
-        title: data[0][1],
-        format: "0",
-        minValue: 0,
-      },
-      hAxis: {
-        title: data[0][0],
-      },
-      title: "SWOB Metrics",
-      height: 250,
-    };
+      // Set chart options
+      var options = {
+        vAxis: {
+          title: data[0][1],
+          format: "0",
+          minValue: 0,
+        },
+        hAxis: {
+          title: data[0][0],
+        },
+        title: "SWOB Metrics",
+        height: 250,
+      };
 
-    // Instantiate and draw our chart, passing in some options.
-    var chart = new google.visualization.LineChart(
-      document.getElementById("line_div")
-    );
+      // Instantiate and draw our chart, passing in some options.
+      var chart = new google.visualization.LineChart(
+        document.getElementById("line_div")
+      );
 
-    chart.draw(result, options);
+      chart.draw(result, options);
+    }
   }
 }
 
 function bar(data) {
-  // Set a callback to run when the Google Visualization API is loaded.
-  google.charts.setOnLoadCallback(drawChart);
+  if (data.length < 2) {
+    document.getElementById("bar_div").innerHTML = `<h5 class="text-danger text-center ">Sorry No Data To Display!</h5>`
+  } else {
+    // Set a callback to run when the Google Visualization API is loaded.
+    google.charts.setOnLoadCallback(drawChart);
 
-  function drawChart() {
-    var result = google.visualization.arrayToDataTable(data);
+    function drawChart() {
+      var result = google.visualization.arrayToDataTable(data);
 
-    // Set chart options
-    var options = {
-      vAxis: {
-        title: data[0][0],
-        format: "0",
-        minValue: 0,
-      },
-      hAxis: {
-        title: data[0][1],
-      },
-      title: "SWOB Metrics",
-      height: 250,
-    };
+      // Set chart options
+      var options = {
+        vAxis: {
+          title: data[0][1],
+          format: "0",
+          minValue: 0,
+        },
+        hAxis: {
+          title: data[0][0],
+        },
+        title: "SWOB Metrics",
+        height: 250,
+      };
 
-    // Instantiate and draw our chart, passing in some options.
-    var chart = new google.visualization.BarChart(
-      document.getElementById("bar_div")
-    );
+      // Instantiate and draw our chart, passing in some options.
+      var chart = new google.visualization.BarChart(
+        document.getElementById("bar_div")
+      );
 
-    chart.draw(result, options);
+      chart.draw(result, options);
+    }
   }
 }
 
