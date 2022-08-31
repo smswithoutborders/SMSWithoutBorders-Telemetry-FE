@@ -143,7 +143,7 @@ function line(data) {
       hAxis: {
         title: data[0][0],
       },
-      title: "Monthly Subscribers Visualization",
+      title: "SWOB Metrics",
       height: 250,
     };
 
@@ -166,14 +166,14 @@ function bar(data) {
     // Set chart options
     var options = {
       vAxis: {
-        title: data[0][1],
+        title: data[0][0],
         format: "0",
         minValue: 0,
       },
       hAxis: {
-        title: data[0][0],
+        title: data[0][1],
       },
-      title: "Monthly Subscribers Visualization",
+      title: "SWOB Metrics",
       height: 250,
     };
 
