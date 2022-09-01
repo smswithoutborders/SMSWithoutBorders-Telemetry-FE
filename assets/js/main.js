@@ -225,12 +225,19 @@ function run(
   table_head.innerHTML = `<tr><th scope="col">${headers[0]}</th><th scope="col">${headers[1]}</th></tr>`;
   table_data.innerHTML = "";
 
+  let total = 0;
+
   filter_data.forEach((item) => {
     table_data.innerHTML += `<tr><td>${item[0]}</td><td>${item[1]}</td></tr>`;
+    total += item[1];
   });
+
+  table_data.innerHTML += `<tr class="table-light table-bordered border-secondary"><td>Total</td><td>${total}</td></tr>`;
+
 
   filter_data.unshift(headers);
 
   line(filter_data);
   bar(filter_data);
+
 }
