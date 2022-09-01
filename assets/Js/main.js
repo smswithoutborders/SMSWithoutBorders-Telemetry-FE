@@ -176,12 +176,12 @@ function bar(data) {
       // Set chart options
       var options = {
         vAxis: {
-          title: data[0][1],
+          title: data[0][0],
           format: "0",
           minValue: 0,
         },
         hAxis: {
-          title: data[0][0],
+          title: data[0][1],
         },
         title: "SWOB Metrics",
         height: 250,
