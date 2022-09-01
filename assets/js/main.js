@@ -77,7 +77,9 @@ function filter_months(entry, start_month, end_month, type) {
     data[element] = (data[element] || 0) + 1;
   });
 
-  let result = Object.keys(data).map((key) => {
+  let result = Object.keys(data).sort(function (a, b) {
+    return month.indexOf(a) > month.indexOf(b);
+  }).map((key) => {
     return [key, data[key]];
   });
 
@@ -106,7 +108,9 @@ function filter_days(entry, start_date, end_date, type) {
     data[element] = (data[element] || 0) + 1;
   });
 
-  let result = Object.keys(data).map((key) => {
+  let result = Object.keys(data).sort(function (a, b) {
+    return new Date(a) > new Date(b);
+  }).map((key) => {
     return [key, data[key]];
   });
 
