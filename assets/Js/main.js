@@ -182,6 +182,8 @@ function bar(data) {
         },
         hAxis: {
           title: data[0][1],
+          minValue: 0,
+
         },
         title: "SWOB Metrics",
         height: 250,
