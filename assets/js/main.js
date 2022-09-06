@@ -77,7 +77,9 @@ function filter_months(entry, start_month, end_month, type) {
     data[element] = (data[element] || 0) + 1;
   });
 
-  let result = Object.keys(data).map((key) => {
+  let result = Object.keys(data).sort(function (a, b) {
+    return month.indexOf(a) > month.indexOf(b);
+  }).map((key) => {
     return [key, data[key]];
   });
 
@@ -106,7 +108,9 @@ function filter_days(entry, start_date, end_date, type) {
     data[element] = (data[element] || 0) + 1;
   });
 
-  let result = Object.keys(data).map((key) => {
+  let result = Object.keys(data).sort(function (a, b) {
+    return new Date(a) > new Date(b);
+  }).map((key) => {
     return [key, data[key]];
   });
 
@@ -182,6 +186,8 @@ function bar(data) {
         },
         hAxis: {
           title: data[0][1],
+          minValue: 0,
+
         },
         title: "SWOB Metrics",
         height: 250,
@@ -223,12 +229,19 @@ function run(
   table_head.innerHTML = `<tr><th scope="col">${headers[0]}</th><th scope="col">${headers[1]}</th></tr>`;
   table_data.innerHTML = "";
 
+  let total = 0;
+
   filter_data.forEach((item) => {
     table_data.innerHTML += `<tr><td>${item[0]}</td><td>${item[1]}</td></tr>`;
+    total += item[1];
   });
+
+  table_data.innerHTML += `<tr class="table-light table-bordered border-secondary"><td>Total</td><td>${total}</td></tr>`;
+
 
   filter_data.unshift(headers);
 
   line(filter_data);
   bar(filter_data);
+
 }
