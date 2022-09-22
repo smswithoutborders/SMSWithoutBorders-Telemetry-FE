@@ -14,7 +14,7 @@
 
 <body>
   <div class="container">
-    <h3 class="text-primary mt-3 mb-5">
+    <h3 class="text-light mt-3 mb-5">
       SMSWithoutBorders data visualization
     </h3>
 
@@ -76,7 +76,7 @@
           <option value="publisher">Published</option>
         </select><br />
 
-        <button id="filter" type="button" class="btn btn-primary btn-lg mt-5 mb-3 w-75 shadow bot">
+        <button id="filter" type="button" class="btn btn-dark btn-lg mt-5 mb-3 w-75 shadow bot">
           Filter
         </button>
       </div>
@@ -84,10 +84,12 @@
       <!-- table -->
       <div class="col-md-5 ms-auto">
         <h6 id="table_header">Summary</h6>
-        <table class="table table-bordered table-sm border-secondary text-center">
+        <div class="table-responsive rest">
+        <table class="table table-bordered table-sm border-secondary text-center text-light">
           <thead id="table_head" class="table-light border-dark"></thead>
           <tbody id="table_data"></tbody>
         </table>
+      </div>
       </div>
     </div>
   </div>
