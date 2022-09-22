@@ -1,6 +1,6 @@
 body {
   /* background-image: url(/assets/images/blob-scene-haikei.svg); */
-  background-color: rgb(16, 60, 101);
+  background-color: #103c65;
   background-repeat: no-repeat;
   background-size: cover;
   height: fit-content;
@@ -37,7 +37,7 @@ body {
 }
 
 .bot:hover {
-  background-color: rgb(51, 52, 52);
+  background-color: #333434;
 }
 
 .rest {
