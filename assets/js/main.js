@@ -156,6 +156,7 @@ function line(data) {
         title: "SWOB Metrics",
         height: 250,
         backgroundColor: '#ebf3fb',
+        colors: ['black']
       };
 
       // Instantiate and draw our chart, passing in some options.
@@ -193,6 +194,7 @@ function bar(data) {
         title: "SWOB Metrics",
         height: 250,
         backgroundColor: '#ebf3fb',
+        colors: ['black']
       };
 
       // Instantiate and draw our chart, passing in some options.
