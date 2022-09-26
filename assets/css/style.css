@@ -41,6 +41,7 @@ body {
 }
 
 .rest {
+  /* width: 700px; */
   height: 200px !important;
   overflow: scroll;
 }
