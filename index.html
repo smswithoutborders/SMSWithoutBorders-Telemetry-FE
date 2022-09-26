@@ -24,8 +24,17 @@
             <!-- Filter -->
             <div class="row">
                 <!-- categories -->
-                <div class="col-md-3 me-auto">
-                    <small>Filter</small><br />
+                <div class="col-md-3 me-auto"> 
+                    
+                    <small>Type</small><br />
+                        <select id="type" class="btn btn-light shadow mb-4">
+                            <option value="" disabled selected hidden>__Select_Type__</option>
+                            <option value="active">Active Users</option>
+                            <option value="signup">Signed-up Users</option>
+                            <option value="recovery">Recovered accounts</option>
+                            <option value="publisher">Published</option>
+                        </select><br />
+                    <!-- <small>Filter</small><br />
                     <select id="category" class="btn btn-light shadow mb-5 w-75">
                         <option value="" disabled selected hidden>
                             __Select_Category__
@@ -66,7 +75,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
 
                 
@@ -93,19 +102,44 @@
 
 
                 <div class="row">
+
                     <div class="col">
-                        <small>Type</small><br />
-                        <select id="type" class="btn btn-light shadow mb-4">
-                            <option value="" disabled selected hidden>__Select_Type__</option>
-                            <option value="active">Active Users</option>
-                            <option value="signup">Signed-up Users</option>
-                            <option value="recovery">Recovered accounts</option>
-                            <option value="publisher">Published</option>
-                        </select><br />
+
+                        <small>Format</small><br />
+                        <div class="col">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                            <label class="form-check-label" for="flexRadioDefault1">
+                              Month
+                            </label>
+                          </div>
+                        </div>
+
+                          <div class="col">
+                          <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                            <label class="form-check-label" for="flexRadioDefault2">
+                              Days
+                            </label>
+                          </div>
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <div>
+                                <small class="">Start</small><br />
+                                <input id="start_date" type="date" class="form-control shadow me-1" />
+                            </div>
+                            <div>
+                                <small class="">End</small><br />
+                                <input id="end_date" type="date" class="form-control shadow" />
+                            </div>
+                        </div>
+                      
 
                         <button id="filter" type="button" class="btn btn-dark btn-lg mt-5 mb-3 shadow bot">
                             Filter
                         </button>
+
                     </div>
 
 
