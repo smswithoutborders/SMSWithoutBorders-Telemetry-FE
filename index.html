@@ -13,27 +13,27 @@
 </head>
 
 <body>
-    <div class="container-fluid">
-        <div class="container">
-            <h3 class="text-dark mt-3 mb-5">
-                SMSWithoutBorders Statistics
-            </h3>
 
-            <div class="hr"></div>
+<div class="container-fluid">
+          <!--the header-->
+  <h3 class="text-dark mt-3 mb-5 text-center"> SMSWithoutBorders Statistics</h3>
+    <hr class="hr">
 
-            <!-- Filter -->
-            <div class="row">
-                <!-- categories -->
-                <div class="col-md-3 me-auto"> 
-                    
-                    <small>Type</small><br />
-                        <select id="type" class="btn btn-light shadow mb-4">
-                            <option value="" disabled selected hidden>__Select_Type__</option>
-                            <option value="active">Active Users</option>
-                            <option value="signup">Signed-up Users</option>
-                            <option value="recovery">Recovered accounts</option>
-                            <option value="publisher">Published</option>
-                        </select><br />
+    <!-- beginning of the Filter -->
+    <div class="row">
+        <!-- categories -->
+        <div class="col-md-3 me-auto"> 
+          <!--the beginning of the cards-->
+          <div class="card">
+            <small>Type</small><br />
+              <select id="type" class="btn btn-light shadow mb-4">
+                <option value="" disabled selected hidden>__Select_Type__</option>
+                <option value="active">Active Users</option>
+                <option value="signup">Signed-up Users</option>
+                <option value="recovery">Recovered accounts</option>
+                <option value="publisher">Published</option>
+              </select><br />
+
                     <!-- <small>Filter</small><br />
                     <select id="category" class="btn btn-light shadow mb-5 w-75">
                         <option value="" disabled selected hidden>
@@ -76,95 +76,68 @@
                             </div>
                         </div>
                     </div> -->
-                </div>
-
-                
-
-                <div class="col-md-7">
-                    <!-- Chart display -->
-
-                    <div id="line_div">
-                        <div class="d-flex justify-content-center">
-                            <div class="spinner-grow text-dark" style="width: 4rem; height: 4rem" role="status">
-                                <span class="visually-hidden">Loading...</span>
-                            </div>
-                            <div class="spinner-grow text-secondary" style="width: 4rem; height: 4rem" role="status">
-                                <span class="visually-hidden">Loading...</span>
-                            </div>
-                            <div class="spinner-grow text-light" style="width: 4rem; height: 4rem" role="status">
-                                <span class="visually-hidden">Loading...</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-              </div>  
-
-
-                <div class="row">
-
-                    <div class="col">
-
-                        <small>Format</small><br />
-                        <div class="col">
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                            <label class="form-check-label" for="flexRadioDefault1">
-                              Month
-                            </label>
-                          </div>
-                        </div>
-
-                          <div class="col">
-                          <div class="form-check">
-                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-                            <label class="form-check-label" for="flexRadioDefault2">
-                              Days
-                            </label>
-                          </div>
-                        </div>
-
-                        <div class="input-group mb-3">
-                            <div>
-                                <small class="">Start</small><br />
-                                <input id="start_date" type="date" class="form-control shadow me-1" />
-                            </div>
-                            <div>
-                                <small class="">End</small><br />
-                                <input id="end_date" type="date" class="form-control shadow" />
-                            </div>
-                        </div>
-                      
-
-                        <button id="filter" type="button" class="btn btn-dark btn-lg mt-5 mb-3 shadow bot">
-                            Filter
-                        </button>
-
-                    </div>
-
-
-                    <div class="col-md-7">
-                        <h6 id="table_header">Summary</h6>
-                        <div class="table-responsive rest">
-                            <table class="table table-bordered table-sm border-secondary text-center">
-                                <thead id="table_head" class="table-light border-dark"></thead>
-                                <tbody id="table_data"></tbody>
-                            </table>
-                        </div>
-                    </div>
-                
                     
-    
-                </div>
+                <small>Format</small><br />
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                      <label class="form-check-label" for="flexRadioDefault1"> Month </label> <br>
 
-
-                
-            
-               
-
-
-            
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                      <label class="form-check-label" for="flexRadioDefault2"> Days</label>
+                  </div>                     
+                  
+                  <div class="input-group mb-3">
+                    <div>
+                      <small class="">Start</small><br />
+                        <input id="start_date" type="date" class="form-control shadow me-1" />
+                    </div>
+                    <div>
+                      <small class="">End</small><br />
+                        <input id="end_date" type="date" class="form-control shadow" />
+                    </div>
+                  </div>
+                    <!--fliter button-->
+                  <button id="filter" type="button" class="btn btn-dark btn-lg mt-5 mb-3 shadow bot">
+                    Filter
+                  </button>
+            <!--closing tag for fliter card section-->
+          </div>
+          <!--closing tag for the filter column-->
         </div>
+
+        <!--second column starts here-->
+        <!--summary table section-->
+        <div class="col-md-7">
+          <h6 id="table_header">Summary</h6>
+            <div class="table-responsive rest">
+              <table class="table table-bordered table-sm border-secondary text-center">
+                <thead id="table_head" class="table-light border-dark"></thead>
+                  <tbody id="table_data"></tbody>
+              </table>
+            </div>
+            <!--closing tage for the summary table column-->
+        </div>
+
+        <div class="col-md-7">
+        <!-- Chart display -->
+          <div id="line_div">
+            <div class="d-flex justify-content-center">
+              <div class="spinner-grow text-dark" style="width: 4rem; height: 4rem" role="status">
+                <span class="visually-hidden">Loading...</span>
+                  </div>
+                <div class="spinner-grow text-secondary" style="width: 4rem; height: 4rem" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+                <div class="spinner-grow text-light" style="width: 4rem; height: 4rem" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+          </div>
+          <!--closing tag for the line chart column-->
+        </div>
+        <!--closing tag for the row-->
+      </div>
+    <!--the closing tag for the cantainer-->
     </div>
 
 
