@@ -14,14 +14,14 @@ body {
 .card {
   margin-right: auto;
   margin-left: auto;
-  width: 350px;
+  width: 400px;
   box-shadow: 0 15px 25px rgba(129, 124, 124, 0.2);
-  height: 500px;
+  height: 600px;
   border-radius: 10px;
   backdrop-filter: blur(14px);
   background-color: rgba(255, 255, 255, 0.2);
   padding: 10px;
-  text-align: center;
+  text-align: start;
 }
 
 
