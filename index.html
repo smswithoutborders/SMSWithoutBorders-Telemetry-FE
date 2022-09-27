@@ -24,6 +24,7 @@
         <div class="col-md-3 me-auto"> 
           <!--the beginning of the cards-->
           <div class="card">
+            <div class="type">
             <h6>Type</h6><br />
               <select id="type" class="btn btn-light shadow mb-4">
                 <option value="" disabled selected hidden>__Select_Type__</option>
@@ -31,7 +32,8 @@
                 <option value="signup">Signed-up Users</option>
                 <option value="recovery">Recovered accounts</option>
                 <option value="publisher">Published</option>
-              </select><br />
+              </select>
+              </div><br />
 
                     <!-- <small>Filter</small><br />
                     <select id="category" class="btn btn-light shadow mb-5 w-75">
@@ -97,9 +99,11 @@
                     </div>
                   </div>
                     <!--fliter button-->
+                    <div class="button">
                   <button id="filter" type="button" class="btn btn-dark btn-lg mt-5 mb-3 shadow bot">
                     Filter
                   </button>
+                  </div>
             <!--closing tag for fliter card section-->
           </div>
           <!--closing tag for the filter column-->
