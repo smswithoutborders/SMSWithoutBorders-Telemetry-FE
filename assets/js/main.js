@@ -5,9 +5,7 @@ google.charts.load("current", {
 
 function fetchData(
   url,
-  category,
-  //start_month,
-  //end_month,
+  format,
   start_date,
   end_date,
   table_data,
@@ -23,9 +21,7 @@ function fetchData(
 
       run(
         entry,
-        category,
-      //  start_month,
-       // end_month,
+        format,
         start_date,
         end_date,
         table_data,
@@ -39,52 +35,52 @@ function fetchData(
   xhttp.send();
 }
 
-// function filter_months(entry, start_month, end_month, type) {
-//   const month = [
-//     "January",
-//     "February",
-//     "March",
-//     "April",
-//     "May",
-//     "June",
-//     "July",
-//     "August",
-//     "September",
-//     "October",
-//     "November",
-//     "December",
-//   ];
+function filter_months(entry, start_date, end_date, type) {
+  const month = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
 
-//   let filter_data = [];
+  let filter_data = [];
 
-//   entry.forEach((element) => {
-//     let search_month = new Date(element.date).toLocaleDateString()
-//     let start_month_modified = new Date(start_month).toLocaleDateString()
-//     let end_month_modified = new Date(new Date(end_month).getFullYear(), new Date(end_month).getMonth() + 1, 0).toLocaleDateString()
+  entry.forEach((element) => {
+    let search_month = new Date(element.date).toLocaleDateString()
+    let start_month_modified = new Date(new Date(start_date).getFullYear(), new Date(start_date).getMonth(), 1).toLocaleDateString()
+    let end_month_modified = new Date(new Date(end_date).getFullYear(), new Date(end_date).getMonth() + 1, 0).toLocaleDateString()
 
-//     if (
-//       new Date(search_month) >= new Date(start_month_modified) &&
-//       new Date(search_month) <= new Date(end_month_modified) &&
-//       element.type == type
-//     ) {
-//       filter_data.push(month[new Date(element.date).getMonth()]);
-//     }
-//   });
+    if (
+      new Date(search_month) >= new Date(start_month_modified) &&
+      new Date(search_month) <= new Date(end_month_modified) &&
+      element.type == type
+    ) {
+      filter_data.push(month[new Date(element.date).getMonth()]);
+    }
+  });
 
-//   let data = {};
+  let data = {};
 
-//   filter_data.forEach((element) => {
-//     data[element] = (data[element] || 0) + 1;
-//   });
+  filter_data.forEach((element) => {
+    data[element] = (data[element] || 0) + 1;
+  });
 
-//   let result = Object.keys(data).sort(function (a, b) {
-//     return month.indexOf(a) > month.indexOf(b);
-//   }).map((key) => {
-//     return [key, data[key]];
-//   });
+  let result = Object.keys(data).sort(function (a, b) {
+    return month.indexOf(a) > month.indexOf(b);
+  }).map((key) => {
+    return [key, data[key]];
+  });
 
-//   return result;
-// }
+  return result;
+}
 
 function filter_days(entry, start_date, end_date, type) {
   let filter_data = [];
@@ -119,19 +115,16 @@ function filter_days(entry, start_date, end_date, type) {
 
 function filter(
   entry,
-  category,
- // start_month,
- // end_month,
+  format,
   type,
   start_date,
   end_date
 ) {
-  // if (category == "months") {
-  //   return filter_months(entry, start_month, end_month, type);
-  // } else if 
-  category == "days" 
+  if (format == "month") {
+    return filter_months(entry, start_date, end_date, type);
+  } else if (format == "day") {
     return filter_days(entry, start_date, end_date, type);
-  
+  }
 }
 
 function line(data) {
@@ -211,21 +204,17 @@ function line(data) {
 
 function run(
   data,
-  category,
-  //start_month,
-  //end_month,
+  format,
   start_date,
   end_date,
   table_data,
   table_head,
   type
 ) {
-  let headers = [category.toUpperCase(), type.toUpperCase()];
+  let headers = [format.toUpperCase(), type.toUpperCase()];
   let filter_data = filter(
     data,
-    category,
-   // start_month,
-   // end_month,
+    format,
     type,
     start_date,
     end_date
@@ -242,8 +231,9 @@ function run(
     total += item[1];
   });
 
- // table_data.innerHTML += `<tr class="table-light table-bordered border-secondary"><td>Total</td><td>${total}</td></tr>`;
+  // table_data.innerHTML += `<tr class="table-light table-bordered border-secondary"><td>Total</td><td>${total}</td></tr>`;
 
+  document.getElementById("total").innerHTML = total
 
   filter_data.unshift(headers);
 
