@@ -28,13 +28,13 @@ body {
   font-size: 30px;
 }
 
-#category_month {
+/* #category_month {
   display: none;
 }
 
 #category_day {
   display: none;
-}
+} */
 
 .bot:hover {
   background-color: #333434;

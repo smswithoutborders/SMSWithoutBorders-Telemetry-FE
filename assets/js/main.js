@@ -6,8 +6,8 @@ google.charts.load("current", {
 function fetchData(
   url,
   category,
-  start_month,
-  end_month,
+  //start_month,
+  //end_month,
   start_date,
   end_date,
   table_data,
@@ -24,8 +24,8 @@ function fetchData(
       run(
         entry,
         category,
-        start_month,
-        end_month,
+      //  start_month,
+       // end_month,
         start_date,
         end_date,
         table_data,
@@ -39,52 +39,52 @@ function fetchData(
   xhttp.send();
 }
 
-function filter_months(entry, start_month, end_month, type) {
-  const month = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
+// function filter_months(entry, start_month, end_month, type) {
+//   const month = [
+//     "January",
+//     "February",
+//     "March",
+//     "April",
+//     "May",
+//     "June",
+//     "July",
+//     "August",
+//     "September",
+//     "October",
+//     "November",
+//     "December",
+//   ];
 
-  let filter_data = [];
+//   let filter_data = [];
 
-  entry.forEach((element) => {
-    let search_month = new Date(element.date).toLocaleDateString()
-    let start_month_modified = new Date(start_month).toLocaleDateString()
-    let end_month_modified = new Date(new Date(end_month).getFullYear(), new Date(end_month).getMonth() + 1, 0).toLocaleDateString()
+//   entry.forEach((element) => {
+//     let search_month = new Date(element.date).toLocaleDateString()
+//     let start_month_modified = new Date(start_month).toLocaleDateString()
+//     let end_month_modified = new Date(new Date(end_month).getFullYear(), new Date(end_month).getMonth() + 1, 0).toLocaleDateString()
 
-    if (
-      new Date(search_month) >= new Date(start_month_modified) &&
-      new Date(search_month) <= new Date(end_month_modified) &&
-      element.type == type
-    ) {
-      filter_data.push(month[new Date(element.date).getMonth()]);
-    }
-  });
+//     if (
+//       new Date(search_month) >= new Date(start_month_modified) &&
+//       new Date(search_month) <= new Date(end_month_modified) &&
+//       element.type == type
+//     ) {
+//       filter_data.push(month[new Date(element.date).getMonth()]);
+//     }
+//   });
 
-  let data = {};
+//   let data = {};
 
-  filter_data.forEach((element) => {
-    data[element] = (data[element] || 0) + 1;
-  });
+//   filter_data.forEach((element) => {
+//     data[element] = (data[element] || 0) + 1;
+//   });
 
-  let result = Object.keys(data).sort(function (a, b) {
-    return month.indexOf(a) > month.indexOf(b);
-  }).map((key) => {
-    return [key, data[key]];
-  });
+//   let result = Object.keys(data).sort(function (a, b) {
+//     return month.indexOf(a) > month.indexOf(b);
+//   }).map((key) => {
+//     return [key, data[key]];
+//   });
 
-  return result;
-}
+//   return result;
+// }
 
 function filter_days(entry, start_date, end_date, type) {
   let filter_data = [];
@@ -120,17 +120,18 @@ function filter_days(entry, start_date, end_date, type) {
 function filter(
   entry,
   category,
-  start_month,
-  end_month,
+ // start_month,
+ // end_month,
   type,
   start_date,
   end_date
 ) {
-  if (category == "months") {
-    return filter_months(entry, start_month, end_month, type);
-  } else if (category == "days") {
+  // if (category == "months") {
+  //   return filter_months(entry, start_month, end_month, type);
+  // } else if 
+  category == "days" 
     return filter_days(entry, start_date, end_date, type);
-  }
+  
 }
 
 function line(data) {
@@ -170,49 +171,49 @@ function line(data) {
   }
 }
 
-function bar(data) {
-  if (data.length < 2) {
-    document.getElementById("bar_div").innerHTML = `<h5 class="text-danger text-center ">Sorry No Data To Display!</h5>`
-  } else {
-    // Set a callback to run when the Google Visualization API is loaded.
-    google.charts.setOnLoadCallback(drawChart);
+// function bar(data) {
+//   if (data.length < 2) {
+//     document.getElementById("bar_div").innerHTML = `<h5 class="text-danger text-center ">Sorry No Data To Display!</h5>`
+//   } else {
+//     // Set a callback to run when the Google Visualization API is loaded.
+//     google.charts.setOnLoadCallback(drawChart);
 
-    function drawChart() {
-      var result = google.visualization.arrayToDataTable(data);
+//     function drawChart() {
+//       var result = google.visualization.arrayToDataTable(data);
 
-      // Set chart options
-      var options = {
-        vAxis: {
-          title: data[0][0],
-          format: "0",
-          minValue: 0,
-        },
-        hAxis: {
-          title: data[0][1],
-          minValue: 0,
+//       // Set chart options
+//       var options = {
+//         vAxis: {
+//           title: data[0][0],
+//           format: "0",
+//           minValue: 0,
+//         },
+//         hAxis: {
+//           title: data[0][1],
+//           minValue: 0,
 
-        },
-        title: "SWOB Metrics",
-        height: 250,
-        backgroundColor: '#ebf3fb',
-        colors: ['black']
-      };
+//         },
+//         title: "SWOB Metrics",
+//         height: 250,
+//         backgroundColor: '#ebf3fb',
+//         colors: ['black']
+//       };
 
-      // Instantiate and draw our chart, passing in some options.
-      var chart = new google.visualization.BarChart(
-        document.getElementById("bar_div")
-      );
+//       // Instantiate and draw our chart, passing in some options.
+//       var chart = new google.visualization.BarChart(
+//         document.getElementById("bar_div")
+//       );
 
-      chart.draw(result, options);
-    }
-  }
-}
+//       chart.draw(result, options);
+//     }
+//   }
+// }
 
 function run(
   data,
   category,
-  start_month,
-  end_month,
+  //start_month,
+  //end_month,
   start_date,
   end_date,
   table_data,
@@ -223,8 +224,8 @@ function run(
   let filter_data = filter(
     data,
     category,
-    start_month,
-    end_month,
+   // start_month,
+   // end_month,
     type,
     start_date,
     end_date
@@ -241,12 +242,12 @@ function run(
     total += item[1];
   });
 
-  table_data.innerHTML += `<tr class="table-light table-bordered border-secondary"><td>Total</td><td>${total}</td></tr>`;
+ // table_data.innerHTML += `<tr class="table-light table-bordered border-secondary"><td>Total</td><td>${total}</td></tr>`;
 
 
   filter_data.unshift(headers);
 
   line(filter_data);
-  bar(filter_data);
+  //bar(filter_data);
 
 }

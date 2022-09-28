@@ -66,7 +66,7 @@
 
                             <div class="input-group mb-3">
                                 <div>
-                                    <small class="">From</small><br />
+         <small class="">From</small><br />
                                     <input id="start_date" type="date" class="form-control shadow me-1" />
                                 </div>
                                 <div>
@@ -77,6 +77,8 @@
                         </div>
                     </div> -->
                 </div>
+
+                
 
                 
 
@@ -106,8 +108,9 @@
                     <div class="col">
 
                         <small>Format</small><br />
+                        <div id="category">
                         <div class="col">
-                        <div class="form-check">
+                        <div class="form-check" id="category_month">
                             <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
                             <label class="form-check-label" for="flexRadioDefault1">
                               Month
@@ -116,13 +119,17 @@
                         </div>
 
                           <div class="col">
-                          <div class="form-check">
+                          <div class="form-check" id="category_day">
                             <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
                             <label class="form-check-label" for="flexRadioDefault2">
                               Days
                             </label>
                           </div>
                         </div>
+                    
+                    </div>
+
+                        <br/>
 
                         <div class="input-group mb-3">
                             <div>
@@ -151,6 +158,9 @@
                                 <tbody id="table_data"></tbody>
                             </table>
                         </div>
+
+                        <small class="">Total</small><br />
+                        <p class="">???</p>
                     </div>
                 
                     
