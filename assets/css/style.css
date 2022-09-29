@@ -33,16 +33,9 @@ body {
 }
 
 .rest {
-  /* width: 700px; */
   padding: 10px;
   border: 20px;
   border-width: 200px;
   height: 200px !important;
   overflow: scroll;
 }
-
-/* .total {
-  border-color: black;
-  border-radius: 10px;
-  border: 10px;
-} */

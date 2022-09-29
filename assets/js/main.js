@@ -149,7 +149,6 @@ function line(data) {
         },
         title: "SWOB Metrics",
         height: 250,
-        //width: 700,
         backgroundColor: '#ebf3fb',
         colors: ['black']
       };
@@ -163,44 +162,6 @@ function line(data) {
     }
   }
 }
-
-// function bar(data) {
-//   if (data.length < 2) {
-//     document.getElementById("bar_div").innerHTML = `<h5 class="text-danger text-center ">Sorry No Data To Display!</h5>`
-//   } else {
-//     // Set a callback to run when the Google Visualization API is loaded.
-//     google.charts.setOnLoadCallback(drawChart);
-
-//     function drawChart() {
-//       var result = google.visualization.arrayToDataTable(data);
-
-//       // Set chart options
-//       var options = {
-//         vAxis: {
-//           title: data[0][0],
-//           format: "0",
-//           minValue: 0,
-//         },
-//         hAxis: {
-//           title: data[0][1],
-//           minValue: 0,
-
-//         },
-//         title: "SWOB Metrics",
-//         height: 250,
-//         backgroundColor: '#ebf3fb',
-//         colors: ['black']
-//       };
-
-//       // Instantiate and draw our chart, passing in some options.
-//       var chart = new google.visualization.BarChart(
-//         document.getElementById("bar_div")
-//       );
-
-//       chart.draw(result, options);
-//     }
-//   }
-// }
 
 function run(
   data,
@@ -231,13 +192,10 @@ function run(
     total += item[1];
   });
 
-  // table_data.innerHTML += `<tr class="table-light table-bordered border-secondary"><td>Total</td><td>${total}</td></tr>`;
-
   document.getElementById("total").innerHTML = total
 
   filter_data.unshift(headers);
 
   line(filter_data);
-  //bar(filter_data);
 
 }
