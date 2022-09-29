@@ -14,6 +14,15 @@ body {
   width: 119px;
 }
 
+.filter{
+  padding: 15px;
+  text-align: start;
+}
+
+.form-check{
+  display: flex;
+}
+
 @media only screen and (max-width: 600px) {
   .form-control {
     width: 100px;
