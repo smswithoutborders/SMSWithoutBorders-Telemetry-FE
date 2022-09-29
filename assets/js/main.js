@@ -5,9 +5,7 @@ google.charts.load("current", {
 
 function fetchData(
   url,
-  category,
-  start_month,
-  end_month,
+  format,
   start_date,
   end_date,
   table_data,
@@ -23,9 +21,7 @@ function fetchData(
 
       run(
         entry,
-        category,
-        start_month,
-        end_month,
+        format,
         start_date,
         end_date,
         table_data,
@@ -39,7 +35,7 @@ function fetchData(
   xhttp.send();
 }
 
-function filter_months(entry, start_month, end_month, type) {
+function filter_months(entry, start_date, end_date, type) {
   const month = [
     "January",
     "February",
@@ -59,8 +55,8 @@ function filter_months(entry, start_month, end_month, type) {
 
   entry.forEach((element) => {
     let search_month = new Date(element.date).toLocaleDateString()
-    let start_month_modified = new Date(start_month).toLocaleDateString()
-    let end_month_modified = new Date(new Date(end_month).getFullYear(), new Date(end_month).getMonth() + 1, 0).toLocaleDateString()
+    let start_month_modified = new Date(new Date(start_date).getFullYear(), new Date(start_date).getMonth(), 1).toLocaleDateString()
+    let end_month_modified = new Date(new Date(end_date).getFullYear(), new Date(end_date).getMonth() + 1, 0).toLocaleDateString()
 
     if (
       new Date(search_month) >= new Date(start_month_modified) &&
@@ -119,16 +115,14 @@ function filter_days(entry, start_date, end_date, type) {
 
 function filter(
   entry,
-  category,
-  start_month,
-  end_month,
+  format,
   type,
   start_date,
   end_date
 ) {
-  if (category == "months") {
-    return filter_months(entry, start_month, end_month, type);
-  } else if (category == "days") {
+  if (format == "month") {
+    return filter_months(entry, start_date, end_date, type);
+  } else if (format == "day") {
     return filter_days(entry, start_date, end_date, type);
   }
 }
@@ -155,6 +149,8 @@ function line(data) {
         },
         title: "SWOB Metrics",
         height: 250,
+        backgroundColor: '#ebf3fb',
+        colors: ['black']
       };
 
       // Instantiate and draw our chart, passing in some options.
@@ -167,59 +163,19 @@ function line(data) {
   }
 }
 
-function bar(data) {
-  if (data.length < 2) {
-    document.getElementById("bar_div").innerHTML = `<h5 class="text-danger text-center ">Sorry No Data To Display!</h5>`
-  } else {
-    // Set a callback to run when the Google Visualization API is loaded.
-    google.charts.setOnLoadCallback(drawChart);
-
-    function drawChart() {
-      var result = google.visualization.arrayToDataTable(data);
-
-      // Set chart options
-      var options = {
-        vAxis: {
-          title: data[0][0],
-          format: "0",
-          minValue: 0,
-        },
-        hAxis: {
-          title: data[0][1],
-          minValue: 0,
-
-        },
-        title: "SWOB Metrics",
-        height: 250,
-      };
-
-      // Instantiate and draw our chart, passing in some options.
-      var chart = new google.visualization.BarChart(
-        document.getElementById("bar_div")
-      );
-
-      chart.draw(result, options);
-    }
-  }
-}
-
 function run(
   data,
-  category,
-  start_month,
-  end_month,
+  format,
   start_date,
   end_date,
   table_data,
   table_head,
   type
 ) {
-  let headers = [category.toUpperCase(), type.toUpperCase()];
+  let headers = [format.toUpperCase(), type.toUpperCase()];
   let filter_data = filter(
     data,
-    category,
-    start_month,
-    end_month,
+    format,
     type,
     start_date,
     end_date
@@ -236,12 +192,10 @@ function run(
     total += item[1];
   });
 
-  table_data.innerHTML += `<tr class="table-light table-bordered border-secondary"><td>Total</td><td>${total}</td></tr>`;
-
+  document.getElementById("total").innerHTML = total
 
   filter_data.unshift(headers);
 
   line(filter_data);
-  bar(filter_data);
 
 }
