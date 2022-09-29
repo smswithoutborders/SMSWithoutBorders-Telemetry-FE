@@ -10,8 +10,32 @@ body {
   justify-content: center;
 }
 
+
+.card {
+  margin-right: auto;
+  margin-left: auto;
+  width: 400px;
+  box-shadow: 0 15px 25px rgba(129, 124, 124, 0.2);
+  height: 600px;
+  border-radius: 10px;
+  backdrop-filter: blur(14px);
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 10px;
+  text-align: start;
+}
+
+
 .form-control {
   width: 119px;
+}
+
+.filter{
+  padding: 15px;
+  text-align: start;
+}
+
+.form-check{
+  display: flex;
 }
 
 @media only screen and (max-width: 600px) {
@@ -28,19 +52,20 @@ body {
   font-size: 30px;
 }
 
-#category_month {
-  display: none;
-}
-
-#category_day {
-  display: none;
-}
-
 .bot:hover {
   background-color: #333434;
 }
 
 .rest {
+  padding: 10px;
+  border: 20px;
+  border-width: 200px;
+  height: 200px !important;
+  overflow: scroll;
+}
+
+.rest {
+  /* width: 700px; */
   height: 200px !important;
   overflow: scroll;
 }
