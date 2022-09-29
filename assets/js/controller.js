@@ -32,7 +32,7 @@ window.onload = () => {
         end_date.value = today;
         document.getElementById("format_day").checked = true;
 
-        fetchData(URL, "day", start_date.value, end_date.value, table_data, table_head, "active");
+        fetchData(URL, "day", start_date.value, end_date.value, table_data, table_head, "signup");
     }
 
     filter_btn.addEventListener("click", () => {
