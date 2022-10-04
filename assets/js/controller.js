@@ -30,12 +30,12 @@ window.onload = () => {
         // Default chart
         start_date.value = today;
         end_date.value = today;
-        document.getElementById("format_day").checked = true;
+        document.getElementById("format_month").checked = true;
 
-        fetchData(URL, "day", start_date.value, end_date.value, table_data, table_head, "publisher");
+        fetchData(URL, "day", start_date.value, end_date.value, table_data, table_head, "signup");
     }
 
-    filter_btn.addEventListener("click", () => {
+    body.addEventListener("click", () => {
         let format_value;
         for (let i = 0; i < format.length; i++) {
             if (format[i].checked) {
