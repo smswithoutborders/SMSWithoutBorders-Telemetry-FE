@@ -149,7 +149,7 @@ function line(data) {
         },
         title: "SWOB Metrics",
         height: 250,
-        backgroundColor: '#ebf3fb',
+        backgroundColor: '#f1f1f1',
         colors: ['black']
       };
 
