@@ -1,6 +1,8 @@
-let filter_btn = document.getElementById("filter")
-let type = document.getElementById("type")
-let format = document.getElementsByName("format")
+let format_day = document.getElementById("format_day");
+let format_month = document.getElementById("format_month");
+let filter_type = document.getElementById("type");
+let type = document.getElementById("type");
+let format = document.getElementsByName("format");
 let start_date = document.getElementById("start_date");
 let end_date = document.getElementById("end_date");
 let table_data = document.getElementById("table_data");
@@ -17,7 +19,6 @@ window.onload = () => {
     }
 
     if (format_value == "month" || format_value == "day") {
-        console.log(format_value)
         fetchData(URL, format_value, start_date.value, end_date.value, table_data, table_head, type.value);
     } else {
         let today = new Date();
@@ -30,12 +31,13 @@ window.onload = () => {
         // Default chart
         start_date.value = today;
         end_date.value = today;
-        document.getElementById("format_month").checked = true;
+        format_month.checked = true;
 
-        fetchData(URL, "day", start_date.value, end_date.value, table_data, table_head, "signup");
+        fetchData(URL, "month", start_date.value, end_date.value, table_data, table_head, "signup");
     }
 
-    body.addEventListener("click", () => {
+
+    format_month.addEventListener("click", () => {
         let format_value;
         for (let i = 0; i < format.length; i++) {
             if (format[i].checked) {
@@ -43,7 +45,50 @@ window.onload = () => {
             }
         }
 
-        console.log(format_value)
+        fetchData(URL, format_value, start_date.value, end_date.value, table_data, table_head, type.value);
+    });
+
+    format_day.addEventListener("click", () => {
+        let format_value;
+        for (let i = 0; i < format.length; i++) {
+            if (format[i].checked) {
+                format_value = format[i].value;
+            }
+        }
+
+        fetchData(URL, format_value, start_date.value, end_date.value, table_data, table_head, type.value);
+    });
+
+    type.addEventListener("change", () => {
+        let format_value;
+        for (let i = 0; i < format.length; i++) {
+            if (format[i].checked) {
+                format_value = format[i].value;
+            }
+        }
+
+        fetchData(URL, format_value, start_date.value, end_date.value, table_data, table_head, type.value);
+    });
+
+    start_date.addEventListener("change", () => {
+        let format_value;
+        for (let i = 0; i < format.length; i++) {
+            if (format[i].checked) {
+                format_value = format[i].value;
+            }
+        }
+
+        fetchData(URL, format_value, start_date.value, end_date.value, table_data, table_head, type.value);
+    });
+
+    end_date.addEventListener("change", () => {
+        let format_value;
+        for (let i = 0; i < format.length; i++) {
+            if (format[i].checked) {
+                format_value = format[i].value;
+            }
+        }
+
         fetchData(URL, format_value, start_date.value, end_date.value, table_data, table_head, type.value);
     });
 }

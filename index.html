@@ -25,10 +25,10 @@
                   <div class="filter">
                     <div class="type">
                     <h6>Type</h6><br />
-                    <select id="type" class="btn btn-light shadow mb-4">
-                        <option value="" disabled selected hidden>__Select_Type__</option>
-                        <option value="available">Available Users</option>
+                    <select id="type" class="btn btn-light mb-4">
+                        <!-- <option value="" disabled selected hidden>__Select_Type__</option> -->
                         <option value="signup">Signed-up Users</option>
+                        <option value="available">Available Users</option>
                         <option value="publisher">Published</option>
                     </select>
                     </div><br />
@@ -51,14 +51,14 @@
                     <br />
 
                      
-                  <div class="input-group mb-2">
+                  <div class="input-group mb-2" id="">
                     <div class="col-6">
                       <small class="">Start</small><br />
-                        <input id="start_date" type="date" class="form-control shadow me-1" />
+                        <input id="start_date" type="date" class="form-control me-1" />
                     </div>
                     <div class="col-md-6">
                       <small class="">End</small><br />
-                        <input id="end_date" type="date" class="form-control shadow" />
+                        <input id="end_date" type="date" class="form-control" />
                     </div>
                   </div>
                  <!--fliter button-->
@@ -70,7 +70,7 @@
               </div>
 
                 <!--the start of the second column-->
-                <div class="col-md-8">
+                <div class="col-md-8" id="chart_section">
                       <!-- Chart display -->
                       <div id="line_div">
                         <div class="d-flex justify-content-center">
