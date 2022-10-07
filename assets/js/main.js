@@ -202,7 +202,7 @@ function run(
   filter_data.forEach((item) => {
     table_data.innerHTML += `<tr><td>${item[0]}</td><td>${item[1]}</td></tr>`;
     total += item[1];
-  });
+  })
 
   document.getElementById("total").innerHTML = total
 
@@ -210,4 +210,4 @@ function run(
 
   line(filter_data);
 
-}
+} 
