@@ -1,6 +1,6 @@
 body {
   /* background-image: url(/assets/images/blob-scene-haikei.svg); */
-  background-color: white;
+  background-color: #f1f1f1;
   background-repeat: no-repeat;
   background-size: cover;
   height: fit-content;
@@ -9,7 +9,6 @@ body {
 .row {
   justify-content: center;
 }
-
 
 .card {
   margin-right: auto;
@@ -24,8 +23,9 @@ body {
   text-align: start;
 }
 
+
 .form-control {
-  width: 140px;
+  width: 119px;
 }
 
 .filter{
@@ -67,4 +67,8 @@ body {
   /* width: 700px; */
   height: 200px !important;
   overflow: scroll;
+}
+
+.total {
+  width: 100px !important;
 }
