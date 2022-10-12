@@ -18,7 +18,6 @@ function fetchData(
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
       let entry = JSON.parse(this.responseText);
-
       run(
         entry,
         format,

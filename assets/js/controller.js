@@ -11,7 +11,17 @@ let table_head = document.getElementById("table_head");
 const URL = "https://smswithoutborders.com:11000/statistics"
 
 window.onload = () => {
+    let start_date_new = start_date.value
+    let end_date_new = end_date.value
+
+    if (start_date_new == "") {
+        start_date_new = end_date_new
+    } else if (end_date_new == "") {
+        end_date_new = start_date_new
+    }
+
     let format_value;
+
     for (let i = 0; i < format.length; i++) {
         if (format[i].checked) {
             format_value = format[i].value;
@@ -19,7 +29,7 @@ window.onload = () => {
     }
 
     if (format_value == "month" || format_value == "day") {
-        fetchData(URL, format_value, start_date.value, end_date.value, table_data, table_head, type.value);
+        fetchData(URL, format_value, start_date_new, end_date_new, table_data, table_head, type.value);
     } else {
         let today = new Date();
         let dd = String(today.getDate()).padStart(2, '0');
@@ -36,59 +46,108 @@ window.onload = () => {
         fetchData(URL, "month", start_date.value, end_date.value, table_data, table_head, "signup");
     }
 
-
     format_month.addEventListener("click", () => {
+        let start_date_new = start_date.value
+        let end_date_new = end_date.value
+
+        if (start_date_new == "") {
+            start_date_new = end_date_new
+        } else if (end_date_new == "") {
+            end_date_new = start_date_new
+        }
+
         let format_value;
+
         for (let i = 0; i < format.length; i++) {
             if (format[i].checked) {
                 format_value = format[i].value;
             }
         }
 
-        fetchData(URL, format_value, start_date.value, end_date.value, table_data, table_head, type.value);
+        fetchData(URL, format_value, start_date_new, end_date_new, table_data, table_head, type.value);
     });
 
     format_day.addEventListener("click", () => {
+        let start_date_new = start_date.value
+        let end_date_new = end_date.value
+
+        if (start_date_new == "") {
+            start_date_new = end_date_new
+        } else if (end_date_new == "") {
+            end_date_new = start_date_new
+        }
+
         let format_value;
+
         for (let i = 0; i < format.length; i++) {
             if (format[i].checked) {
                 format_value = format[i].value;
             }
         }
 
-        fetchData(URL, format_value, start_date.value, end_date.value, table_data, table_head, type.value);
+        fetchData(URL, format_value, start_date_new, end_date_new, table_data, table_head, type.value);
     });
 
     type.addEventListener("change", () => {
+        let start_date_new = start_date.value
+        let end_date_new = end_date.value
+
+        if (start_date_new == "") {
+            start_date_new = end_date_new
+        } else if (end_date_new == "") {
+            end_date_new = start_date_new
+        }
+
         let format_value;
+
         for (let i = 0; i < format.length; i++) {
             if (format[i].checked) {
                 format_value = format[i].value;
             }
         }
 
-        fetchData(URL, format_value, start_date.value, end_date.value, table_data, table_head, type.value);
+        fetchData(URL, format_value, start_date_new, end_date_new, table_data, table_head, type.value);
     });
 
     start_date.addEventListener("change", () => {
+        let start_date_new = start_date.value
+        let end_date_new = end_date.value
+
+        if (start_date_new == "") {
+            start_date_new = end_date_new
+        } else if (end_date_new == "") {
+            end_date_new = start_date_new
+        }
+
         let format_value;
+
         for (let i = 0; i < format.length; i++) {
             if (format[i].checked) {
                 format_value = format[i].value;
             }
         }
 
-        fetchData(URL, format_value, start_date.value, end_date.value, table_data, table_head, type.value);
+        fetchData(URL, format_value, start_date_new, end_date_new, table_data, table_head, type.value);
     });
 
     end_date.addEventListener("change", () => {
+        let start_date_new = start_date.value
+        let end_date_new = end_date.value
+
+        if (start_date_new == "") {
+            start_date_new = end_date_new
+        } else if (end_date_new == "") {
+            end_date_new = start_date_new
+        }
+
         let format_value;
+
         for (let i = 0; i < format.length; i++) {
             if (format[i].checked) {
                 format_value = format[i].value;
             }
         }
 
-        fetchData(URL, format_value, start_date.value, end_date.value, table_data, table_head, type.value);
+        fetchData(URL, format_value, start_date_new, end_date_new, table_data, table_head, type.value);
     });
 }
