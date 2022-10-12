@@ -4,6 +4,8 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   height: fit-content;
+  padding-top: 20px;
+
 }
 
 .row {
