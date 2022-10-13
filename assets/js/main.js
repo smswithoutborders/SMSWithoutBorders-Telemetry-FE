@@ -153,15 +153,16 @@ function line(data) {
         vAxis: {
           title: data[0][1],
           format: "0",
-          minValue: 0,
+          minValue: 0
         },
         hAxis: {
-          title: data[0][0],
+          title: data[0][0]
         },
         title: "SWOB Metrics",
         height: 250,
         backgroundColor: '#ffffff',
-        colors: ['black']
+        colors: ['black'],
+        trendlines: { 1: {} }
       };
 
       // Instantiate and draw our chart, passing in some options.
@@ -201,12 +202,12 @@ function run(
   filter_data.forEach((item) => {
     table_data.innerHTML += `<tr><td>${item[0]}</td><td>${item[1]}</td></tr>`;
     total += item[1];
-  })
+  });
 
   document.getElementById("total").innerHTML = total
 
   filter_data.unshift(headers);
 
   line(filter_data);
-  
-} 
+
+}
