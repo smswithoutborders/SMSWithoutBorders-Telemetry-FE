@@ -1,15 +1,16 @@
 body {
   /* background-image: url(/assets/images/blob-scene-haikei.svg); */
-  background-color: white;
+  background-color: #f1f1f1;
   background-repeat: no-repeat;
   background-size: cover;
   height: fit-content;
+  padding-top: 20px;
+
 }
 
 .row {
   justify-content: center;
 }
-
 
 .card {
   margin-right: auto;
@@ -68,4 +69,8 @@ body {
   /* width: 700px; */
   height: 200px !important;
   overflow: scroll;
+}
+
+.total {
+  width: 100px !important;
 }
