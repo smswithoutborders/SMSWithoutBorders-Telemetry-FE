@@ -39,6 +39,10 @@ function fetchData(
           <span class="visually-hidden">Loading...</span>
       </div>
   </div>`
+  table_head.innerHTML;
+  table_data.innerHTML = "";
+  
+  document.getElementById("total").innerHTML =`....`
     }
   };
 
