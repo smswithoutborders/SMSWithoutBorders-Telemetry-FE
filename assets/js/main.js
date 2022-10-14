@@ -39,8 +39,9 @@ function fetchData(
           <span class="visually-hidden">Loading...</span>
       </div>
   </div>`
-  table_head.innerHTML;
+  table_head.innerHTML = `<tr><th scope="col">${headers[0]}</th><th scope="col">${headers[1]}</th></tr>`;
   table_data.innerHTML = "";
+
   
   document.getElementById("total").innerHTML =`....`
     }

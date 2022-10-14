@@ -8,8 +8,8 @@ let end_date = document.getElementById("end_date");
 let table_data = document.getElementById("table_data");
 let table_head = document.getElementById("table_head");
 
-//const URL = "https://smswithoutborders.com:11000/statistics"
-const URL = "https://62ffa49234344b6431fe43fc.mockapi.io/statistics"
+const URL = "https://smswithoutborders.com:11000/statistics"
+
 
 window.onload = () => {
     let start_date_new = start_date.value
