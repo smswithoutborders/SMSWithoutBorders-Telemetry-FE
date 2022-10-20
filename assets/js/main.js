@@ -18,7 +18,6 @@ function fetchData(
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
       let entry = JSON.parse(this.responseText);
-
       run(
         entry,
         format,
@@ -28,6 +27,21 @@ function fetchData(
         table_head,
         type
       );
+    } else {
+      document.getElementById("line_div").innerHTML = `<div class="d-flex justify-content-center">
+      <div class="spinner-grow text-dark" style="width: 4rem; height: 4rem" role="status">
+          <span class="visually-hidden">Loading...</span>
+      </div>
+      <div class="spinner-grow text-secondary" style="width: 4rem; height: 4rem" role="status">
+          <span class="visually-hidden">Loading...</span>
+      </div>
+      <div class="spinner-grow text-light" style="width: 4rem; height: 4rem" role="status">
+          <span class="visually-hidden">Loading...</span>
+      </div>
+  </div>`
+      table_head.innerHTML = `<tr><th scope="col">${headers[0]}</th><th scope="col">${headers[1]}</th></tr>`;
+      table_data.innerHTML = "";
+      document.getElementById("total").innerHTML = `....`
     }
   };
 
@@ -53,33 +67,73 @@ function filter_months(entry, start_date, end_date, type) {
 
   let filter_data = [];
 
-  entry.forEach((element) => {
-    let search_month = new Date(element.date).toLocaleDateString()
-    let start_month_modified = new Date(new Date(start_date).getFullYear(), new Date(start_date).getMonth(), 1).toLocaleDateString()
-    let end_month_modified = new Date(new Date(end_date).getFullYear(), new Date(end_date).getMonth() + 1, 0).toLocaleDateString()
+  if (type == "available") {
+    let previous_months_count = 0;
 
-    if (
-      new Date(search_month) >= new Date(start_month_modified) &&
-      new Date(search_month) <= new Date(end_month_modified) &&
-      element.type == type
-    ) {
-      filter_data.push(month[new Date(element.date).getMonth()]);
-    }
-  });
+    entry.forEach((element) => {
+      let search_month = new Date(element.date).toLocaleDateString()
+      let start_month_modified = new Date(new Date(start_date).getFullYear(), new Date(start_date).getMonth(), 1).toLocaleDateString()
+      let end_month_modified = new Date(new Date(end_date).getFullYear(), new Date(end_date).getMonth() + 1, 0).toLocaleDateString()
 
-  let data = {};
+      if (
+        new Date(search_month) >= new Date(start_month_modified) &&
+        new Date(search_month) <= new Date(end_month_modified) &&
+        element.type == type
+      ) {
+        filter_data.push(month[new Date(element.date).getMonth()]);
+      }
 
-  filter_data.forEach((element) => {
-    data[element] = (data[element] || 0) + 1;
-  });
+      if (
+        new Date(search_month) < new Date(start_month_modified) &&
+        element.type == type
+      ) {
+        previous_months_count += 1;
+      }
+    });
 
-  let result = Object.keys(data).sort(function (a, b) {
-    return month.indexOf(a) > month.indexOf(b);
-  }).map((key) => {
-    return [key, data[key]];
-  });
+    let data = {};
 
-  return result;
+    filter_data.forEach((element) => {
+      data[element] = (data[element] || 0) + 1;
+    });
+
+    let result = Object.keys(data).sort(function (a, b) {
+      return month.indexOf(a) > month.indexOf(b);
+    }).map((key, index, array) => {
+      previous_months_count += (data[array[index - 1]] || 0)
+      return [key, data[key] + previous_months_count];
+    });
+
+    return result;
+  } else {
+    entry.forEach((element) => {
+      let search_month = new Date(element.date).toLocaleDateString()
+      let start_month_modified = new Date(new Date(start_date).getFullYear(), new Date(start_date).getMonth(), 1).toLocaleDateString()
+      let end_month_modified = new Date(new Date(end_date).getFullYear(), new Date(end_date).getMonth() + 1, 0).toLocaleDateString()
+
+      if (
+        new Date(search_month) >= new Date(start_month_modified) &&
+        new Date(search_month) <= new Date(end_month_modified) &&
+        element.type == type
+      ) {
+        filter_data.push(month[new Date(element.date).getMonth()]);
+      }
+    });
+
+    let data = {};
+
+    filter_data.forEach((element) => {
+      data[element] = (data[element] || 0) + 1;
+    });
+
+    let result = Object.keys(data).sort(function (a, b) {
+      return month.indexOf(a) > month.indexOf(b);
+    }).map((key) => {
+      return [key, data[key]];
+    });
+
+    return result;
+  }
 }
 
 function filter_days(entry, start_date, end_date, type) {
@@ -142,15 +196,18 @@ function line(data) {
         vAxis: {
           title: data[0][1],
           format: "0",
-          minValue: 0,
+          minValue: 0
         },
         hAxis: {
-          title: data[0][0],
+          title: data[0][0]
         },
         title: "SWOB Metrics",
         height: 250,
-        backgroundColor: '#ebf3fb',
-        colors: ['black']
+        backgroundColor: '#ffffff',
+        colors: ['black'],
+        trendlines: {
+          1: {}
+        }
       };
 
       // Instantiate and draw our chart, passing in some options.
@@ -187,9 +244,16 @@ function run(
 
   let total = 0;
 
-  filter_data.forEach((item) => {
+  filter_data.forEach((item, index, array) => {
     table_data.innerHTML += `<tr><td>${item[0]}</td><td>${item[1]}</td></tr>`;
-    total += item[1];
+
+    if (type == "available") {
+      if (index == array.length - 1) {
+        total = item[1];
+      }
+    } else {
+      total += item[1];
+    }
   });
 
   document.getElementById("total").innerHTML = total
