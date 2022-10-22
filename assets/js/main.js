@@ -29,19 +29,14 @@ function fetchData(
       );
     } else {
       document.getElementById("line_div").innerHTML = `<div class="d-flex justify-content-center">
-      <div class="spinner-grow text-dark" style="width: 4rem; height: 4rem" role="status">
+      <div class="spinner-border text-dark" style="margin-top: 5rem; width: 4rem; height: 4rem" role="status">
           <span class="visually-hidden">Loading...</span>
-      </div>
-      <div class="spinner-grow text-secondary" style="width: 4rem; height: 4rem" role="status">
-          <span class="visually-hidden">Loading...</span>
-      </div>
-      <div class="spinner-grow text-light" style="width: 4rem; height: 4rem" role="status">
-          <span class="visually-hidden">Loading...</span>
-      </div>
-  </div>`
-      table_head.innerHTML = `<tr><th scope="col">${headers[0]}</th><th scope="col">${headers[1]}</th></tr>`;
+      </div></div>`;
+
+      document.getElementById("table_header").innerHTML = ""
+      table_head.innerHTML = "";
       table_data.innerHTML = "";
-      document.getElementById("total").innerHTML = `....`
+      document.getElementById("total").innerHTML = `...`
     }
   };
 
@@ -239,6 +234,7 @@ function run(
   );
 
   // table
+  document.getElementById("table_header").innerHTML = "Summary"
   table_head.innerHTML = `<tr><th scope="col">${headers[0]}</th><th scope="col">${headers[1]}</th></tr>`;
   table_data.innerHTML = "";
 
@@ -261,5 +257,4 @@ function run(
   filter_data.unshift(headers);
 
   line(filter_data);
-
 }
