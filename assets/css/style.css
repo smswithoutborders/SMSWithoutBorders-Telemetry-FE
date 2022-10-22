@@ -25,17 +25,16 @@ body {
   text-align: start;
 }
 
-
 .form-control {
   width: 119px;
 }
 
-.filter{
+.filter {
   padding: 15px;
   text-align: start;
 }
 
-.form-check{
+.form-check {
   display: flex;
 }
 
@@ -64,8 +63,6 @@ body {
   height: 200px !important;
   overflow: scroll;
 }
-
-
 
 .total {
   width: 100px !important;
