@@ -1,6 +1,6 @@
 body {
   /* background-image: url(/assets/images/blob-scene-haikei.svg); */
-  background-color: #ffffff;
+  background-color: #0e213b;
   background-repeat: no-repeat;
   background-size: cover;
   height: fit-content;
@@ -66,4 +66,15 @@ body {
 
 .total {
   width: 100px !important;
+}
+
+table {
+  border-radius: 70px;
+}
+
+.mapouter {
+  background-image: url(../images/90OK.gif);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100px;
 }

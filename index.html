@@ -12,86 +12,130 @@
   <title>Afkanerd Chart</title>
 </head>
 
-<body id="body">
-  <div class="container-fluid">
-    <div class="container">
-      <h3 class="text-dark mt-3"> SMSWithoutBorders Statistics </h3>
-      <hr class="hr">
+<body>
+  <div class="container-fluid ">
 
-      <!-- Filter -->
-      <div class="row">
-        <!-- categories -->
-        <div class="col-md-3 me-auto">
-          <div class="filter">
-            <div class="type">
-              <h6>Type</h6><br />
-              <select id="type" class="btn btn-outline-dark mb-4">
-                <!-- <option value="" disabled selected hidden>__Select_Type__</option> -->
-                <option value="signup">Signed-up Users</option>
-                <option value="available">Available Users</option>
-                <option value="publisher">Published</option>
-              </select>
-            </div><br />
+    <h3 class="text-light"> <img src="assets/images/Artboard 9.png" width="60px" alt=""> SMSWithoutBorders Statistics
+    </h3>
 
+    <hr class="hr text-light">
 
-            <h6>Format</h6>
-            <div class="form-check" id="">
-              <div class="col">
-                <input class="form-check-input" type="radio" name="format" value="month" id="format_month">
-                <label class="form-check-label" for=""> Month </label>
-              </div>
+    <div class="row">
 
-              <div class="col">
-                <div id="">
-                  <input class="form-check-input" type="radio" name="format" value="day" id="format_day">
-                  <label class="form-check-label" for=""> Days</label>
-                </div>
+      <div class="col-md-3">
+        <div class="filter">
+          <div class="type">
+            <h6 class="text-light">Type</h6>
+            <select id="type" class="btn btn-light mb-4">
+              <option value="signup">Signed-up Users</option>
+              <option value="available">Available Users</option>
+              <option value="publisher">Published</option>
+            </select>
+          </div><br />
+
+          <h6 class="text-light">Format</h6>
+          <div class="form-check" id="">
+            <div class="col">
+              <input class="form-check-input" type="radio" name="format" value="month" id="format_month">
+              <label class="form-check-label text-light" for=""> Month </label>
+            </div>
+
+            <div class="col">
+              <div id="">
+                <input class="form-check-input" type="radio" name="format" value="day" id="format_day">
+                <label class="form-check-label text-light" for=""> Days</label>
               </div>
             </div>
-            <br />
+          </div>
+          <br />
 
-
-            <div class="input-group mb-2" id="">
-              <div class="col-6">
-                <small class="">Start-Date</small><br />
-                <input id="start_date" type="date" class="form-control me-1" />
-              </div>
-              <div class="col-6">
-                <small class="">End-Date</small><br />
-                <input id="end_date" type="date" class="form-control" />
-              </div>
+          <div class="input-group mb-5 text-light" id="">
+            <div class="col">
+              <small class="">Start-Date</small><br />
+              <input id="start_date" type="date" class="form-control me-1" />
             </div>
-            <!--end of filter section-->
+            <div class="col">
+              <small class="">End-Date</small><br />
+              <input id="end_date" type="date" class="form-control" />
+            </div>
           </div>
         </div>
 
-        <!--the start of the second column-->
-        <div class="col-md-8" id="chart_section">
-
-          <small class="">Total</small><br />
-          <button type="" class="btn btn-outline-dark total" id="total">...</button><br><br>
-          <!-- Chart display -->
-          <div id="line_div">
-            <div class="d-flex justify-content-center">
-              <div class="spinner-border text-dark" style="margin-top: 5rem; width: 4rem; height: 4rem" role="status">
-                <span class="visually-hidden">Loading...</span>
-              </div>
+        <div class=" text-light" id="pie_div">
+          <div class="d-flex justify-content-center">
+            <div class="spinner-border text-light" style="margin-top: 5rem; width: 4rem; height: 4rem" role="status">
+              <span class="visually-hidden">Loading...</span>
             </div>
-          </div><br>
-
-          <!--summary table section-->
-          <h5 id="table_header"></h5>
-          <div class="table-responsive rest" id="table">
-            <table class="table table-bordered table-sm border-secondary text-center">
-              <thead id="table_head" class="table-light border-dark"></thead>
-              <tbody id="table_data"></tbody>
-            </table>
           </div>
         </div>
+        <br>
+
       </div>
-      <!--closing tag for the line chart column-->
+
+      <div class="col-md-5" id="chart_section">
+
+        <h6 class="text-light mt-3" id="ttext">Total</h6>
+        <h1 class="total text-light" id="total"> 0 </h1>
+
+        <div class=" text-light" id="line_div">
+          <div class="d-flex justify-content-center">
+            <div class="spinner-border text-light" style="margin-top: 5rem; width: 4rem; height: 4rem" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
+        </div>
+        <br>
+
+        <div class="text-light" id="bar_div">
+          <div class="d-flex justify-content-center">
+            <div class="spinner-border text-light" style="margin-top: 5rem; width: 4rem; height: 4rem" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
+        </div><br>
+
+      </div>
+
+      <div class="col-md-4">
+
+        <h6 class="text-light mt-3">Country</h6>
+        <select id="country" class="btn btn-light mb-4">
+          <option value="">__select_country__</option>
+        </select>
+        <br>
+
+        <h5 id="table_header"></h5>
+        <div class="table-responsive rest" id="table">
+          <table class="table table-bordered table-sm border-secondary text-center">
+            <thead id="table_head" class="table-light border-dark"></thead>
+            <tbody id="table_data" class="text-light"></tbody>
+          </table>
+        </div> <br>
+
+        <div class="mapouter">
+          <div class="gmap_canvas"><iframe width="600px" height="300px" id="gmap_canvas" src="" frameborder="0"
+              scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://123movies-to.org"></a><br>
+            <style>
+              .mapouter {
+                position: relative;
+                text-align: right;
+                border-radius: 20px;
+              }
+            </style><a href="https://www.embedgooglemap.net">Google</a>
+            <style>
+              .gmap_canvas {
+                overflow: hidden;
+                background: none !important;
+                border-radius: 20px;
+              }
+            </style>
+          </div>
+        </div>
+
+      </div><br>
+
     </div>
-    <!--closing tag for the row-->
+  </div>
   </div>
 
   <!--Load the AJAX API-->

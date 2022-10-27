@@ -2,16 +2,19 @@ let format_day = document.getElementById("format_day");
 let format_month = document.getElementById("format_month");
 let filter_type = document.getElementById("type");
 let type = document.getElementById("type");
+let country = document.getElementById("country");
 let format = document.getElementsByName("format");
 let start_date = document.getElementById("start_date");
 let end_date = document.getElementById("end_date");
 let table_data = document.getElementById("table_data");
 let table_head = document.getElementById("table_head");
 
-const URL = "https://smswithoutborders.com:11000/statistics"
+const URL = "https://62ffa49234344b6431fe43fc.mockapi.io/statistics"
 
 
 window.onload = () => {
+    document.getElementById("gmap_canvas").src = "https://maps.google.com/maps?q=Cameroon&t=&z=6&ie=UTF8&iwloc=&output=embed";
+
     let start_date_new = start_date.value
     let end_date_new = end_date.value
 
@@ -150,5 +153,9 @@ window.onload = () => {
         }
 
         fetchData(URL, format_value, start_date_new, end_date_new, table_data, table_head, type.value);
+    });
+
+    country.addEventListener("change", () => {
+        document.getElementById("gmap_canvas").src = `https://maps.google.com/maps?q=${country.value}&t=&z=6&ie=UTF8&iwloc=&output=embed`;
     });
 }
