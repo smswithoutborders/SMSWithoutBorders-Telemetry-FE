@@ -255,7 +255,7 @@ const countries = {
 
 // Load google API
 google.charts.load("current", {
-  packages: ["corechart", 'sankey'],
+  packages: ["corechart"],
 });
 
 function fetchData(
@@ -424,33 +424,101 @@ function filter_months(entry, start_date, end_date, type) {
 
 function filter_days(entry, start_date, end_date, type) {
   let filter_data = [];
+  let country_phone_codes = [];
 
-  entry.forEach((element) => {
-    let search_date = new Date(element.date).toLocaleDateString()
-    let start_date_modified = new Date(start_date).toLocaleDateString()
-    let end_date_modified = new Date(end_date).toLocaleDateString()
+  if (type == "available") {
+    let previous_days_count = 0;
 
-    if (
-      new Date(search_date) >= new Date(start_date_modified) &&
-      new Date(search_date) <= new Date(end_date_modified) &&
-      element.type == type
-    ) {
-      filter_data.push(new Date(element.date).toDateString());
-    }
-  });
-  let data = {};
+    entry.forEach((element) => {
+      let search_date = new Date(element.date).toLocaleDateString()
+      let start_date_modified = new Date(start_date).toLocaleDateString()
+      let end_date_modified = new Date(end_date).toLocaleDateString()
 
-  filter_data.forEach((element) => {
-    data[element] = (data[element] || 0) + 1;
-  });
+      if (
+        new Date(search_date) >= new Date(start_date_modified) &&
+        new Date(search_date) <= new Date(end_date_modified) &&
+        element.type == type
+      ) {
+        filter_data.push(new Date(element.date).toDateString());
+        country_phone_codes.push(element.country_code);
+      }
 
-  let result = Object.keys(data).sort(function (a, b) {
-    return new Date(a) > new Date(b);
-  }).map((key) => {
-    return [key, data[key]];
-  });
+      if (
+        new Date(search_date) < new Date(start_date_modified) &&
+        element.type == type
+      ) {
+        previous_days_count += 1;
+        country_phone_codes.push(element.country_code);
+      }
+    });
 
-  return result;
+    let country_data = {};
+
+    country_phone_codes.forEach((element) => {
+      let country_region_code = Object.keys(countries).find(key => countries[key] === element)
+
+      const regionNames = new Intl.DisplayNames(
+        ['en'], {
+          type: 'region'
+        }
+      );
+      let country_name = regionNames.of(country_region_code);
+
+      if (country_data[country_name]) {
+        country_data[country_name] = (country_data[country_name] || 0) + 1;
+      } else {
+        country_data[country_name] = (country_data[country_name] || 0) + 1;
+      }
+    });
+
+    document.getElementById("country").innerHTML = `<option value="">__select_country__</option> `
+
+    Object.keys(country_data).forEach((key) => {
+      document.getElementById("country").innerHTML += `<option value="${key}">${key} (${country_data[key]})</option>`
+    })
+
+    let data = {};
+
+    filter_data.forEach((element) => {
+      data[element] = (data[element] || 0) + 1;
+    });
+
+    let result = Object.keys(data).sort(function (a, b) {
+      return new Date(a) > new Date(b);
+    }).map((key, index, array) => {
+      previous_days_count += (data[array[index - 1]] || 0)
+      return [key, data[key] + previous_days_count];
+    });
+
+    return result;
+  } else {
+    entry.forEach((element) => {
+      let search_date = new Date(element.date).toLocaleDateString()
+      let start_date_modified = new Date(start_date).toLocaleDateString()
+      let end_date_modified = new Date(end_date).toLocaleDateString()
+
+      if (
+        new Date(search_date) >= new Date(start_date_modified) &&
+        new Date(search_date) <= new Date(end_date_modified) &&
+        element.type == type
+      ) {
+        filter_data.push(new Date(element.date).toDateString());
+      }
+    });
+    let data = {};
+
+    filter_data.forEach((element) => {
+      data[element] = (data[element] || 0) + 1;
+    });
+
+    let result = Object.keys(data).sort(function (a, b) {
+      return new Date(a) > new Date(b);
+    }).map((key) => {
+      return [key, data[key]];
+    });
+
+    return result;
+  }
 }
 
 function filter(
