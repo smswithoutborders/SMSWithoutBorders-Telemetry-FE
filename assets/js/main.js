@@ -255,7 +255,7 @@ const countries = {
 
 // Load google API
 google.charts.load("current", {
-  packages: ["corechart"],
+  packages: ["corechart", 'sankey'],
 });
 
 function fetchData(
@@ -352,6 +352,7 @@ function filter_months(entry, start_date, end_date, type) {
       }
     });
 
+    let country_region_code_data = {};
     let country_data = {};
 
     country_phone_codes.forEach((element) => {
@@ -368,6 +369,12 @@ function filter_months(entry, start_date, end_date, type) {
         country_data[country_name] = (country_data[country_name] || 0) + 1;
       } else {
         country_data[country_name] = (country_data[country_name] || 0) + 1;
+      };
+
+      if (country_region_code_data[country_region_code]) {
+        country_region_code_data[country_region_code] = (country_region_code_data[country_region_code] || 0) + 1;
+      } else {
+        country_region_code_data[country_region_code] = (country_region_code_data[country_region_code] || 0) + 1;
       }
     });
 
@@ -376,6 +383,48 @@ function filter_months(entry, start_date, end_date, type) {
     Object.keys(country_data).forEach((key) => {
       document.getElementById("country").innerHTML += `<option value="${key}">${key} (${country_data[key]})</option>`
     })
+
+    // Map //
+    let anyChartData = [];
+
+    Object.keys(country_region_code_data).forEach((key) => {
+      anyChartData.push({
+        "id": key,
+        "value": country_region_code_data[key]
+      })
+    });
+    anychart.onDocumentReady(function () {
+      var map = anychart.map();
+      map.geoData(anychart.maps.world);
+
+      // set the series
+      var series = map.marker(anyChartData);
+
+      map.legend(true);
+
+      map.title("Marker series on a map");
+
+      anychart.theme('darkGlamour');
+
+      //format the labels of the id-defined series
+      series.labels().format("{%name}");
+
+      series.tooltip().format("Id: {%id} \nUsers: {%value}");
+
+
+      // add zoom ui controls
+      var zoomController = anychart.ui.zoom();
+      zoomController.render(map);
+
+
+      // disable labels
+      series.labels(false);
+
+      // set the container
+      map.container('mapping');
+      map.draw();
+    });
+    // Map  End//
 
     let data = {};
 
@@ -452,6 +501,7 @@ function filter_days(entry, start_date, end_date, type) {
       }
     });
 
+    let country_region_code_data = {};
     let country_data = {};
 
     country_phone_codes.forEach((element) => {
@@ -468,6 +518,12 @@ function filter_days(entry, start_date, end_date, type) {
         country_data[country_name] = (country_data[country_name] || 0) + 1;
       } else {
         country_data[country_name] = (country_data[country_name] || 0) + 1;
+      };
+
+      if (country_region_code_data[country_region_code]) {
+        country_region_code_data[country_region_code] = (country_region_code_data[country_region_code] || 0) + 1;
+      } else {
+        country_region_code_data[country_region_code] = (country_region_code_data[country_region_code] || 0) + 1;
       }
     });
 
@@ -476,6 +532,48 @@ function filter_days(entry, start_date, end_date, type) {
     Object.keys(country_data).forEach((key) => {
       document.getElementById("country").innerHTML += `<option value="${key}">${key} (${country_data[key]})</option>`
     })
+
+    // Map //
+    let anyChartData = [];
+
+    Object.keys(country_region_code_data).forEach((key) => {
+      anyChartData.push({
+        "id": key,
+        "value": country_region_code_data[key]
+      })
+    });
+    anychart.onDocumentReady(function () {
+      var map = anychart.map();
+      map.geoData(anychart.maps.world);
+
+      // set the series
+      var series = map.marker(anyChartData);
+
+      map.legend(true);
+
+      map.title("Marker series on a map");
+
+      anychart.theme('darkGlamour');
+
+      //format the labels of the id-defined series
+      series.labels().format("{%name}");
+
+      series.tooltip().format("Id: {%id} \nUsers: {%value}");
+
+
+      // add zoom ui controls
+      var zoomController = anychart.ui.zoom();
+      zoomController.render(map);
+
+
+      // disable labels
+      series.labels(false);
+
+      // set the container
+      map.container('mapping');
+      map.draw();
+    });
+    // Map  End//
 
     let data = {};
 
@@ -491,6 +589,7 @@ function filter_days(entry, start_date, end_date, type) {
     });
 
     return result;
+
   } else {
     entry.forEach((element) => {
       let search_date = new Date(element.date).toLocaleDateString()
@@ -712,6 +811,8 @@ function pie(data) {
     }
   }
 }
+
+
 
 function run(
   data,
