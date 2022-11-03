@@ -13,7 +13,6 @@ const URL = "https://62ffa49234344b6431fe43fc.mockapi.io/statistics"
 //Original URL https://smswithoutborders.com:11000/statistics
 
 window.onload = () => {
-   // document.getElementById("gmap_canvas").src = "https://maps.google.com/maps?q=Cameroon&t=&z=6&ie=UTF8&iwloc=&output=embed";
 
     let start_date_new = start_date.value
     let end_date_new = end_date.value

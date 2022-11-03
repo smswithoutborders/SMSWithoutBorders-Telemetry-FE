@@ -378,10 +378,10 @@ function filter_months(entry, start_date, end_date, type) {
       }
     });
 
-    document.getElementById("country").innerHTML = `<option value="">__select_country__</option> `
-
     Object.keys(country_data).forEach((key) => {
-      document.getElementById("country").innerHTML += `<option value="${key}">${key} (${country_data[key]})</option>`
+      document.getElementById("countrytable_header").innerHTML = `<h6 class="text-light">Country Summary Table</h6>`
+      countrytable_head.innerHTML = `<tr><th scope="col">Country</th><th scope="col">Number</th></tr>`;
+      countrytable_data.innerHTML += `<tr><td>${key}</td><td>${country_data[key]}</td></tr>`;
     })
 
     // Map //
@@ -399,8 +399,6 @@ function filter_months(entry, start_date, end_date, type) {
 
       // set the series
       var series = map.marker(anyChartData);
-
-      map.legend(true);
 
       map.title("Marker series on a map");
 
@@ -527,10 +525,11 @@ function filter_days(entry, start_date, end_date, type) {
       }
     });
 
-    document.getElementById("country").innerHTML = `<option value="">__select_country__</option> `
-
     Object.keys(country_data).forEach((key) => {
-      document.getElementById("country").innerHTML += `<option value="${key}">${key} (${country_data[key]})</option>`
+      document.getElementById("countrytable_header").innerHTML = `<h6 class="text-light">Country Summary Table</h6>`
+      countrytable_head.innerHTML = `<tr><th scope="col">COUNTRY</th><th scope="col">NUMBER OF USERS</th></tr>`;
+     // countrytable_data.innerHTML = "";
+      countrytable_data.innerHTML += `<tr><td>${key}</td><td>${country_data[key]}</td></tr>`;
     })
 
     // Map //
@@ -548,8 +547,6 @@ function filter_days(entry, start_date, end_date, type) {
 
       // set the series
       var series = map.marker(anyChartData);
-
-      map.legend(true);
 
       map.title("Marker series on a map");
 
