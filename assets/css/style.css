@@ -60,7 +60,7 @@ body {
   padding: 10px;
   border: 20px;
   border-width: 200px;
-  height: 200px !important;
+  height: 180px !important;
   overflow: scroll;
 }
 
@@ -77,5 +77,5 @@ table {
   background-repeat: no-repeat;
   background-position: center;
   background-size: 100px;
-  height: 300px;
+  height: 280px;
 }
