@@ -18,11 +18,10 @@
 <body>
   <div class="container-fluid ">
 
-    <h3 class="text-light"> <img src="assets/images/Artboard 9.png" width="40px" alt=""> SMSWithoutBorders Statistics
-    </h3>
-
-    <hr class="hr text-light">
-
+    <h4 class="text-light p-0 m-0"> <img src="assets/images/logoicon.png" width="50px" alt=""> SMSWithoutBorders Statistics
+      <hr class="hr text-light p-0 m-0">
+    </h4>
+    
     <div class="row">
 
       <div class="col-md-3">
@@ -71,14 +70,11 @@
             </div>
           </div>
         </div>
-        <br>
+        
 
       </div>
 
       <div class="col-md-5" id="chart_section">
-
-        <h6 class="text-light" id="ttext">Total</h6>
-        <h1 class="total text-light" id="total"> 0 </h1>
 
         <div class=" text-light" id="line_div">
           <div class="d-flex justify-content-center">
@@ -89,23 +85,15 @@
         </div>
         <br>
 
-        <div class="text-light" id="bar_div">
-          <div class="d-flex justify-content-center">
-            <div class="spinner-border text-light" style="margin-top: 5rem; width: 4rem; height: 4rem" role="status">
-              <span class="visually-hidden">Loading...</span>
-            </div>
-          </div>
-        </div><br>
+        <div class="mapouter" id="mapping"></div>
 
       </div>
 
       <div class="col-md-4">
 
-        <h6 class="text-light mt-3">Country</h6>
-        <select id="country" class="btn btn-light mb-4">
-          <option value="">__select_country__</option>
-        </select>
-        <br>
+
+        <h6 class="text-light p-1" id="ttext">Total</h6>
+        <h1 class="total text-light" id="total"> 0 </h1>
 
         <h5 id="table_header"></h5>
         <div class="table-responsive rest" id="table">
@@ -115,7 +103,13 @@
           </table>
         </div> <br>
 
-        <div class="mapouter" id="mapping"></div>
+        <h5 id="countrytable_header"></h5>
+        <div class="table-responsive rest" id="table">
+            <table class="table table-bordered table-sm border-secondary text-center">
+              <thead id="countrytable_head" class="table-light border-dark"></thead>
+              <tbody id="countrytable_data" class="text-light"></tbody>
+            </table>
+          </div> <br>
 
       </div><br>
 

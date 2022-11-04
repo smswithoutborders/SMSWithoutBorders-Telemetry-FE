@@ -13,7 +13,38 @@ const URL = "https://62ffa49234344b6431fe43fc.mockapi.io/statistics"
 //Original URL https://smswithoutborders.com:11000/statistics
 
 window.onload = () => {
-   // document.getElementById("gmap_canvas").src = "https://maps.google.com/maps?q=Cameroon&t=&z=6&ie=UTF8&iwloc=&output=embed";
+
+    document.getElementById("mapping").innerHTML = ""
+
+    anychart.onDocumentReady(function () {
+      var map = anychart.map();
+      map.geoData(anychart.maps.world);
+
+      // set the series
+      var series = map.marker();
+
+      map.title("AVAILABLE USERS AROUND THE WORLD");
+
+      anychart.theme('darkGlamour');
+
+      //format the labels of the id-defined series
+      series.labels().format("{%name}");
+
+      series.tooltip().format("Id: {%id} \nUsers: {%value}");
+
+
+      // add zoom ui controls
+      var zoomController = anychart.ui.zoom();
+      zoomController.render(map);
+
+
+      // disable labels
+      series.labels(false);
+
+      // set the container
+      map.container('mapping');
+      map.draw();
+    });
 
     let start_date_new = start_date.value
     let end_date_new = end_date.value

@@ -287,10 +287,7 @@ function fetchData(
       <div class="spinner-border text-light" style="margin-top: 5rem; width: 4rem; height: 4rem" role="status">
           <span class="visually-hidden">Loading...</span>
       </div></div>`;
-      document.getElementById("bar_div").innerHTML = `<div class="d-flex justify-content-center">
-      <div class="spinner-border text-light" style="margin-top: 5rem; width: 4rem; height: 4rem" role="status">
-          <span class="visually-hidden">Loading...</span>
-      </div></div>`;
+    
       document.getElementById("pie_div").innerHTML = `<div class="d-flex justify-content-center">
       <div class="spinner-border text-light" style="margin-top: 5rem; width: 4rem; height: 4rem" role="status">
           <span class="visually-hidden">Loading...</span>
@@ -378,10 +375,10 @@ function filter_months(entry, start_date, end_date, type) {
       }
     });
 
-    document.getElementById("country").innerHTML = `<option value="">__select_country__</option> `
-
     Object.keys(country_data).forEach((key) => {
-      document.getElementById("country").innerHTML += `<option value="${key}">${key} (${country_data[key]})</option>`
+      document.getElementById("countrytable_header").innerHTML = `<h6 class="text-light">Country Summary Table</h6>`
+      countrytable_head.innerHTML = `<tr><th scope="col">COUNTRY</th><th scope="col">NUMBER OF USERS</th></tr>`;
+      countrytable_data.innerHTML += `<tr><td>${key}</td><td>${country_data[key]}</td></tr>`;
     })
 
     // Map //
@@ -393,6 +390,9 @@ function filter_months(entry, start_date, end_date, type) {
         "value": country_region_code_data[key]
       })
     });
+
+    document.getElementById("mapping").innerHTML = ""
+
     anychart.onDocumentReady(function () {
       var map = anychart.map();
       map.geoData(anychart.maps.world);
@@ -400,9 +400,7 @@ function filter_months(entry, start_date, end_date, type) {
       // set the series
       var series = map.marker(anyChartData);
 
-      map.legend(true);
-
-      map.title("Marker series on a map");
+      map.title("AVAILABLE USERS AROUND THE WORLD");
 
       anychart.theme('darkGlamour');
 
@@ -527,10 +525,10 @@ function filter_days(entry, start_date, end_date, type) {
       }
     });
 
-    document.getElementById("country").innerHTML = `<option value="">__select_country__</option> `
-
     Object.keys(country_data).forEach((key) => {
-      document.getElementById("country").innerHTML += `<option value="${key}">${key} (${country_data[key]})</option>`
+      document.getElementById("countrytable_header").innerHTML = `<h6 class="text-light">Country Summary Table</h6>`
+      countrytable_head.innerHTML = `<tr><th scope="col">COUNTRY</th><th scope="col">NUMBER OF USERS</th></tr>`;
+      countrytable_data.innerHTML += `<tr><td>${key}</td><td>${country_data[key]}</td></tr>`;
     })
 
     // Map //
@@ -542,6 +540,9 @@ function filter_days(entry, start_date, end_date, type) {
         "value": country_region_code_data[key]
       })
     });
+
+    document.getElementById("mapping").innerHTML = ""
+
     anychart.onDocumentReady(function () {
       var map = anychart.map();
       map.geoData(anychart.maps.world);
@@ -549,9 +550,7 @@ function filter_days(entry, start_date, end_date, type) {
       // set the series
       var series = map.marker(anyChartData);
 
-      map.legend(true);
-
-      map.title("Marker series on a map");
+      map.title("AVAILABLE USERS AROUND THE WORLD");
 
       anychart.theme('darkGlamour');
 
@@ -691,60 +690,6 @@ function line(data) {
   }
 }
 
-function bar(data) {
-  if (data.length < 2) {
-    document.getElementById("bar_div").innerHTML = `<h5 class="text-danger text-center ">Sorry No Data To Display!</h5>`
-  } else {
-    // Set a callback to run when the Google Visualization API is loaded.
-    google.charts.setOnLoadCallback(drawChart);
-
-    function drawChart() {
-      var result = google.visualization.arrayToDataTable(data);
-
-      // Set chart options
-      var options = {
-        vAxis: {
-          title: data[0][1],
-          format: "0",
-          minValue: 0,
-          textStyle: {
-            color: '#FFF'
-          },
-          titleColor: '#FFF'
-        },
-        hAxis: {
-          title: data[0][0],
-          textStyle: {
-            color: '#FFF'
-          },
-          titleColor: '#FFF'
-        },
-        title: `${data[0][1]} METRICS`,
-        height: 250,
-        backgroundColor: '#0e213b',
-        legendTextStyle: {
-          color: '#FFF'
-        },
-        titleTextStyle: {
-          color: '#FFF'
-        },
-        seriesType: 'bars',
-        series: {
-          1: {
-            type: 'line'
-          }
-        }
-      };
-      // Instantiate and draw our chart, passing in some options.
-      var chart = new google.visualization.ComboChart(
-        document.getElementById("bar_div")
-      );
-
-      chart.draw(result, options);
-    }
-  }
-}
-
 function pie(data) {
   if (data.length < 2) {
     document.getElementById("pie_div").innerHTML = `<h5 class="text-danger text-center ">Sorry No Data To Display!</h5>`
@@ -812,8 +757,6 @@ function pie(data) {
   }
 }
 
-
-
 function run(
   data,
   format,
@@ -856,6 +799,5 @@ function run(
   filter_data.unshift(headers);
 
   line(filter_data);
-  bar(filter_data);
   pie(filter_data);
 }
