@@ -1,5 +1,4 @@
 body {
-  /* background-image: url(/assets/images/blob-scene-haikei.svg); */
   background-color: #0e213b;
   background-repeat: no-repeat;
   background-size: cover;
@@ -8,52 +7,12 @@ body {
 
 }
 
-.row {
-  justify-content: center;
-}
-
-.card {
-  margin-right: auto;
-  margin-left: auto;
-  width: 400px;
-  box-shadow: 0 15px 25px rgba(129, 124, 124, 0.2);
-  height: 600px;
-  border-radius: 10px;
-  backdrop-filter: blur(14px);
-  background-color: rgba(255, 255, 255, 0.2);
-  padding: 10px;
-  text-align: start;
-}
-
 .form-control {
   width: 119px;
 }
 
-.filter {
-  padding: 15px;
-  text-align: start;
-}
-
 .form-check {
   display: flex;
-}
-
-@media only screen and (max-width: 600px) {
-  .form-control {
-    width: 100px;
-    height: fit-content;
-  }
-}
-
-.title {
-  font-family: Ubuntu, sans-serif;
-  color: rgb(28, 92, 228);
-  font-weight: bold;
-  font-size: 30px;
-}
-
-.bot:hover {
-  background-color: #333434;
 }
 
 .rest {
@@ -62,10 +21,6 @@ body {
   border-width: 200px;
   height: 180px !important;
   overflow: scroll;
-}
-
-.total {
-  width: 100px !important;
 }
 
 table {
