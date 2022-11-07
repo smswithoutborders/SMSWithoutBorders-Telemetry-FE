@@ -28,9 +28,9 @@ table {
 }
 
 .mapouter {
-  background-image: url(../images/90OK.gif);
+  /* background-image: url(../images/90OK.gif);
   background-repeat: no-repeat;
-  background-position: center;
-  background-size: 100px;
+  background-position: center; */
+  /* background-size: 100px; */
   height: 280px;
 }

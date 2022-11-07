@@ -13,39 +13,7 @@ const URL = "https://62ffa49234344b6431fe43fc.mockapi.io/statistics"
 //Original URL https://smswithoutborders.com:11000/statistics
 
 window.onload = () => {
-
-    document.getElementById("mapping").innerHTML = ""
-
-    anychart.onDocumentReady(function () {
-        var map = anychart.map();
-        map.geoData(anychart.maps.world);
-
-        // set the series
-        var series = map.marker();
-
-        map.title("AVAILABLE USERS AROUND THE WORLD");
-
-        anychart.theme('darkBlue');
-
-        //format the labels of the id-defined series
-        series.labels().format("{%name}");
-
-        series.tooltip().format("Id: {%id} \nUsers: {%value}");
-
-        // add zoom ui controls
-        var zoomController = anychart.ui.zoom();
-        zoomController.render(map);
-        // disable labels
-        series.labels(false);
-
-        map.listen('pointClick', function (e) {
-            map.zoomToFeature(e.point.get('id'));
-        })
-
-        // set the container
-        map.container('mapping');
-        map.draw();
-    });
+    document.getElementById('mapping').innerHTML = `<h5 class="text-danger text-center ">Map display for available users!</h5>`;
 
     let start_date_new = start_date.value
     let end_date_new = end_date.value
@@ -186,8 +154,4 @@ window.onload = () => {
 
         fetchData(URL, format_value, start_date_new, end_date_new, table_data, table_head, type.value);
     });
-
-    // countrytable_data.addEventListener("change", () => { 
-
-    // });
 }
