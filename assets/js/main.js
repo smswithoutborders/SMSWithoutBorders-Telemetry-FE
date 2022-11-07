@@ -416,11 +416,10 @@ function filter_months(entry, start_date, end_date, type) {
       // disable labels
       series.labels(false);
 
-      function largeMap() {
       map.listen('pointClick', function (e) {
         map.zoomToFeature(e.point.get('id'));
       })
-}
+
       // set the colors and ranges for the scale
       series.colorScale(anychart.scales.linearColor());
 
