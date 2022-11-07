@@ -17,33 +17,34 @@ window.onload = () => {
     document.getElementById("mapping").innerHTML = ""
 
     anychart.onDocumentReady(function () {
-      var map = anychart.map();
-      map.geoData(anychart.maps.world);
+        var map = anychart.map();
+        map.geoData(anychart.maps.world);
 
-      // set the series
-      var series = map.marker();
+        // set the series
+        var series = map.marker();
 
-      map.title("AVAILABLE USERS AROUND THE WORLD");
+        map.title("AVAILABLE USERS AROUND THE WORLD");
 
-      anychart.theme('darkGlamour');
+        anychart.theme('darkBlue');
 
-      //format the labels of the id-defined series
-      series.labels().format("{%name}");
+        //format the labels of the id-defined series
+        series.labels().format("{%name}");
 
-      series.tooltip().format("Id: {%id} \nUsers: {%value}");
+        series.tooltip().format("Id: {%id} \nUsers: {%value}");
 
+        // add zoom ui controls
+        var zoomController = anychart.ui.zoom();
+        zoomController.render(map);
+        // disable labels
+        series.labels(false);
 
-      // add zoom ui controls
-      var zoomController = anychart.ui.zoom();
-      zoomController.render(map);
+        map.listen('pointClick', function (e) {
+            map.zoomToFeature(e.point.get('id'));
+        })
 
-
-      // disable labels
-      series.labels(false);
-
-      // set the container
-      map.container('mapping');
-      map.draw();
+        // set the container
+        map.container('mapping');
+        map.draw();
     });
 
     let start_date_new = start_date.value
@@ -186,7 +187,7 @@ window.onload = () => {
         fetchData(URL, format_value, start_date_new, end_date_new, table_data, table_head, type.value);
     });
 
-    // country.addEventListener("change", () => {
-    //     document.getElementById("gmap_canvas").src = `https://maps.google.com/maps?q=${country.value}&t=&z=6&ie=UTF8&iwloc=&output=embed`;
+    // countrytable_data.addEventListener("change", () => { 
+
     // });
 }
