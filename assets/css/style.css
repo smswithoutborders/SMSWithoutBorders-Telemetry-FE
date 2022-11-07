@@ -7,10 +7,6 @@ body {
 
 }
 
-.form-control {
-  width: 119px;
-}
-
 .form-check {
   display: flex;
 }
@@ -28,9 +24,14 @@ table {
 }
 
 .mapouter {
-  /* background-image: url(../images/90OK.gif);
-  background-repeat: no-repeat;
-  background-position: center; */
-  /* background-size: 100px; */
   height: 280px;
+}
+
+.pointclick {
+  cursor: pointer;
+}
+
+.pointclick:hover {
+  cursor: pointer;
+  background-color: rgb(17, 96, 180);
 }
