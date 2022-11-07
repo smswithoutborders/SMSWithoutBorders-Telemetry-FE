@@ -287,7 +287,7 @@ function fetchData(
       <div class="spinner-border text-light" style="margin-top: 5rem; width: 4rem; height: 4rem" role="status">
           <span class="visually-hidden">Loading...</span>
       </div></div>`;
-    
+
       document.getElementById("pie_div").innerHTML = `<div class="d-flex justify-content-center">
       <div class="spinner-border text-light" style="margin-top: 5rem; width: 4rem; height: 4rem" role="status">
           <span class="visually-hidden">Loading...</span>
@@ -398,29 +398,51 @@ function filter_months(entry, start_date, end_date, type) {
       map.geoData(anychart.maps.world);
 
       // set the series
-      var series = map.marker(anyChartData);
+      var series = map.choropleth(anyChartData);
 
-      map.title("AVAILABLE USERS AROUND THE WORLD");
+      //map.title("AVAILABLE USERS AROUND THE WORLD");
 
-      anychart.theme('darkGlamour');
+      anychart.theme('darkBlue');
 
       //format the labels of the id-defined series
       series.labels().format("{%name}");
 
       series.tooltip().format("Id: {%id} \nUsers: {%value}");
 
-
       // add zoom ui controls
       var zoomController = anychart.ui.zoom();
       zoomController.render(map);
 
-
       // disable labels
       series.labels(false);
+
+      map.listen('pointClick', function (e) {
+        map.zoomToFeature(e.point.get('id'));
+      })
+
+      // set the colors and ranges for the scale
+      series.colorScale(anychart.scales.linearColor());
+
+      //set the single hue progression
+      var colors = anychart.color.singleHueProgression('#0068BC');
+
+      // define the colors 
+      series.colorScale().colors(colors);
+
+      // create and enable the colorRange
+      var colorRange = map.colorRange();
+      colorRange.enabled(true);
+
+      // put the colorRange to the right from the map
+      colorRange.orientation('right');
+
+      // set the colorRange length
+      colorRange.length(100);
 
       // set the container
       map.container('mapping');
       map.draw();
+    
     });
     // Map  End//
 
@@ -548,25 +570,48 @@ function filter_days(entry, start_date, end_date, type) {
       map.geoData(anychart.maps.world);
 
       // set the series
-      var series = map.marker(anyChartData);
+      var series = map.choropleth(anyChartData);
 
-      map.title("AVAILABLE USERS AROUND THE WORLD");
+      //map.title("AVAILABLE USERS AROUND THE WORLD");
 
-      anychart.theme('darkGlamour');
+      anychart.theme('darkBlue');
 
       //format the labels of the id-defined series
       series.labels().format("{%name}");
 
       series.tooltip().format("Id: {%id} \nUsers: {%value}");
 
-
       // add zoom ui controls
       var zoomController = anychart.ui.zoom();
       zoomController.render(map);
 
-
       // disable labels
       series.labels(false);
+
+      map.listen('pointClick', function (e) {
+        map.zoomToFeature(e.point.get('id'));
+      })
+
+
+      // set the colors and ranges for the scale
+      series.colorScale(anychart.scales.linearColor());
+
+      //set the single hue progression
+      var colors = anychart.color.singleHueProgression('#0068BC');
+
+      // define the colors 
+      series.colorScale().colors(colors);
+
+      // create and enable the colorRange
+      var colorRange = map.colorRange();
+      colorRange.enabled(true);
+
+      // put the colorRange to the right from the map
+      colorRange.orientation('right');
+
+      // set the colorRange length
+      colorRange.length(100);
+
 
       // set the container
       map.container('mapping');
