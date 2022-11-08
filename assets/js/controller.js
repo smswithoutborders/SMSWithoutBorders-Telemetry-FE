@@ -9,8 +9,7 @@ let end_date = document.getElementById("end_date");
 let table_data = document.getElementById("table_data");
 let table_head = document.getElementById("table_head");
 
-const URL = "https://62ffa49234344b6431fe43fc.mockapi.io/statistics"
-//Original URL https://smswithoutborders.com:11000/statistics
+const URL = "https://smswithoutborders.com:11000/statistics"
 
 window.onload = () => {
     document.getElementById('mapping').innerHTML = `<h5 class="text-info text-center" style="margin-top: 10rem;">No data for Map Visualization</h5><p class="text-info text-center">Map Previews for only Available Users Data Type</p>`;
