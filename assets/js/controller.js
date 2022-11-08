@@ -2,6 +2,7 @@ let format_day = document.getElementById("format_day");
 let format_month = document.getElementById("format_month");
 let filter_type = document.getElementById("type");
 let type = document.getElementById("type");
+let country = document.getElementById("country");
 let format = document.getElementsByName("format");
 let start_date = document.getElementById("start_date");
 let end_date = document.getElementById("end_date");
@@ -10,8 +11,9 @@ let table_head = document.getElementById("table_head");
 
 const URL = "https://smswithoutborders.com:11000/statistics"
 
-
 window.onload = () => {
+    document.getElementById('mapping').innerHTML = `<h5 class="text-info text-center" style="margin-top: 10rem;">No data for Map Visualization</h5><p class="text-info text-center">Map Previews for only Available Users Data Type</p>`;
+
     let start_date_new = start_date.value
     let end_date_new = end_date.value
 
