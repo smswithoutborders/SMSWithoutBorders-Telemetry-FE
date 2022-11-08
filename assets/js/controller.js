@@ -13,7 +13,7 @@ const URL = "https://62ffa49234344b6431fe43fc.mockapi.io/statistics"
 //Original URL https://smswithoutborders.com:11000/statistics
 
 window.onload = () => {
-    document.getElementById('mapping').innerHTML = `<h5 class="text-danger text-center ">Map display for available users!</h5>`;
+    document.getElementById('mapping').innerHTML = `<h5 class="text-info text-center" style="margin-top: 10rem;">No data for Map Visualization</h5><p class="text-info text-center">Map Previews for only Available Users Data Type</p>`;
 
     let start_date_new = start_date.value
     let end_date_new = end_date.value

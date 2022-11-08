@@ -253,6 +253,8 @@ const countries = {
   "MZ": "258"
 }
 
+let map
+
 // Load google API
 google.charts.load("current", {
   packages: ["corechart", 'sankey'],
@@ -273,6 +275,10 @@ function fetchData(
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
       let entry = JSON.parse(this.responseText);
+
+      // anyChart map
+      map = anychart.map();
+
       run(
         entry,
         format,
@@ -284,7 +290,7 @@ function fetchData(
       );
     } else {
       document.getElementById("line_div").innerHTML = `<div class="d-flex justify-content-center">
-      <div class="spinner-border text-light" style="margin-top: 5rem; width: 4rem; height: 4rem" role="status">
+      <div class="spinner-border text-light" style="margin-top: 10rem; width: 4rem; height: 4rem" role="status">
           <span class="visually-hidden">Loading...</span>
       </div></div>`;
 
@@ -375,11 +381,13 @@ function filter_months(entry, start_date, end_date, type) {
       }
     });
 
-    Object.keys(country_data).forEach((key) => {
+    document.getElementById("countrytable_data").innerHTML = ""
+
+    Object.keys(country_data).forEach((key, index) => {
       document.getElementById("countrytable_header").innerHTML = `<h6 class="text-light">Country Summary Table</h6>`
-      countrytable_head.innerHTML = `<tr><th scope="col">COUNTRY</th><th scope="col">NUMBER OF USERS</th></tr>`;
-      countrytable_data.innerHTML += `<tr><td>${key}</td><td>${country_data[key]}</td></tr>`;
-    })
+      document.getElementById("countrytable_head").innerHTML = `<tr><th scope="col">COUNTRY</th><th scope="col">NUMBER OF USERS</th></tr>`;
+      document.getElementById("countrytable_data").innerHTML += `<tr><td class="pointclick" onclick="map.zoomToFeature('${Object.keys(country_region_code_data)[index]}')">${key}</td><td>${country_data[key]}</td></tr>`;
+    });
 
     // Map //
     let anyChartData = [];
@@ -393,57 +401,7 @@ function filter_months(entry, start_date, end_date, type) {
 
     document.getElementById("mapping").innerHTML = ""
 
-    anychart.onDocumentReady(function () {
-      var map = anychart.map();
-      map.geoData(anychart.maps.world);
-
-      // set the series
-      var series = map.choropleth(anyChartData);
-
-      //map.title("AVAILABLE USERS AROUND THE WORLD");
-
-      anychart.theme('darkBlue');
-
-      //format the labels of the id-defined series
-      series.labels().format("{%name}");
-
-      series.tooltip().format("Id: {%id} \nUsers: {%value}");
-
-      // add zoom ui controls
-      var zoomController = anychart.ui.zoom();
-      zoomController.render(map);
-
-      // disable labels
-      series.labels(false);
-
-      map.listen('pointClick', function (e) {
-        map.zoomToFeature(e.point.get('id'));
-      })
-
-      // set the colors and ranges for the scale
-      series.colorScale(anychart.scales.linearColor());
-
-      //set the single hue progression
-      var colors = anychart.color.singleHueProgression('#0068BC');
-
-      // define the colors 
-      series.colorScale().colors(colors);
-
-      // create and enable the colorRange
-      var colorRange = map.colorRange();
-      colorRange.enabled(true);
-
-      // put the colorRange to the right from the map
-      colorRange.orientation('right');
-
-      // set the colorRange length
-      colorRange.length(100);
-
-      // set the container
-      map.container('mapping');
-      map.draw();
-    
-    });
+    createMap(anyChartData);
     // Map  End//
 
     let data = {};
@@ -547,11 +505,13 @@ function filter_days(entry, start_date, end_date, type) {
       }
     });
 
-    Object.keys(country_data).forEach((key) => {
-      document.getElementById("countrytable_header").innerHTML = `<h6 class="text-light">Country Summary Table</h6>`
-      countrytable_head.innerHTML = `<tr><th scope="col">COUNTRY</th><th scope="col">NUMBER OF USERS</th></tr>`;
-      countrytable_data.innerHTML += `<tr><td>${key}</td><td>${country_data[key]}</td></tr>`;
-    })
+    document.getElementById("countrytable_data").innerHTML = ""
+
+    Object.keys(country_data).forEach((key, index) => {
+      document.getElementById("countrytable_header").innerHTML = `<h6 class="text-light">Country Summary Table day</h6>`
+      document.getElementById("countrytable_head").innerHTML = `<tr><th scope="col">COUNTRY</th><th scope="col">NUMBER OF USERS</th></tr>`;
+      document.getElementById("countrytable_data").innerHTML += `<tr><td class="pointclick" onclick="map.zoomToFeature('${Object.keys(country_region_code_data)[index]}')">${key}</td><td>${country_data[key]}</td></tr>`;
+    });
 
     // Map //
     let anyChartData = [];
@@ -565,58 +525,7 @@ function filter_days(entry, start_date, end_date, type) {
 
     document.getElementById("mapping").innerHTML = ""
 
-    anychart.onDocumentReady(function () {
-      var map = anychart.map();
-      map.geoData(anychart.maps.world);
-
-      // set the series
-      var series = map.choropleth(anyChartData);
-
-      //map.title("AVAILABLE USERS AROUND THE WORLD");
-
-      anychart.theme('darkBlue');
-
-      //format the labels of the id-defined series
-      series.labels().format("{%name}");
-
-      series.tooltip().format("Id: {%id} \nUsers: {%value}");
-
-      // add zoom ui controls
-      var zoomController = anychart.ui.zoom();
-      zoomController.render(map);
-
-      // disable labels
-      series.labels(false);
-
-      map.listen('pointClick', function (e) {
-        map.zoomToFeature(e.point.get('id'));
-      })
-
-
-      // set the colors and ranges for the scale
-      series.colorScale(anychart.scales.linearColor());
-
-      //set the single hue progression
-      var colors = anychart.color.singleHueProgression('#0068BC');
-
-      // define the colors 
-      series.colorScale().colors(colors);
-
-      // create and enable the colorRange
-      var colorRange = map.colorRange();
-      colorRange.enabled(true);
-
-      // put the colorRange to the right from the map
-      colorRange.orientation('right');
-
-      // set the colorRange length
-      colorRange.length(100);
-
-
-      // set the container
-      map.container('mapping');
-      map.draw();
-    });
+    createMap(anyChartData);
     // Map  End//
 
     let data = {};
@@ -680,7 +589,7 @@ function filter(
 
 function line(data) {
   if (data.length < 2) {
-    document.getElementById("line_div").innerHTML = `<h5 class="text-danger text-center ">Sorry No Data To Display!</h5>`
+    document.getElementById("line_div").innerHTML = `<h5 class="text-danger text-center" style="margin-top: 10rem;">Sorry No Data To Display!</h5>`
   } else {
     // Set a callback to run when the Google Visualization API is loaded.
     google.charts.setOnLoadCallback(drawChart);
@@ -737,7 +646,7 @@ function line(data) {
 
 function pie(data) {
   if (data.length < 2) {
-    document.getElementById("pie_div").innerHTML = `<h5 class="text-danger text-center ">Sorry No Data To Display!</h5>`
+    document.getElementById("pie_div").innerHTML = `<h5 class="text-danger text-center" style="margin-top: 5rem;">Sorry No Data To Display!</h5>`
   } else {
     // Set a callback to run when the Google Visualization API is loaded.
     google.charts.setOnLoadCallback(drawChart);
@@ -789,9 +698,8 @@ function pie(data) {
             offset: 0.3
           },
         },
-
-
       };
+
       // Instantiate and draw our chart, passing in some options.
       var chart = new google.visualization.PieChart(
         document.getElementById("pie_div")
@@ -845,4 +753,56 @@ function run(
 
   line(filter_data);
   pie(filter_data);
+};
+
+function createMap(data) {
+  anychart.onDocumentReady(function () {
+    map.geoData(anychart.maps.world);
+
+    // set the series
+    var series = map.choropleth(data);
+
+    //map.title("AVAILABLE USERS AROUND THE WORLD");
+
+    anychart.theme('darkBlue');
+
+    //format the labels of the id-defined series
+    series.labels().format("{%name}");
+
+    series.tooltip().format("Id: {%id} \nUsers: {%value}");
+
+    // add zoom ui controls
+    var zoomController = anychart.ui.zoom();
+    zoomController.render(map);
+
+    // disable labels
+    series.labels(false);
+
+    map.listen('pointClick', function (e) {
+      map.zoomToFeature(e.point.get('id'));
+    })
+
+    // set the colors and ranges for the scale
+    series.colorScale(anychart.scales.linearColor());
+
+    //set the single hue progression
+    var colors = anychart.color.singleHueProgression('#0068BC');
+
+    // define the colors 
+    series.colorScale().colors(colors);
+
+    // create and enable the colorRange
+    var colorRange = map.colorRange();
+    colorRange.enabled(true);
+
+    // put the colorRange to the right from the map
+    colorRange.orientation('right');
+
+    // set the colorRange length
+    colorRange.length(100);
+
+    // set the container
+    map.container('mapping');
+    map.draw();
+  });
 }
