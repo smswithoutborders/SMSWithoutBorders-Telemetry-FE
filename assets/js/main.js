@@ -384,7 +384,7 @@ function filter_months(entry, start_date, end_date, type) {
     document.getElementById("countrytable_data").innerHTML = ""
 
     Object.keys(country_data).forEach((key, index) => {
-      document.getElementById("countrytable_header").innerHTML = `<h6 class="text-light">Country Summary Table day</h6>`
+      document.getElementById("countrytable_header").innerHTML = `<h6 class="text-light">Country Summary Table</h6>`
       document.getElementById("countrytable_head").innerHTML = `<tr><th scope="col">COUNTRY</th><th scope="col">NUMBER OF USERS</th></tr>`;
       document.getElementById("countrytable_data").innerHTML += `<tr><td class="pointclick" onclick="map.zoomToFeature('${Object.keys(country_region_code_data)[index]}')">${key}</td><td>${country_data[key]}</td></tr>`;
     });
