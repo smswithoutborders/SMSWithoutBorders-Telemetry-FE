@@ -757,14 +757,18 @@ function run(
 
 function createMap(data) {
   anychart.onDocumentReady(function () {
+    document.getElementById('mapping').innerHTML = `<a href="#" onclick='map.fullScreen(true)'>Enter full screen mode</a>`
+
     map.geoData(anychart.maps.world);
 
     // set the series
     var series = map.choropleth(data);
 
-    //map.title("AVAILABLE USERS AROUND THE WORLD");
+   // map.title("AVAILABLE USERS AROUND THE WORLD");
 
     anychart.theme('darkBlue');
+
+   // map.fullScreen(true)
 
     //format the labels of the id-defined series
     series.labels().format("{%name}");
