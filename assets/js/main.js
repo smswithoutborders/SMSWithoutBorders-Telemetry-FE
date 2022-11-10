@@ -747,6 +747,9 @@ function run(
     }
   });
 
+  document.getElementById("usertt").innerHTML = `<h6 class="text-light usertt" id="">${data[0][0]} Total </h6>`;
+
+  
   document.getElementById("total").innerHTML = total
 
   filter_data.unshift(headers);
