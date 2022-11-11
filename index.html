@@ -16,7 +16,7 @@
 </head>
 
 <body>
-  <div class="container-fluid ">
+  <div class="container-fluid w-100 h-100 ">
 
     <h4 class="text-light p-0 m-0"> <img src="assets/images/logoicon.png" width="50px" alt=""> SMSWithoutBorders
       Statistics
@@ -111,8 +111,10 @@
       <div class="col-md-4 my-3">
 
         <!-- total -->
-        <h6 class="text-light" id="">Total</h6>
-        <h1 class="total text-light" id="total"> 0 </h1>
+        <div class="col-4 py-1 totalbox">
+          <h6 class="text-light " id="totalheader"> TOTAL </h6>
+          <h1 class="total text-light" id="total"> 0 </h1>
+        </div> <br>
 
         <!-- summary table -->
         <h5 id="table_header"></h5>

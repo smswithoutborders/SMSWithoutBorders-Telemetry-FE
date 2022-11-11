@@ -445,6 +445,12 @@ function filter_months(entry, start_date, end_date, type) {
       return [key, data[key]];
     });
 
+    document.getElementById('mapping').innerHTML = `<h5 class="text-info text-center" style="margin-top: 10rem;">No data for Map Visualization</h5><p class="text-info text-center">Map Previews for only Available Users Data Type</p>`;
+    document.getElementById("countrytable_header").innerHTML = "";
+    document.getElementById("countrytable_head").innerHTML = "";
+    document.getElementById("countrytable_data").innerHTML = "";
+
+
     return result;
   }
 }
@@ -569,6 +575,11 @@ function filter_days(entry, start_date, end_date, type) {
       return [key, data[key]];
     });
 
+    document.getElementById('mapping').innerHTML = `<h5 class="text-info text-center" style="margin-top: 10rem;">No data for Map Visualization</h5><p class="text-info text-center">Map Previews for only Available Users Data Type</p>`;
+    document.getElementById("countrytable_header").innerHTML = "";
+    document.getElementById("countrytable_head").innerHTML = "";
+    document.getElementById("countrytable_data").innerHTML = "";
+
     return result;
   }
 }
@@ -624,13 +635,7 @@ function line(data) {
         titleTextStyle: {
           color: '#FFF'
         },
-        trendlines: {
-          [1]: {
-            type: 'linear',
-            showR2: true,
-            visibleInLegend: true
-          }
-        }
+        trendlines: { 0: {} }    // Draw a trendline for data series 0.
 
       };
 
@@ -747,6 +752,8 @@ function run(
     }
   });
 
+  document.getElementById("totalheader").innerHTML = `<h6 class="text-light totalheader" id=""> TOTAL ${headers[1]}</h6>`;
+
   document.getElementById("total").innerHTML = total
 
   filter_data.unshift(headers);
@@ -757,14 +764,18 @@ function run(
 
 function createMap(data) {
   anychart.onDocumentReady(function () {
+    document.getElementById('mapping').innerHTML = `<a href="#" onclick='map.fullScreen(true)'>Enter full screen mode</a>`
+
     map.geoData(anychart.maps.world);
 
     // set the series
     var series = map.choropleth(data);
 
-    //map.title("AVAILABLE USERS AROUND THE WORLD");
+    // map.title("AVAILABLE USERS AROUND THE WORLD");
 
     anychart.theme('darkBlue');
+
+    // map.fullScreen(true)
 
     //format the labels of the id-defined series
     series.labels().format("{%name}");

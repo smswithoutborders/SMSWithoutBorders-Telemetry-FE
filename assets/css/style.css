@@ -24,7 +24,7 @@ table {
 }
 
 .mapouter {
-  height: 280px;
+  height: 300px;
 }
 
 .pointclick {
@@ -33,5 +33,11 @@ table {
 
 .pointclick:hover {
   cursor: pointer;
-  background-color: rgb(17, 96, 180);
+  background-color: #1160b4;
+}
+
+.totalbox {
+  background-color: #1160b4;
+  border-radius: 10px;
+  text-align: center;
 }
