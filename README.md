@@ -1,7 +1,9 @@
 # SMSWithoutBorders-Telemetry-Front-End
 
 <img src= "assets/images/swob.png" width="350px"/>
-This is a system for SMS Without Borders visual data analysis. ### [See Live](https://smswithoutborders.com:8080/)
+This is a tool for SMS Without Borders visual data analysis.
+
+## [See Live](https://smswithoutborders.com:8080/)
 
 ## Tools
 1. [Google Charts](https://developers.google.com/chart)
