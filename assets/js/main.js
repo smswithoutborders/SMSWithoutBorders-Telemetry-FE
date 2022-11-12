@@ -390,6 +390,7 @@ function filter_months(entry, start_date, end_date, type) {
       document.getElementById("countrytable_data").innerHTML += `<tr><td class="pointclick" onclick="map.zoomToFeature('${Object.keys(country_region_code_data)[index]}')">${key}</td><td>${country_data[key]}</td></tr>`;
     });
 
+    document.getElementById("countrytotaldiv").style.display = "block"
     document.getElementById("countrytotal").innerHTML = `<h1 class="total text-light" id="countrytotal"> ${countrydatamapper.length}</h1>`
 
 
@@ -453,7 +454,8 @@ function filter_months(entry, start_date, end_date, type) {
     document.getElementById("countrytable_header").innerHTML = "";
     document.getElementById("countrytable_head").innerHTML = "";
     document.getElementById("countrytable_data").innerHTML = "";
-
+    document.getElementById("countrytotal").innerHTML = ""
+    document.getElementById("countrytotaldiv").style.display = "none"
 
     return result;
   }
@@ -525,6 +527,7 @@ function filter_days(entry, start_date, end_date, type) {
       document.getElementById("countrytable_data").innerHTML += `<tr><td class="pointclick" onclick="map.zoomToFeature('${Object.keys(country_region_code_data)[index]}')">${key}</td><td>${country_data[key]}</td></tr>`;
     });
 
+    document.getElementById("countrytotaldiv").style.display = "block"
     document.getElementById("countrytotal").innerHTML = `<h1 class="total text-light" id="countrytotal"> ${countrydatamapper.length}</h1>`
     // Map //
     let anyChartData = [];
@@ -586,7 +589,8 @@ function filter_days(entry, start_date, end_date, type) {
     document.getElementById("countrytable_header").innerHTML = "";
     document.getElementById("countrytable_head").innerHTML = "";
     document.getElementById("countrytable_data").innerHTML = "";
-    document.getElementById("countrytotaldiv").innerHTML = ""
+    document.getElementById("countrytotaldiv").style.display = "none"
+    document.getElementById("countrytotal").innerHTML = ""
 
     return result;
   }
