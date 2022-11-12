@@ -257,7 +257,7 @@ let map
 
 // Load google API
 google.charts.load("current", {
-  packages: ["corechart", 'sankey'],
+  packages: ["corechart"],
 });
 
 function fetchData(
@@ -325,7 +325,7 @@ function filter_months(entry, start_date, end_date, type) {
     "November",
     "December",
   ];
-
+ 
   let filter_data = [];
   let country_phone_codes = [];
 
@@ -373,7 +373,7 @@ function filter_months(entry, start_date, end_date, type) {
       } else {
         country_data[country_name] = (country_data[country_name] || 0) + 1;
       };
-      // console.log(country_name.length)
+
       if (country_region_code_data[country_region_code]) {
         country_region_code_data[country_region_code] = (country_region_code_data[country_region_code] || 0) + 1;
       } else {
@@ -460,7 +460,6 @@ function filter_months(entry, start_date, end_date, type) {
     return result;
   }
 }
-
 function filter_days(entry, start_date, end_date, type) {
   let filter_data = [];
   let country_phone_codes = [];
@@ -662,7 +661,6 @@ function line(data) {
     }
   }
 }
-
 function pie(data) {
   if (data.length < 2) {
     document.getElementById("pie_div").innerHTML = `<h5 class="text-danger text-center" style="margin-top: 5rem;">Sorry No Data To Display!</h5>`
@@ -786,7 +784,7 @@ function run(
     let encodedUri = encodeURI(csvContent);
     let link = document.createElement("a");
     link.setAttribute("href", encodedUri);
-    link.setAttribute("download", "swob_statistics.csv");
+    link.setAttribute("download", `swob_telemetry_${new Date().toLocaleString()}.csv`);
     document.body.appendChild(link); // Required for FF
 
     link.click();
