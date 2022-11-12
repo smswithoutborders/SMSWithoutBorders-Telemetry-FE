@@ -10,7 +10,12 @@
   <link rel="stylesheet" href="assets/css/style.css" />
   <link rel="shortcut icon" sizes="32x32 64x64" href="assets/images/favicon (1).ico" />
   <title>Afkanerd Chart</title>
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+    integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/solid.min.css"
+    integrity="sha512-uj2QCZdpo8PSbRGL/g5mXek6HM/APd7k/B5Hx/rkVFPNOxAQMXD+t+bG4Zv8OAdUpydZTU3UHmyjjiHv2Ww0PA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" type="text/css" href="https://cdn.anychart.com/releases/8.9.0/css/anychart-ui.min.css">
   <link rel="stylesheet" type="text/css" href="https://cdn.anychart.com/releases/8.9.0/fonts/css/anychart-font.min.css">
 </head>
@@ -111,10 +116,18 @@
       <div class="col-md-4 my-3">
 
         <!-- total -->
-        <div class="col-4 py-1 totalbox">
-          <h6 class="text-light " id="totalheader"> TOTAL </h6>
-          <h1 class="total text-light" id="total"> 0 </h1>
-        </div> <br>
+        <div class="row mb-3">
+          <div class="col-3 p-1 totalbox">
+            <h6 class="text-light " id="totalheader"> TOTAL </h6>
+            <h1 class="total text-light" id="total"> 0 </h1>
+          </div> <br>
+
+          <div class="col-3 py-1 totalbox" id="download">
+            <h6 class="text-light "> DOWNLOAD </h6>
+            <i class="fa-sharp fa-solid fa-download text-light fa-3x"></i>
+          </div> <br>
+        </div>
+
 
         <!-- summary table -->
         <h5 id="table_header"></h5>

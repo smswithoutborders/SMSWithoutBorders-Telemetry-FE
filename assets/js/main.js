@@ -635,7 +635,9 @@ function line(data) {
         titleTextStyle: {
           color: '#FFF'
         },
-        trendlines: { 0: {} }    // Draw a trendline for data series 0.
+        trendlines: {
+          0: {}
+        } // Draw a trendline for data series 0.
 
       };
 
@@ -715,6 +717,8 @@ function pie(data) {
   }
 }
 
+
+
 function run(
   data,
   format,
@@ -760,6 +764,23 @@ function run(
 
   line(filter_data);
   pie(filter_data);
+
+  
+  let download = document.getElementById("download");
+  download.addEventListener('click', event => {
+
+    let csvContent = "data:text/csv;charset=utf-8," +
+      filter_data.map(e => e.join(",")).join("\n");
+
+    let encodedUri = encodeURI(csvContent);
+    let link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "swob_statistics.csv");
+    document.body.appendChild(link); // Required for FF
+
+    link.click(); 
+
+  });
 };
 
 function createMap(data) {
