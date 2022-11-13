@@ -257,7 +257,7 @@ let map
 
 // Load google API
 google.charts.load("current", {
-  packages: ["corechart", 'sankey'],
+  packages: ["corechart"],
 });
 
 function fetchData(
@@ -325,7 +325,7 @@ function filter_months(entry, start_date, end_date, type) {
     "November",
     "December",
   ];
-
+ 
   let filter_data = [];
   let country_phone_codes = [];
 
@@ -380,14 +380,19 @@ function filter_months(entry, start_date, end_date, type) {
         country_region_code_data[country_region_code] = (country_region_code_data[country_region_code] || 0) + 1;
       }
     });
-
     document.getElementById("countrytable_data").innerHTML = ""
 
-    Object.keys(country_data).forEach((key, index) => {
+    let countrydatamapper = Object.keys(country_data);
+
+    countrydatamapper.forEach((key, index) => {
       document.getElementById("countrytable_header").innerHTML = `<h6 class="text-light">Country Summary Table</h6>`
       document.getElementById("countrytable_head").innerHTML = `<tr><th scope="col">COUNTRY</th><th scope="col">NUMBER OF USERS</th></tr>`;
       document.getElementById("countrytable_data").innerHTML += `<tr><td class="pointclick" onclick="map.zoomToFeature('${Object.keys(country_region_code_data)[index]}')">${key}</td><td>${country_data[key]}</td></tr>`;
     });
+
+    document.getElementById("countrytotaldiv").style.display = "block"
+    document.getElementById("countrytotal").innerHTML = `<h1 class="total text-light" id="countrytotal"> ${countrydatamapper.length}</h1>`
+
 
     // Map //
     let anyChartData = [];
@@ -449,12 +454,12 @@ function filter_months(entry, start_date, end_date, type) {
     document.getElementById("countrytable_header").innerHTML = "";
     document.getElementById("countrytable_head").innerHTML = "";
     document.getElementById("countrytable_data").innerHTML = "";
-
+    document.getElementById("countrytotal").innerHTML = ""
+    document.getElementById("countrytotaldiv").style.display = "none"
 
     return result;
   }
 }
-
 function filter_days(entry, start_date, end_date, type) {
   let filter_data = [];
   let country_phone_codes = [];
@@ -513,12 +518,16 @@ function filter_days(entry, start_date, end_date, type) {
 
     document.getElementById("countrytable_data").innerHTML = ""
 
-    Object.keys(country_data).forEach((key, index) => {
+    let countrydatamapper = Object.keys(country_data);
+
+    countrydatamapper.forEach((key, index) => {
       document.getElementById("countrytable_header").innerHTML = `<h6 class="text-light">Country Summary Table day</h6>`
       document.getElementById("countrytable_head").innerHTML = `<tr><th scope="col">COUNTRY</th><th scope="col">NUMBER OF USERS</th></tr>`;
       document.getElementById("countrytable_data").innerHTML += `<tr><td class="pointclick" onclick="map.zoomToFeature('${Object.keys(country_region_code_data)[index]}')">${key}</td><td>${country_data[key]}</td></tr>`;
     });
 
+    document.getElementById("countrytotaldiv").style.display = "block"
+    document.getElementById("countrytotal").innerHTML = `<h1 class="total text-light" id="countrytotal"> ${countrydatamapper.length}</h1>`
     // Map //
     let anyChartData = [];
 
@@ -579,6 +588,8 @@ function filter_days(entry, start_date, end_date, type) {
     document.getElementById("countrytable_header").innerHTML = "";
     document.getElementById("countrytable_head").innerHTML = "";
     document.getElementById("countrytable_data").innerHTML = "";
+    document.getElementById("countrytotaldiv").style.display = "none"
+    document.getElementById("countrytotal").innerHTML = ""
 
     return result;
   }
@@ -635,7 +646,9 @@ function line(data) {
         titleTextStyle: {
           color: '#FFF'
         },
-        trendlines: { 0: {} }    // Draw a trendline for data series 0.
+        trendlines: {
+          0: {}
+        } // Draw a trendline for data series 0.
 
       };
 
@@ -648,7 +661,6 @@ function line(data) {
     }
   }
 }
-
 function pie(data) {
   if (data.length < 2) {
     document.getElementById("pie_div").innerHTML = `<h5 class="text-danger text-center" style="margin-top: 5rem;">Sorry No Data To Display!</h5>`
@@ -715,6 +727,8 @@ function pie(data) {
   }
 }
 
+
+
 function run(
   data,
   format,
@@ -760,6 +774,22 @@ function run(
 
   line(filter_data);
   pie(filter_data);
+
+  let download = document.getElementById("download");
+  download.addEventListener('click', event => {
+
+    let csvContent = "data:text/csv;charset=utf-8," +
+      filter_data.map(e => e.join(",")).join("\n");
+
+    let encodedUri = encodeURI(csvContent);
+    let link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", `swob_telemetry_${new Date().toLocaleString()}.csv`);
+    document.body.appendChild(link); // Required for FF
+
+    link.click();
+
+  });
 };
 
 function createMap(data) {
