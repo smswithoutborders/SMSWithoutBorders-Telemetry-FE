@@ -21,144 +21,126 @@
 </head>
 
 <body>
-  <div class="container-fluid w-100 h-100 ">
+  <div class="container-fluid">
 
     <h4 class="text-light p-0 m-0"> <img src="assets/images/logoicon.png" width="50px" alt=""> SMSWithoutBorders
       Statistics
       <hr class="hr text-light p-0 m-0">
     </h4>
 
-    <div class="row">
+    <div class="row my-3 px-3">
+      <!-- filters -->
+      <!-- type -->
+      <div class="col type">
+        <h6 class="text-light">Type</h6>
+        <select id="type" class="btn btn-light mb-4 w-75">
+          <option value="signup">Signed-up Users</option>
+          <option value="available">Available Users</option>
+          <option value="publisher">Published</option>
+        </select>
+      </div>
 
-      <!-- Section 1 -->
-      <div class="col-md-3">
-
-        <!-- filters -->
-        <div class="filter ps-5 ms-3">
-
-          <!-- type -->
-          <div class="type my-3">
-            <h6 class="text-light">Type</h6>
-            <select id="type" class="btn btn-light mb-4">
-              <option value="signup">Signed-up Users</option>
-              <option value="available">Available Users</option>
-              <option value="publisher">Published</option>
-            </select>
+      <div class="col">
+        <h6 class="text-light">Format</h6>
+        <div class="row" id="">
+          <div class="col">
+            <input class="form-check-input" type="radio" name="format" value="month" id="format_month">
+            <label class="form-check-label text-light" for=""> Month </label>
           </div>
 
-          <!-- format -->
-          <h6 class="text-light">Format</h6>
-          <div class="mb-3" id="">
-            <div class="">
-              <input class="form-check-input" type="radio" name="format" value="month" id="format_month">
-              <label class="form-check-label text-light" for=""> Month </label>
-            </div>
-
-            <div class="">
-              <input class="form-check-input" type="radio" name="format" value="day" id="format_day">
-              <label class="form-check-label text-light" for=""> Days</label>
-            </div>
+          <div class="col">
+            <input class="form-check-input" type="radio" name="format" value="day" id="format_day">
+            <label class="form-check-label text-light" for=""> Days</label>
           </div>
-
-          <!-- dates -->
-          <div class="mb-3 text-light" id="">
-            <div class="w-50">
-              <small class="">Start-Date</small><br />
-              <input id="start_date" type="date" class="form-control text-center" />
-            </div>
-
-            <div class="w-50">
-              <small class="">End-Date</small><br />
-              <input id="end_date" type="date" class="form-control text-center" />
-            </div>
-          </div>
-
         </div>
-        <!-- filters -->
+      </div>
 
-        <!-- pie chart -->
-        <div class="text-light" id="pie_div">
+      <div class="col-md-4 text-light ps-1 pe-5 pb-3">
+        <div class="row">
+          <div class="col-6">
+            <small class="">Start-Date</small>
+            <input id="start_date" type="date" class="form-control text-center" />
+          </div>
+
+          <div class="col-6">
+            <small class="">End-Date</small>
+            <input id="end_date" type="date" class="form-control text-center" />
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="row mb-3">
+          <div class="col p-1 totalbox">
+            <p class="text-light " id="totalheader"> TOTAL </p>
+            <h3 class="total text-light" id="total"> 0 </h3>
+          </div> <br>
+
+          <div class="col p-1 totalbox" id="countrytotaldiv">
+            <p class="text-light " id="">COUNTRY TOTAL </p>
+            <h3 class="total text-light" id="countrytotal"> 0 </h3>
+          </div> <br>
+
+          <div class="col py-1 totalbox" id="download">
+            <p class="text-light "> DOWNLOAD </p>
+            <i class="fa-sharp fa-solid fa-download text-light fa-2x"></i>
+          </div> <br>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+    <div class="row px-3">
+      <div class="col-md-7">
+        <!-- map -->
+        <div class="mapouter" id="mapping">
           <div class="d-flex justify-content-center">
             <div class="spinner-border text-light" style="margin-top: 5rem; width: 4rem; height: 4rem" role="status">
               <span class="visually-hidden">Loading...</span>
             </div>
           </div>
         </div>
-
       </div>
-      <!-- Section 1 -->
 
-      <!-- Section 2 -->
-      <div class="col-md-5 my-3" id="chart_section">
-
-        <!-- line chart -->
-        <div class="text-light mb-3" id="line_div">
-          <div class="d-flex justify-content-center">
-            <div class="spinner-border text-light" style="margin-top: 10rem; width: 4rem; height: 4rem" role="status">
-              <span class="visually-hidden">Loading...</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- map -->
-        <div class="mapouter" id="mapping">
-          <div class="d-flex justify-content-center">
-            <div class="spinner-border text-light" style="margin-top: 10rem; width: 4rem; height: 4rem" role="status">
-              <span class="visually-hidden">Loading...</span>
-            </div>
-          </div>
-        </div>
-
-      </div>
-      <!-- Section 2 -->
-
-      <!-- Section 3 -->
-      <div class="col-md-4 my-3">
-
-        <!-- total -->
-        <div class="row mb-3">
-          <div class="col-3 p-1 totalbox">
-            <h6 class="text-light " id="totalheader"> TOTAL </h6>
-            <h1 class="total text-light" id="total"> 0 </h1>
-          </div> <br>
-
-          <div class="col-3 p-1 totalbox" id="countrytotaldiv">
-            <h6 class="text-light " id="">COUNTRY TOTAL </h6>
-            <h1 class="total text-light" id="countrytotal"> 0 </h1>
-          </div> <br>
-
-          <div class="col-3 py-1 totalbox" id="download">
-            <h6 class="text-light "> DOWNLOAD </h6>
-            <i class="fa-sharp fa-solid fa-download text-light fa-3x"></i>
-          </div> <br>
-
-        </div>
-
-
-        <!-- summary table -->
-        <h5 id="table_header"></h5>
-        <div class="table-responsive rest mb-3" id="table">
-          <table class="table table-bordered table-sm border-secondary text-center">
-            <thead id="table_head" class="table-light border-dark"></thead>
-            <tbody id="table_data" class="text-light"></tbody>
-          </table>
-        </div>
-
-        <!-- country table -->
+      <div class="col-md-5 pe-5">
         <h5 id="countrytable_header"></h5>
-        <div class="table-responsive rest" id="table">
-          <table class="table table-bordered table-sm border-secondary text-center">
+        <div class="table-responsive rest" id="countrytableid">
+          <table class="table table-bordered border-secondary text-center">
             <thead id="countrytable_head" class="table-light border-dark"></thead>
             <tbody id="countrytable_data" class="text-light"></tbody>
           </table>
         </div>
-
       </div>
-      <!-- Section 3 -->
 
-    </div>
+
+      <div class="col-md-7">
+        <div class="text-light mb-3" id="line_div">
+          <div class="d-flex justify-content-center">
+            <div class="spinner-border text-light" style="margin-top: 1rem; width: 4rem; height: 4rem" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-5 pe-5">
+        <h5 id="table_header"></h5>
+        <div class="table-responsive rest mb-3 " id="table">
+          <table class="table table-bordered border-secondary text-center">
+            <thead id="table_head" class="table-light border-dark"></thead>
+            <tbody id="table_data" class="text-light"></tbody>
+          </table>
+        </div>
+      </div>
+
+    
+
 
   </div>
+
+
 
   <!-- Any chart map -->
   <script src="https://cdn.anychart.com/releases/8.9.0/js/anychart-base.min.js"></script>
