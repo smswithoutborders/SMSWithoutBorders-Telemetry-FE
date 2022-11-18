@@ -1,6 +1,6 @@
 # SMSWithoutBorders-Telemetry-Front-End
 
-<img src= "assets/images/swob.png" width="350px"/>
+<img src= "assets/images/logoicon.png" align="right" width="350px"/>
 This is a tool for SMS Without Borders visual data analysis.
 
 ## [See Live](https://smswithoutborders.com:8080/)
