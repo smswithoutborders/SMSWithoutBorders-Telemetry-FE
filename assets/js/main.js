@@ -455,12 +455,12 @@ function filter_months(entry, start_date, end_date, type) {
       return [key, data[key]];
     });
 
-    document.getElementById('mapping').innerHTML = `<h5 class="text-info text-center" style="margin-top: 1rem;">No data for Map Visualization</h5><p class="text-info text-center">Map Previews for only Available Users Data Type</p>`;
-    document.getElementById("countrytable_header").innerHTML = "";
-    document.getElementById("countrytable_head").innerHTML = "";
-    document.getElementById("countrytable_data").innerHTML = "";
-    document.getElementById("countrytotal").innerHTML = ""
-    document.getElementById("countrytotaldiv").style.display = "none"
+    document.getElementById('mapping').style.display = "none"
+    // document.getElementById("countrytable_header").innerHTML = "";
+    // document.getElementById("countrytable_head").innerHTML = "";
+    // document.getElementById("countrytable_data").innerHTML = "";
+    // document.getElementById("countrytotal").innerHTML = ""
+     document.getElementById("countrytotaldiv").style.display = "none"
 
     return result;
   }
