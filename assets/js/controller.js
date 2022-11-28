@@ -12,7 +12,7 @@ let table_head = document.getElementById("table_head");
 const URL = "https://smswithoutborders.com:11000/statistics"
 
 window.onload = () => {
-    document.getElementById('mapping').style.display = "none"
+    document.getElementById('mapping').style.display = "none";
 
     let start_date_new = start_date.value
     let end_date_new = end_date.value

@@ -294,6 +294,11 @@ function fetchData(
           <span class="visually-hidden">Loading...</span>
       </div></div>`;
 
+      document.getElementById("mapouter").innerHTML = `<div class="d-flex justify-content-center">
+      <div class="spinner-border text-light" style="margin-top: 10rem; width: 4rem; height: 4rem" role="status">
+          <span class="visually-hidden">Loading...</span>
+      </div></div>`;
+
       document.getElementById("table_header").innerHTML = `<h6 class="text-light">Loading Summary ...</h6>`
       table_head.innerHTML = "";
       table_data.innerHTML = "";
@@ -394,7 +399,9 @@ function filter_months(entry, start_date, end_date, type) {
       document.getElementById("countrytable_data").innerHTML += `<tr><td class="pointclick" onclick="map.zoomToFeature('${Object.keys(country_region_code_data)[index]}')">${key}</td><td>${country_data[key]}</td><td> ${((country_data[key]/totoalUserCount) * 100).toFixed(1) + "%" } </td></tr>`;
     });
 
+    document.getElementById("mapping").style.display = "block"
     document.getElementById("countrytotaldiv").style.display = "block"
+    document.getElementById("countrytableid").style.display = "block";
     document.getElementById("countrytotal").innerHTML = `<h3 class="total text-light" id="countrytotal"> ${countrydatamapper.length}</h3>`
 
 
@@ -455,12 +462,13 @@ function filter_months(entry, start_date, end_date, type) {
       return [key, data[key]];
     });
 
-    document.getElementById('mapping').style.display = "none"
-    // document.getElementById("countrytable_header").innerHTML = "";
+    document.getElementById('mapping').style.display = "none";
+    document.getElementById("countrytableid").style.display = "none";
+    document.getElementById("countrytable_header").innerHTML = "";
     // document.getElementById("countrytable_head").innerHTML = "";
     // document.getElementById("countrytable_data").innerHTML = "";
-    // document.getElementById("countrytotal").innerHTML = ""
-     document.getElementById("countrytotaldiv").style.display = "none"
+    document.getElementById("countrytotal").innerHTML = "";
+    document.getElementById("countrytotaldiv").style.display = "none";
 
     return result;
   }
@@ -539,7 +547,9 @@ function filter_days(entry, start_date, end_date, type) {
       document.getElementById("countrytable_data").innerHTML += `<tr><td class="pointclick" onclick="map.zoomToFeature('${Object.keys(country_region_code_data)[index]}')">${key}</td><td>${country_data[key]}</td><td> ${((country_data[key]/totoalUserCount) * 100).toFixed(1) + "%" } </td></tr>`;
     });
 
+    document.getElementById("mapping").style.display = "block"
     document.getElementById("countrytotaldiv").style.display = "block"
+    document.getElementById("countrytableid").style.display = "block";
     document.getElementById("countrytotal").innerHTML = `<h3 class="total text-light" id="countrytotal"> ${countrydatamapper.length}</h3>`
     // Map //
     let anyChartData = [];
@@ -597,12 +607,14 @@ function filter_days(entry, start_date, end_date, type) {
       return [key, data[key]];
     });
 
-    document.getElementById('mapping').innerHTML = `<h5 class="text-info text-center" style="margin-top: 1rem;">No data for Map Visualization</h5><p class="text-info text-center">Map Previews for only Available Users Data Type</p>`;
+
+    document.getElementById('mapping').style.display = "none";
+    document.getElementById("countrytableid").style.display = "none";
     document.getElementById("countrytable_header").innerHTML = "";
-    document.getElementById("countrytable_head").innerHTML = "";
-    document.getElementById("countrytable_data").innerHTML = "";
-    document.getElementById("countrytotaldiv").style.display = "none"
-    document.getElementById("countrytotal").innerHTML = ""
+    // document.getElementById("countrytable_head").innerHTML = "";
+    // document.getElementById("countrytable_data").innerHTML = "";
+    document.getElementById("countrytotal").innerHTML = "";
+    document.getElementById("countrytotaldiv").style.display = "none";
 
     return result;
   }

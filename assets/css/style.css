@@ -11,11 +11,10 @@ body {
   display: flex;
 }
 
-.rest {
-  padding: 10px;
+ .rest {
   height: 200px !important;
   overflow-y: auto;
-}
+} 
 
 table {
   border-radius: 70px;
