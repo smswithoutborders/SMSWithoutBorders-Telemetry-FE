@@ -331,7 +331,7 @@ function filter_months(entry, start_date, end_date, type) {
 
   let filter_data = [];
   let country_phone_codes = [];
-
+  
   if (type == "available") {
     let previous_months_count = 0;
 
@@ -457,7 +457,7 @@ function filter_months(entry, start_date, end_date, type) {
     });
 
     let result = Object.keys(data).sort(function (a, b) {
-      return month.indexOf(a) > month.indexOf(b);
+      return month.indexOf(a) - month.indexOf(b);
     }).map((key) => {
       return [key, data[key]];
     });
@@ -465,8 +465,6 @@ function filter_months(entry, start_date, end_date, type) {
     document.getElementById('mapping').style.display = "none";
     document.getElementById("countrytableid").style.display = "none";
     document.getElementById("countrytable_header").innerHTML = "";
-    // document.getElementById("countrytable_head").innerHTML = "";
-    // document.getElementById("countrytable_data").innerHTML = "";
     document.getElementById("countrytotal").innerHTML = "";
     document.getElementById("countrytotaldiv").style.display = "none";
 
@@ -602,7 +600,7 @@ function filter_days(entry, start_date, end_date, type) {
     });
 
     let result = Object.keys(data).sort(function (a, b) {
-      return new Date(a) > new Date(b);
+      return new Date(a) - new Date(b);
     }).map((key) => {
       return [key, data[key]];
     });
@@ -611,8 +609,6 @@ function filter_days(entry, start_date, end_date, type) {
     document.getElementById('mapping').style.display = "none";
     document.getElementById("countrytableid").style.display = "none";
     document.getElementById("countrytable_header").innerHTML = "";
-    // document.getElementById("countrytable_head").innerHTML = "";
-    // document.getElementById("countrytable_data").innerHTML = "";
     document.getElementById("countrytotal").innerHTML = "";
     document.getElementById("countrytotaldiv").style.display = "none";
 
@@ -808,3 +804,4 @@ function createMap(data) {
     map.draw();
   });
 }
+
