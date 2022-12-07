@@ -257,7 +257,7 @@ let map
 
 // Load google API
 google.charts.load("current", {
-  packages: ["corechart", 'sankey'],
+  packages: ["corechart"],
 });
 
 function fetchData(
@@ -289,13 +289,9 @@ function fetchData(
         type
       );
     } else {
+      // Loaders
       document.getElementById("line_div").innerHTML = `<div class="d-flex justify-content-center">
       <div class="spinner-border text-light" style="margin-top: 10rem; width: 4rem; height: 4rem" role="status">
-          <span class="visually-hidden">Loading...</span>
-      </div></div>`;
-
-      document.getElementById("pie_div").innerHTML = `<div class="d-flex justify-content-center">
-      <div class="spinner-border text-light" style="margin-top: 5rem; width: 4rem; height: 4rem" role="status">
           <span class="visually-hidden">Loading...</span>
       </div></div>`;
 
@@ -303,6 +299,8 @@ function fetchData(
       table_head.innerHTML = "";
       table_data.innerHTML = "";
       document.getElementById("total").innerHTML = `...`
+      document.getElementById("countrytotal").innerHTML = `...`
+
     }
   };
 
@@ -310,6 +308,7 @@ function fetchData(
   xhttp.send();
 }
 
+// Filter Months
 function filter_months(entry, start_date, end_date, type) {
   const month = [
     "January",
@@ -328,7 +327,7 @@ function filter_months(entry, start_date, end_date, type) {
 
   let filter_data = [];
   let country_phone_codes = [];
-
+  
   if (type == "available") {
     let previous_months_count = 0;
 
@@ -380,14 +379,27 @@ function filter_months(entry, start_date, end_date, type) {
         country_region_code_data[country_region_code] = (country_region_code_data[country_region_code] || 0) + 1;
       }
     });
-
     document.getElementById("countrytable_data").innerHTML = ""
 
-    Object.keys(country_data).forEach((key, index) => {
-      document.getElementById("countrytable_header").innerHTML = `<h6 class="text-light">Country Summary Table</h6>`
-      document.getElementById("countrytable_head").innerHTML = `<tr><th scope="col">COUNTRY</th><th scope="col">NUMBER OF USERS</th></tr>`;
-      document.getElementById("countrytable_data").innerHTML += `<tr><td class="pointclick" onclick="map.zoomToFeature('${Object.keys(country_region_code_data)[index]}')">${key}</td><td>${country_data[key]}</td></tr>`;
+    let countrydatamapper = Object.keys(country_data);
+    let totoalUserCount = 0
+
+    countrydatamapper.forEach((key) => {
+      totoalUserCount += country_data[key]
     });
+    countrydatamapper.sort();
+
+    countrydatamapper.forEach((key, index) => {
+      document.getElementById("countrytable_header").innerHTML = `<h6 class="text-light">Country Summary Table</h6>`
+      document.getElementById("countrytable_head").innerHTML = `<tr><th scope="col">COUNTRY</th><th scope="col">NUMBER OF USERS</th><th scope="col">PERCENTAGE</th></tr>`;
+      document.getElementById("countrytable_data").innerHTML += `<tr><td class="pointclick" onclick="map.zoomToFeature('${Object.keys(country_region_code_data)[index]}')">${key}</td><td>${country_data[key]}</td><td> ${((country_data[key]/totoalUserCount) * 100).toFixed(1) + "%" } </td></tr>`;
+    });
+
+    document.getElementById("mapping").style.display = "block"
+    document.getElementById("countrytotaldiv").style.display = "block"
+    document.getElementById("countrytableid").style.display = "block";
+    document.getElementById("countrytotal").innerHTML = `<h3 class="total text-light" id="countrytotal"> ${countrydatamapper.length}</h3>`
+
 
     // Map //
     let anyChartData = [];
@@ -417,6 +429,7 @@ function filter_months(entry, start_date, end_date, type) {
       return [key, data[key] + previous_months_count];
     });
 
+
     return result;
   } else {
     entry.forEach((element) => {
@@ -440,15 +453,22 @@ function filter_months(entry, start_date, end_date, type) {
     });
 
     let result = Object.keys(data).sort(function (a, b) {
-      return month.indexOf(a) > month.indexOf(b);
+      return month.indexOf(a) - month.indexOf(b);
     }).map((key) => {
       return [key, data[key]];
     });
+
+    document.getElementById('mapping').style.display = "none";
+    document.getElementById("countrytableid").style.display = "none";
+    document.getElementById("countrytable_header").innerHTML = "";
+    document.getElementById("countrytotal").innerHTML = "";
+    document.getElementById("countrytotaldiv").style.display = "none";
 
     return result;
   }
 }
 
+//Filter Days
 function filter_days(entry, start_date, end_date, type) {
   let filter_data = [];
   let country_phone_codes = [];
@@ -507,12 +527,25 @@ function filter_days(entry, start_date, end_date, type) {
 
     document.getElementById("countrytable_data").innerHTML = ""
 
-    Object.keys(country_data).forEach((key, index) => {
-      document.getElementById("countrytable_header").innerHTML = `<h6 class="text-light">Country Summary Table day</h6>`
-      document.getElementById("countrytable_head").innerHTML = `<tr><th scope="col">COUNTRY</th><th scope="col">NUMBER OF USERS</th></tr>`;
-      document.getElementById("countrytable_data").innerHTML += `<tr><td class="pointclick" onclick="map.zoomToFeature('${Object.keys(country_region_code_data)[index]}')">${key}</td><td>${country_data[key]}</td></tr>`;
+    let countrydatamapper = Object.keys(country_data);
+    let totoalUserCount = 0
+
+    countrydatamapper.forEach((key) => {
+      totoalUserCount += country_data[key]
+    });
+    countrydatamapper.sort();
+
+    countrydatamapper.forEach((key, index) => {
+      document.getElementById("countrytable_header").innerHTML = `<h6 class="text-light">Country Summary Table</h6>`
+      document.getElementById("countrytable_head").innerHTML = `<tr><th scope="col">COUNTRY</th><th scope="col">NUMBER OF USERS</th><th scope="col">PERCENTAGE</th></tr>`;
+      document.getElementById("countrytable_data").innerHTML += `<tr><td class="pointclick" onclick="map.zoomToFeature('${Object.keys(country_region_code_data)[index]}')">${key}</td><td>${country_data[key]}</td><td> ${((country_data[key]/totoalUserCount) * 100).toFixed(1) + "%" } </td></tr>`;
     });
 
+    document.getElementById("mapping").style.display = "block"
+    document.getElementById("countrytotaldiv").style.display = "block"
+    document.getElementById("countrytableid").style.display = "block";
+    document.getElementById("countrytotal").innerHTML = `<h3 class="total text-light" id="countrytotal"> ${countrydatamapper.length}</h3>`
+    
     // Map //
     let anyChartData = [];
 
@@ -564,10 +597,17 @@ function filter_days(entry, start_date, end_date, type) {
     });
 
     let result = Object.keys(data).sort(function (a, b) {
-      return new Date(a) > new Date(b);
+      return new Date(a) - new Date(b);
     }).map((key) => {
       return [key, data[key]];
     });
+
+
+    document.getElementById('mapping').style.display = "none";
+    document.getElementById("countrytableid").style.display = "none";
+    document.getElementById("countrytable_header").innerHTML = "";
+    document.getElementById("countrytotal").innerHTML = "";
+    document.getElementById("countrytotaldiv").style.display = "none";
 
     return result;
   }
@@ -587,6 +627,7 @@ function filter(
   }
 }
 
+//Line Chart
 function line(data) {
   if (data.length < 2) {
     document.getElementById("line_div").innerHTML = `<h5 class="text-danger text-center" style="margin-top: 10rem;">Sorry No Data To Display!</h5>`
@@ -615,7 +656,7 @@ function line(data) {
           },
           titleColor: '#FFF'
         },
-        title: `${data[0][1]} METRICS`,
+        // title: `${data[0][1]} METRICS`,
         height: 250,
         backgroundColor: '#0e213b',
         legendTextStyle: {
@@ -625,84 +666,14 @@ function line(data) {
           color: '#FFF'
         },
         trendlines: {
-          [1]: {
-            type: 'linear',
-            showR2: true,
-            visibleInLegend: true
-          }
-        }
+          0: {}
+        } // Draw a trendline for data series 0.
 
       };
 
       // Instantiate and draw our chart, passing in some options.
       var chart = new google.visualization.LineChart(
         document.getElementById("line_div")
-      );
-
-      chart.draw(result, options);
-    }
-  }
-}
-
-function pie(data) {
-  if (data.length < 2) {
-    document.getElementById("pie_div").innerHTML = `<h5 class="text-danger text-center" style="margin-top: 5rem;">Sorry No Data To Display!</h5>`
-  } else {
-    // Set a callback to run when the Google Visualization API is loaded.
-    google.charts.setOnLoadCallback(drawChart);
-
-    function drawChart() {
-      var result = google.visualization.arrayToDataTable(data);
-
-      // Set chart options
-      var options = {
-        vAxis: {
-          title: data[0][1],
-          format: "0",
-          minValue: 0,
-          textStyle: {
-            color: '#FFF'
-          },
-          titleColor: '#FFF'
-        },
-        hAxis: {
-          title: data[0][0],
-          textStyle: {
-            color: '#FFF'
-          },
-          titleColor: '#FFF'
-        },
-        title: `${data[0][1]} METRICS`,
-        height: 250,
-        backgroundColor: '#0e213b',
-        legendTextStyle: {
-          color: '#FFF'
-        },
-        titleTextStyle: {
-          color: '#FFF'
-        },
-        slices: {
-          4: {
-            offset: 0.2
-          },
-          1: {
-            offset: 0.3
-          },
-          2: {
-            offset: 0.3
-          },
-          3: {
-            offset: 0.3
-          },
-          5: {
-            offset: 0.3
-          },
-        },
-      };
-
-      // Instantiate and draw our chart, passing in some options.
-      var chart = new google.visualization.PieChart(
-        document.getElementById("pie_div")
       );
 
       chart.draw(result, options);
@@ -728,7 +699,7 @@ function run(
     end_date
   );
 
-  // table
+  // Table
   document.getElementById("table_header").innerHTML = `<h6 class="text-light">Summary Table</h6>`
   table_head.innerHTML = `<tr><th scope="col">${headers[0]}</th><th scope="col">${headers[1]}</th></tr>`;
   table_data.innerHTML = "";
@@ -737,7 +708,6 @@ function run(
 
   filter_data.forEach((item, index, array) => {
     table_data.innerHTML += `<tr><td>${item[0]}</td><td>${item[1]}</td></tr>`;
-
     if (type == "available") {
       if (index == array.length - 1) {
         total = item[1];
@@ -747,24 +717,49 @@ function run(
     }
   });
 
+  document.getElementById("totalheader").innerHTML = `<p class="text-light totalheader" id=""> TOTAL ${headers[1]}</p>`;
+
   document.getElementById("total").innerHTML = total
 
   filter_data.unshift(headers);
 
   line(filter_data);
-  pie(filter_data);
+
+  // Download CSV feature
+  let download = document.getElementById("download");
+  download.addEventListener('click', event => {
+
+    let csvContent = "data:text/csv;charset=utf-8," +
+      filter_data.map(e => e.join(",")).join("\n");
+
+    let encodedUri = encodeURI(csvContent);
+    let link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", `swob_telemetry_${new Date().toLocaleString()}.csv`);
+    document.body.appendChild(link); // Required for FF
+
+    link.click();
+
+  });
 };
 
+// Draw Map
 function createMap(data) {
   anychart.onDocumentReady(function () {
+    document.getElementById('mapping').innerHTML = `<a href="#" onclick='map.fullScreen(true)'>Enter full screen mode</a>`
+
     map.geoData(anychart.maps.world);
 
     // set the series
     var series = map.choropleth(data);
 
-    //map.title("AVAILABLE USERS AROUND THE WORLD");
+    // map.title("AVAILABLE USERS AROUND THE WORLD");
 
     anychart.theme('darkBlue');
+
+    map.height('110%');
+
+    // map.fullScreen(true)
 
     //format the labels of the id-defined series
     series.labels().format("{%name}");
@@ -806,3 +801,4 @@ function createMap(data) {
     map.draw();
   });
 }
+
