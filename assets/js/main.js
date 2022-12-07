@@ -289,12 +289,8 @@ function fetchData(
         type
       );
     } else {
+      // Loaders
       document.getElementById("line_div").innerHTML = `<div class="d-flex justify-content-center">
-      <div class="spinner-border text-light" style="margin-top: 10rem; width: 4rem; height: 4rem" role="status">
-          <span class="visually-hidden">Loading...</span>
-      </div></div>`;
-
-      document.getElementById("mapouter").innerHTML = `<div class="d-flex justify-content-center">
       <div class="spinner-border text-light" style="margin-top: 10rem; width: 4rem; height: 4rem" role="status">
           <span class="visually-hidden">Loading...</span>
       </div></div>`;
@@ -549,6 +545,7 @@ function filter_days(entry, start_date, end_date, type) {
     document.getElementById("countrytotaldiv").style.display = "block"
     document.getElementById("countrytableid").style.display = "block";
     document.getElementById("countrytotal").innerHTML = `<h3 class="total text-light" id="countrytotal"> ${countrydatamapper.length}</h3>`
+    
     // Map //
     let anyChartData = [];
 
