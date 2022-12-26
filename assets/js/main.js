@@ -327,7 +327,7 @@ function filter_months(entry, start_date, end_date, type) {
 
   let filter_data = [];
   let country_phone_codes = [];
-  
+
   if (type == "available") {
     let previous_months_count = 0;
 
@@ -354,7 +354,6 @@ function filter_months(entry, start_date, end_date, type) {
       }
     });
 
-    let country_region_code_data = {};
     let country_data = {};
 
     country_phone_codes.forEach((element) => {
@@ -368,31 +367,30 @@ function filter_months(entry, start_date, end_date, type) {
       let country_name = regionNames.of(country_region_code);
 
       if (country_data[country_name]) {
-        country_data[country_name] = (country_data[country_name] || 0) + 1;
+        country_data[country_name]["count"] = (country_data[country_name]["count"] || 0) + 1;
       } else {
-        country_data[country_name] = (country_data[country_name] || 0) + 1;
+        country_data[country_name] = {
+          count: (country_data[country_name] || 0) + 1,
+          region_code: country_region_code
+        }
       };
-
-      if (country_region_code_data[country_region_code]) {
-        country_region_code_data[country_region_code] = (country_region_code_data[country_region_code] || 0) + 1;
-      } else {
-        country_region_code_data[country_region_code] = (country_region_code_data[country_region_code] || 0) + 1;
-      }
     });
+
     document.getElementById("countrytable_data").innerHTML = ""
 
     let countrydatamapper = Object.keys(country_data);
     let totoalUserCount = 0
 
     countrydatamapper.forEach((key) => {
-      totoalUserCount += country_data[key]
+      totoalUserCount += country_data[key]["count"]
     });
+
     countrydatamapper.sort();
 
-    countrydatamapper.forEach((key, index) => {
+    countrydatamapper.forEach((key) => {
       document.getElementById("countrytable_header").innerHTML = `<h6 class="text-light">Country Summary Table</h6>`
       document.getElementById("countrytable_head").innerHTML = `<tr><th scope="col">COUNTRY</th><th scope="col">NUMBER OF USERS</th><th scope="col">PERCENTAGE</th></tr>`;
-      document.getElementById("countrytable_data").innerHTML += `<tr><td class="pointclick" onclick="map.zoomToFeature('${Object.keys(country_region_code_data)[index]}')">${key}</td><td>${country_data[key]}</td><td> ${((country_data[key]/totoalUserCount) * 100).toFixed(1) + "%" } </td></tr>`;
+      document.getElementById("countrytable_data").innerHTML += `<tr><td class="pointclick" onclick="map.zoomToFeature('${country_data[key]["region_code"]}')">${key}</td><td>${country_data[key]["count"]}</td><td> ${((country_data[key]["count"]/totoalUserCount) * 100).toFixed(1) + "%" } </td></tr>`;
     });
 
     document.getElementById("mapping").style.display = "block"
@@ -404,10 +402,10 @@ function filter_months(entry, start_date, end_date, type) {
     // Map //
     let anyChartData = [];
 
-    Object.keys(country_region_code_data).forEach((key) => {
+    Object.keys(country_data).forEach((key) => {
       anyChartData.push({
-        "id": key,
-        "value": country_region_code_data[key]
+        "id": country_data[key]["region_code"],
+        "value": country_data[key]["count"]
       })
     });
 
@@ -423,7 +421,7 @@ function filter_months(entry, start_date, end_date, type) {
     });
 
     let result = Object.keys(data).sort(function (a, b) {
-      return month.indexOf(a) > month.indexOf(b);
+      return month.indexOf(a) - month.indexOf(b);
     }).map((key, index, array) => {
       previous_months_count += (data[array[index - 1]] || 0)
       return [key, data[key] + previous_months_count];
@@ -499,7 +497,6 @@ function filter_days(entry, start_date, end_date, type) {
       }
     });
 
-    let country_region_code_data = {};
     let country_data = {};
 
     country_phone_codes.forEach((element) => {
@@ -513,16 +510,13 @@ function filter_days(entry, start_date, end_date, type) {
       let country_name = regionNames.of(country_region_code);
 
       if (country_data[country_name]) {
-        country_data[country_name] = (country_data[country_name] || 0) + 1;
+        country_data[country_name]["count"] = (country_data[country_name]["count"] || 0) + 1;
       } else {
-        country_data[country_name] = (country_data[country_name] || 0) + 1;
+        country_data[country_name] = {
+          count: (country_data[country_name] || 0) + 1,
+          region_code: country_region_code
+        }
       };
-
-      if (country_region_code_data[country_region_code]) {
-        country_region_code_data[country_region_code] = (country_region_code_data[country_region_code] || 0) + 1;
-      } else {
-        country_region_code_data[country_region_code] = (country_region_code_data[country_region_code] || 0) + 1;
-      }
     });
 
     document.getElementById("countrytable_data").innerHTML = ""
@@ -531,28 +525,30 @@ function filter_days(entry, start_date, end_date, type) {
     let totoalUserCount = 0
 
     countrydatamapper.forEach((key) => {
-      totoalUserCount += country_data[key]
+      totoalUserCount += country_data[key]["count"]
     });
+
     countrydatamapper.sort();
 
-    countrydatamapper.forEach((key, index) => {
+    countrydatamapper.forEach((key) => {
       document.getElementById("countrytable_header").innerHTML = `<h6 class="text-light">Country Summary Table</h6>`
       document.getElementById("countrytable_head").innerHTML = `<tr><th scope="col">COUNTRY</th><th scope="col">NUMBER OF USERS</th><th scope="col">PERCENTAGE</th></tr>`;
-      document.getElementById("countrytable_data").innerHTML += `<tr><td class="pointclick" onclick="map.zoomToFeature('${Object.keys(country_region_code_data)[index]}')">${key}</td><td>${country_data[key]}</td><td> ${((country_data[key]/totoalUserCount) * 100).toFixed(1) + "%" } </td></tr>`;
+      document.getElementById("countrytable_data").innerHTML += `<tr><td class="pointclick" onclick="map.zoomToFeature('${country_data[key]["region_code"]}')">${key}</td><td>${country_data[key]["count"]}</td><td> ${((country_data[key]["count"]/totoalUserCount) * 100).toFixed(1) + "%" } </td></tr>`;
     });
 
     document.getElementById("mapping").style.display = "block"
     document.getElementById("countrytotaldiv").style.display = "block"
     document.getElementById("countrytableid").style.display = "block";
     document.getElementById("countrytotal").innerHTML = `<h3 class="total text-light" id="countrytotal"> ${countrydatamapper.length}</h3>`
-    
+
+
     // Map //
     let anyChartData = [];
 
-    Object.keys(country_region_code_data).forEach((key) => {
+    Object.keys(country_data).forEach((key) => {
       anyChartData.push({
-        "id": key,
-        "value": country_region_code_data[key]
+        "id": country_data[key]["region_code"],
+        "value": country_data[key]["count"]
       })
     });
 
@@ -568,7 +564,7 @@ function filter_days(entry, start_date, end_date, type) {
     });
 
     let result = Object.keys(data).sort(function (a, b) {
-      return new Date(a) > new Date(b);
+      return new Date(a) - new Date(b);
     }).map((key, index, array) => {
       previous_days_count += (data[array[index - 1]] || 0)
       return [key, data[key] + previous_days_count];
@@ -801,4 +797,3 @@ function createMap(data) {
     map.draw();
   });
 }
-
