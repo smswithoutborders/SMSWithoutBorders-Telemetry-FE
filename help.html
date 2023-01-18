@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="shortcut icon" sizes="32x32 64x64" href="assets/images/favicon.ico" />
+    <title>SWOB Telemetry</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+        integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/solid.min.css"
+        integrity="sha512-uj2QCZdpo8PSbRGL/g5mXek6HM/APd7k/B5Hx/rkVFPNOxAQMXD+t+bG4Zv8OAdUpydZTU3UHmyjjiHv2Ww0PA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.anychart.com/releases/8.9.0/css/anychart-ui.min.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.anychart.com/releases/8.9.0/fonts/css/anychart-font.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+        integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+
+</head>
+
+<body>
+    <style>
+        p {
+            color: #c6c6c7;
+        }
+    </style>
+
+    <div class="sidebar close">
+        <div class="logo-details">
+            <img src="assets/images/logoicon.png" alt="" width="55px" class="ps-3">
+            <span class="logo_name">SWOB</span>
+        </div>
+        <ul class="nav-links">
+            <li>
+                <a href="index.html">
+                    <i class='bx bx-grid-alt'></i>
+                    <span class="link_name">Dashboard</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="index.html">Dashboard</a></li>
+                </ul>
+            </li>
+
+
+            <li>
+                <a href="#">
+                    <i class='bx bx-help-circle'></i>
+                    <span class="link_name">Help</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="#">Help</a></li>
+                </ul>
+            </li>
+            <!-- <li>
+            <a href="#">
+                <i class='bx bx-map'></i>
+                <span class="link_name">Map</span>
+            </a>
+            <ul class="sub-menu blank">
+                <li><a class="link_name" href="#">Map</a></li>
+            </ul>
+        </li> -->
+
+            <li>
+                <a href="support.html">
+                    <i class='bx bx-support'></i>
+                    <span class="link_name">Support</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="support.html">Support</a></li>
+                </ul>
+            </li>
+
+
+        </ul>
+    </div>
+
+
+
+
+    <section class="home-section ">
+        <div class="home-content">
+            <i class='bx bx-menu text-light'></i>
+
+            <div class="main" id="">
+
+                <div class="text-light">
+                    <h2> <b> Open Telemetry </b> </h2>
+                    <p>This is an open source tool used to monitor <a href="https://smswithoutborders.com/">
+                            SMSWithoutBorders</a> statistics. </p>
+
+                    <p>We use this data to provide and improve SMSWithoutBorders.</p>
+                </div>
+
+                <div class="text-light my-5">
+                    <h4> <b> How To Use </b> </h4>
+                    <p>
+                        <b>Type Category</b> <br>
+                        Signed-up Users - See number of sign ups <br>
+                        Available Users - See number of all available users <br>
+                        Published - See the total number of all messages sent using SMSWithoutBorders
+                    </p>
+
+                    <p>
+                        <b> Filters </b> <br>
+                        Month - See all data in months format <br>
+                        Day - See all data in days format
+                    </p>
+
+                    <p>
+                        <b>Date</b> <br>
+                        Start Date - Pick the date you want the data to fetch from <br>
+                        End Date - Pick the date you want the data to end <br>
+                        Example - To see data for just January and Feburary
+                        <img src="assets/images/example.png" alt="">
+                    </p>
+
+
+                </div>
+                <p class="copyright" style="color: rgb(126, 128, 129);">
+                    &copy; 2023 - <a href="#"><span>SMSWithoutBorders</span></a> .
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Any chart map -->
+    <script src="https://cdn.anychart.com/releases/8.9.0/js/anychart-base.min.js"></script>
+    <script src="https://cdn.anychart.com/releases/8.9.0/js/anychart-map.min.js"></script>
+    <script src="https://cdn.anychart.com/geodata/latest/custom/world/world.js"></script>
+    <script src="https://cdn.anychart.com/releases/8.9.0/js/anychart-data-adapter.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.3.15/proj4.js"></script>
+    <script src="https://cdn.anychart.com/releases/8.9.0/js/anychart-exports.min.js"></script>
+    <script src="https://cdn.anychart.com/releases/8.9.0/js/anychart-ui.min.js"></script>
+    <script src="https://cdn.anychart.com/themes/2.0.0/dark_blue.min.js"></script>
+
+    <!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <!-- My JS -->
+    <script src="assets/js/controller.js"></script>
+    <script src="assets/js/main.js"></script>
+
+    <!-- Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
+    </script>
+
+</body>
+
+</html>

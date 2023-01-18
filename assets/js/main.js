@@ -295,7 +295,6 @@ function fetchData(
           <span class="visually-hidden">Loading...</span>
       </div></div>`;
 
-      document.getElementById("table_header").innerHTML = `<h6 class="text-light">Loading Summary ...</h6>`
       table_head.innerHTML = "";
       table_data.innerHTML = "";
       document.getElementById("total").innerHTML = `...`
@@ -388,15 +387,16 @@ function filter_months(entry, start_date, end_date, type) {
     countrydatamapper.sort();
 
     countrydatamapper.forEach((key) => {
-      document.getElementById("countrytable_header").innerHTML = `<h6 class="text-light">Country Summary Table</h6>`
-      document.getElementById("countrytable_head").innerHTML = `<tr><th scope="col">COUNTRY</th><th scope="col">NUMBER OF USERS</th><th scope="col">PERCENTAGE</th></tr>`;
+      document.getElementById("countrytable_head").innerHTML = `<tr><th scope="col">COUNTRY</th><th scope="col">USERS</th><th scope="col">PERCENTAGE</th></tr>`;
       document.getElementById("countrytable_data").innerHTML += `<tr><td class="pointclick" onclick="map.zoomToFeature('${country_data[key]["region_code"]}')">${key}</td><td>${country_data[key]["count"]}</td><td> ${((country_data[key]["count"]/totoalUserCount) * 100).toFixed(1) + "%" } </td></tr>`;
     });
 
+    document.getElementById("card2").style.display = "block"
+    document.getElementById("maprow").style.display = "flex"
     document.getElementById("mapping").style.display = "block"
     document.getElementById("countrytotaldiv").style.display = "block"
     document.getElementById("countrytableid").style.display = "block";
-    document.getElementById("countrytotal").innerHTML = `<h3 class="total text-light" id="countrytotal"> ${countrydatamapper.length}</h3>`
+    document.getElementById("countrytotal").innerHTML = `<h3 class="total text-light" id="countrytotal"> ${countrydatamapper.length} <i class="fa-solid fa-sort-up"></i></h3>`
 
 
     // Map //
@@ -456,12 +456,9 @@ function filter_months(entry, start_date, end_date, type) {
       return [key, data[key]];
     });
 
-    document.getElementById('mapping').style.display = "none";
-    document.getElementById("countrytableid").style.display = "none";
-    document.getElementById("countrytable_header").innerHTML = "";
-    document.getElementById("countrytotal").innerHTML = "";
-    document.getElementById("countrytotaldiv").style.display = "none";
-
+    document.getElementById('maprow').style.display = "none";
+    document.getElementById('card2').style.display = "none";
+   
     return result;
   }
 }
@@ -531,15 +528,16 @@ function filter_days(entry, start_date, end_date, type) {
     countrydatamapper.sort();
 
     countrydatamapper.forEach((key) => {
-      document.getElementById("countrytable_header").innerHTML = `<h6 class="text-light">Country Summary Table</h6>`
-      document.getElementById("countrytable_head").innerHTML = `<tr><th scope="col">COUNTRY</th><th scope="col">NUMBER OF USERS</th><th scope="col">PERCENTAGE</th></tr>`;
+      document.getElementById("countrytable_head").innerHTML = `<tr><th scope="col">COUNTRY</th><th scope="col">USERS</th><th scope="col">PERCENTAGE</th></tr>`;
       document.getElementById("countrytable_data").innerHTML += `<tr><td class="pointclick" onclick="map.zoomToFeature('${country_data[key]["region_code"]}')">${key}</td><td>${country_data[key]["count"]}</td><td> ${((country_data[key]["count"]/totoalUserCount) * 100).toFixed(1) + "%" } </td></tr>`;
     });
 
+    document.getElementById("card2").style.display = "block"
+    document.getElementById("maprow").style.display = "flex"
     document.getElementById("mapping").style.display = "block"
     document.getElementById("countrytotaldiv").style.display = "block"
     document.getElementById("countrytableid").style.display = "block";
-    document.getElementById("countrytotal").innerHTML = `<h3 class="total text-light" id="countrytotal"> ${countrydatamapper.length}</h3>`
+    document.getElementById("countrytotal").innerHTML = `<h3 class="total text-light" id="countrytotal"> ${countrydatamapper.length} <i class="fa-solid fa-sort-up"></i></h3>`
 
 
     // Map //
@@ -599,11 +597,8 @@ function filter_days(entry, start_date, end_date, type) {
     });
 
 
-    document.getElementById('mapping').style.display = "none";
-    document.getElementById("countrytableid").style.display = "none";
-    document.getElementById("countrytable_header").innerHTML = "";
-    document.getElementById("countrytotal").innerHTML = "";
-    document.getElementById("countrytotaldiv").style.display = "none";
+    document.getElementById('maprow').style.display = "none";
+    document.getElementById('card2').style.display = "none";
 
     return result;
   }
@@ -653,8 +648,8 @@ function line(data) {
           titleColor: '#FFF'
         },
         // title: `${data[0][1]} METRICS`,
-        height: 250,
-        backgroundColor: '#0e213b',
+        //height: 200,
+        backgroundColor: '#212121',
         legendTextStyle: {
           color: '#FFF'
         },
@@ -696,7 +691,7 @@ function run(
   );
 
   // Table
-  document.getElementById("table_header").innerHTML = `<h6 class="text-light">Summary Table</h6>`
+  //document.getElementById("table_header").innerHTML = `<h6 class="text-light">Summary Table</h6>`
   table_head.innerHTML = `<tr><th scope="col">${headers[0]}</th><th scope="col">${headers[1]}</th></tr>`;
   table_data.innerHTML = "";
 
@@ -715,7 +710,7 @@ function run(
 
   document.getElementById("totalheader").innerHTML = `<p class="text-light totalheader" id=""> TOTAL ${headers[1]}</p>`;
 
-  document.getElementById("total").innerHTML = total
+  document.getElementById("total").innerHTML = `<h3 class="total text-light" id="total"> ${total} <i class="fa-solid fa-sort-up"></i></h3>`
 
   filter_data.unshift(headers);
 
@@ -742,7 +737,7 @@ function run(
 // Draw Map
 function createMap(data) {
   anychart.onDocumentReady(function () {
-    document.getElementById('mapping').innerHTML = `<a href="#" onclick='map.fullScreen(true)'>Enter full screen mode</a>`
+    document.getElementById('mapping').innerHTML = `<a href="#" onclick='map.fullScreen(true)' class="text-light"><i class="fa-solid fa-maximize"></i></a>`
 
     map.geoData(anychart.maps.world);
 
@@ -751,9 +746,9 @@ function createMap(data) {
 
     // map.title("AVAILABLE USERS AROUND THE WORLD");
 
-    anychart.theme('darkBlue');
+    anychart.theme('#212121');
 
-    map.height('110%');
+    map.height('130%');
 
     // map.fullScreen(true)
 
