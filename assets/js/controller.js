@@ -1,38 +1,38 @@
-let format_day = document.getElementById("format_day");
-let format_month = document.getElementById("format_month");
-let filter_type = document.getElementById("type");
-let type = document.getElementById("type");
-let country = document.getElementById("country");
-let format = document.getElementsByName("format");
-let start_date = document.getElementById("start_date");
-let end_date = document.getElementById("end_date");
-let table_data = document.getElementById("table_data");
-let table_head = document.getElementById("table_head");
-
-const URL = "https://smswithoutborders.com:11000/statistics"
+const baseUrl = "https://smswithoutborders.com:11000"
 
 window.onload = () => {
+    let getFormat = () => {
+        let result
+        let format = document.getElementsByName("format");
+
+        for (let i = 0; i < format.length; i++) {
+            if (format[i].checked) {
+                result = format[i].value;
+                break;
+            }
+        }
+
+        return result;
+    };
+
+    let checkDate = () => {
+        if (start_date.value == "") {
+            start_date.value = end_date.value
+        } else if (end_date.value == "") {
+            end_date.value = start_date.value
+        }
+
+        return;
+    };
+
     document.getElementById('mapping').style.display = "none";
 
-    let start_date_new = start_date.value
-    let end_date_new = end_date.value
-
-    if (start_date_new == "") {
-        start_date_new = end_date_new
-    } else if (end_date_new == "") {
-        end_date_new = start_date_new
-    }
-
-    let format_value;
-
-    for (let i = 0; i < format.length; i++) {
-        if (format[i].checked) {
-            format_value = format[i].value;
-        }
-    }
+    checkDate();
+    let format_value = getFormat();
 
     if (format_value == "month" || format_value == "day") {
-        fetchData(URL, format_value, start_date_new, end_date_new, table_data, table_head, type.value);
+        const URL = `${baseUrl}/users?start=${start_date.value}&end=${end_date.value}&type=${type.value}&format=${format_value}`
+        fetchData(URL, format_value, type.value);
     } else {
         let today = new Date();
         let dd = String(today.getDate()).padStart(2, '0');
@@ -45,112 +45,63 @@ window.onload = () => {
         start_date.value = today;
         end_date.value = today;
         format_month.checked = true;
+        type.value = "available"
+        format_value = "month"
 
-        fetchData(URL, "month", start_date.value, end_date.value, table_data, table_head, "signup");
+        const URL = `${baseUrl}/users?start=${start_date.value}&end=${end_date.value}&type=${type.value}&format=${format_value}`
+        fetchData(URL, format_value, type.value);
     }
 
     format_month.addEventListener("click", () => {
-        let start_date_new = start_date.value
-        let end_date_new = end_date.value
+        checkDate();
+        let format_value = getFormat();
 
-        if (start_date_new == "") {
-            start_date_new = end_date_new
-        } else if (end_date_new == "") {
-            end_date_new = start_date_new
-        }
-
-        let format_value;
-
-        for (let i = 0; i < format.length; i++) {
-            if (format[i].checked) {
-                format_value = format[i].value;
-            }
-        }
-
-        fetchData(URL, format_value, start_date_new, end_date_new, table_data, table_head, type.value);
+        const URL = `${baseUrl}/users?start=${start_date.value}&end=${end_date.value}&type=${type.value}&format=${format_value}`
+        fetchData(URL, format_value, type.value);
     });
 
     format_day.addEventListener("click", () => {
-        let start_date_new = start_date.value
-        let end_date_new = end_date.value
+        checkDate();
+        let format_value = getFormat();
 
-        if (start_date_new == "") {
-            start_date_new = end_date_new
-        } else if (end_date_new == "") {
-            end_date_new = start_date_new
-        }
-
-        let format_value;
-
-        for (let i = 0; i < format.length; i++) {
-            if (format[i].checked) {
-                format_value = format[i].value;
-            }
-        }
-
-        fetchData(URL, format_value, start_date_new, end_date_new, table_data, table_head, type.value);
+        const URL = `${baseUrl}/users?start=${start_date.value}&end=${end_date.value}&type=${type.value}&format=${format_value}`
+        fetchData(URL, format_value, type.value);
     });
 
     type.addEventListener("change", () => {
-        let start_date_new = start_date.value
-        let end_date_new = end_date.value
+        checkDate();
+        let format_value = getFormat();
 
-        if (start_date_new == "") {
-            start_date_new = end_date_new
-        } else if (end_date_new == "") {
-            end_date_new = start_date_new
-        }
-
-        let format_value;
-
-        for (let i = 0; i < format.length; i++) {
-            if (format[i].checked) {
-                format_value = format[i].value;
-            }
-        }
-
-        fetchData(URL, format_value, start_date_new, end_date_new, table_data, table_head, type.value);
+        const URL = `${baseUrl}/users?start=${start_date.value}&end=${end_date.value}&type=${type.value}&format=${format_value}`
+        fetchData(URL, format_value, type.value);
     });
 
     start_date.addEventListener("change", () => {
-        let start_date_new = start_date.value
-        let end_date_new = end_date.value
+        checkDate();
+        let format_value = getFormat();
 
-        if (start_date_new == "") {
-            start_date_new = end_date_new
-        } else if (end_date_new == "") {
-            end_date_new = start_date_new
-        }
-
-        let format_value;
-
-        for (let i = 0; i < format.length; i++) {
-            if (format[i].checked) {
-                format_value = format[i].value;
-            }
-        }
-
-        fetchData(URL, format_value, start_date_new, end_date_new, table_data, table_head, type.value);
+        const URL = `${baseUrl}/users?start=${start_date.value}&end=${end_date.value}&type=${type.value}&format=${format_value}`
+        fetchData(URL, format_value, type.value);
     });
 
     end_date.addEventListener("change", () => {
-        let start_date_new = start_date.value
-        let end_date_new = end_date.value
+        checkDate();
+        let format_value = getFormat();
 
-        if (start_date_new == "") {
-            start_date_new = end_date_new
-        } else if (end_date_new == "") {
-            end_date_new = start_date_new
-        }
+        const URL = `${baseUrl}/users?start=${start_date.value}&end=${end_date.value}&type=${type.value}&format=${format_value}`
+        fetchData(URL, format_value, type.value);
+    });;
+}
 
-        let format_value;
-
-        for (let i = 0; i < format.length; i++) {
-            if (format[i].checked) {
-                format_value = format[i].value;
-            }
-        }
-
-        fetchData(URL, format_value, start_date_new, end_date_new, table_data, table_head, type.value);
+let arrow = document.querySelectorAll(".arrow");
+for (var i = 0; i < arrow.length; i++) {
+    arrow[i].addEventListener("click", (e) => {
+        let arrowParent = e.target.parentElement.parentElement; //selecting main parent of arrow
+        arrowParent.classList.toggle("showMenu");
     });
 }
+let sidebar = document.querySelector(".sidebar");
+let sidebarBtn = document.querySelector(".bx-menu");
+sidebarBtn.addEventListener("click", () => {
+    sidebar.classList.toggle("close");
+});

@@ -2,163 +2,248 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous" />
-  <link rel="stylesheet" href="assets/css/style.css" />
-  <link rel="shortcut icon" sizes="32x32 64x64" href="assets/images/favicon.ico" />
-  <title>SWOB Telemetry</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
-    integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/solid.min.css"
-    integrity="sha512-uj2QCZdpo8PSbRGL/g5mXek6HM/APd7k/B5Hx/rkVFPNOxAQMXD+t+bG4Zv8OAdUpydZTU3UHmyjjiHv2Ww0PA=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" type="text/css" href="https://cdn.anychart.com/releases/8.9.0/css/anychart-ui.min.css">
-  <link rel="stylesheet" type="text/css" href="https://cdn.anychart.com/releases/8.9.0/fonts/css/anychart-font.min.css">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="shortcut icon" sizes="32x32 64x64" href="assets/images/favicon.ico" />
+    <title>SWOB Telemetry</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+        integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/solid.min.css"
+        integrity="sha512-uj2QCZdpo8PSbRGL/g5mXek6HM/APd7k/B5Hx/rkVFPNOxAQMXD+t+bG4Zv8OAdUpydZTU3UHmyjjiHv2Ww0PA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.anychart.com/releases/8.9.0/css/anychart-ui.min.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.anychart.com/releases/8.9.0/fonts/css/anychart-font.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+        integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
 </head>
 
 <body>
-  <div class="container-fluid">
 
-    <h4 class="text-light p-0 m-0"> <img src="assets/images/logoicon.png" width="50px" alt=""> SMSWithoutBorders
-      Statistics
-      <hr class="hr text-light p-0 m-0">
-    </h4>
-
-    <div class="row my-3 px-3">
-      <!-- filters -->
-      <!-- type -->
-      <div class="col type">
-        <h6 class="text-light">Type</h6>
-        <select id="type" class="btn btn-light mb-4 w-75">
-          <option value="signup">Signed-up Users</option>
-          <option value="available">Available Users</option>
-          <option value="publisher">Published</option>
-        </select>
-      </div>
-
-      <div class="col">
-        <h6 class="text-light">Format</h6>
-        <div class="row" id="">
-          <div class="col">
-            <input class="form-check-input" type="radio" name="format" value="month" id="format_month">
-            <label class="form-check-label text-light" for=""> Month </label>
-          </div>
-
-          <div class="col">
-            <input class="form-check-input" type="radio" name="format" value="day" id="format_day">
-            <label class="form-check-label text-light" for=""> Days</label>
-          </div>
+    <div class="sidebar close">
+        <div class="logo-details">
+            <img src="assets/images/logoicon.png" alt="" width="55px" class="ps-3">
+            <span class="logo_name">SWOB</span>
         </div>
-      </div>
+        <ul class="nav-links">
+            <li>
+                <a href="#">
+                    <i class='bx bx-grid-alt'></i>
+                    <span class="link_name">Dashboard</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="#">Dashboard</a></li>
+                </ul>
+            </li>
 
-      <div class="col-md-4 text-light ps-1 pe-5 pb-3">
-        <div class="row">
-          <div class="col-6">
-            <small class="">Start-Date</small>
-            <input id="start_date" type="date" class="form-control text-center" />
-          </div>
+            <li>
+                <a href="help.html">
+                    <i class='bx bx-help-circle'></i>
+                    <span class="link_name">Help</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="help.html">Help</a></li>
+                </ul>
+            </li>
+            <!-- <li>
+                <a href="#">
+                    <i class='bx bx-map'></i>
+                    <span class="link_name">Map</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="#">Map</a></li>
+                </ul>
+            </li> -->
 
-          <div class="col-6">
-            <small class="">End-Date</small>
-            <input id="end_date" type="date" class="form-control text-center" />
-          </div>
-        </div>
-      </div>
+            <li>
+                <a href="support.html">
+                    <i class='bx bx-support'></i>
+                    <span class="link_name">Support</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="support.html">Support</a></li>
+                </ul>
+            </li>
 
-      <!-- Total boxes -->
-      <div class="col-md-4">
-        <div class="row mb-3">
-          <div class="col p-1 mx-1 totalbox">
-            <p class="text-light " id="totalheader"> TOTAL </p>
-            <h3 class="total text-light" id="total"> 0 </h3>
-          </div> <br>
-
-          <div class="col p-1 mx-1 totalbox" id="countrytotaldiv">
-            <p class="text-light " id="">COUNTRY TOTAL </p>
-            <h3 class="total text-light" id="countrytotal"> 0 </h3>
-          </div> <br>
-
-          <div class="col py-1 mx-1 totalbox" id="download">
-            <p class="text-light "> DOWNLOAD </p>
-            <i class="fa-sharp fa-solid fa-download text-light fa-2x"></i>
-          </div> <br>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-
-  <div class="row px-3">
-    <!-- map -->
-    <div class="col-md-7">
-      <div class="mapouter" id="mapping">
-        <div class="d-flex justify-content-center">
-          <div class="spinner-border text-light" style="margin-top: 5rem; width: 4rem; height: 4rem" role="status">
-            <span class="visually-hidden">Loading...</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- map data table -->
-    <div class="col-md-5 pe-5">
-      <h5 id="countrytable_header"></h5>
-      <div class="table-responsive rest" id="countrytableid">
-        <table class="table table-bordered border-5 border-secondary text-center">
-          <thead id="countrytable_head" class="table-light border-dark"></thead>
-          <tbody id="countrytable_data" class="text-light"></tbody>
-        </table>
-      </div>
+        </ul>
     </div>
 
-    <!-- line chart -->
-    <div class="col-md-7">
-      <div class="text-light mb-3" id="line_div">
-        <div class="d-flex justify-content-center">
-          <div class="spinner-border text-light" style="margin-top: 1rem; width: 4rem; height: 4rem" role="status">
-            <span class="visually-hidden">Loading...</span>
-          </div>
+    <section class="home-section ">
+        <div class="home-content">
+            <i class='bx bx-menu text-light'></i>
+
+
+            <div class="main" id="">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4 class="text-light"> Open Telemetry <i class="fa-solid fa-arrows-rotate refresh"
+                                onClick="window.location.reload()"></i></h4>
+                    </div>
+                    <div class="col-md-6 text-end pe-5">
+                        <!-- <i class='bx bx-download  text-light ' id="download"></i> </div> -->
+
+                </div>
+
+                <!-- Total Boxes -->
+                <div class="row text-light">
+                    <div class="col-sm-2 card1 text-center m-1">
+                        <div class="row justify-content-md-center">
+                            <div class="col-md-3 icondiv">
+                                <div class="icon1">
+                                    <i class="fa-solid fa-chart-simple fa-2x"></i>
+                                </div>
+                            </div>
+                            <div class="col-md-6 ">
+                                <h3 class="total text-light" id="total"> 0 </h3>
+                                <p class="text-light textsmall" id="totalheader"> TOTAL </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br>
+                    <div class="col-sm-2 card2 text-center m-1" id="card2">
+                        <div class="row justify-content-md-center">
+                            <div class="col-md-3 ">
+                                <div class="icon2">
+                                    <i class="fa-solid fa-map-location-dot fa-2x"></i>
+                                </div>
+                            </div>
+                            <div class="col-md-6 " id="countrytotaldiv">
+                                <h3 class="total text-light" id="countrytotal"> 0 </h3>
+                                <p class="text-light textsmall" id="">COUNTRY TOTAL </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End of Total box section -->
+
+                <div class="row mt-3">
+                    <!-- filters -->
+                    <!-- type -->
+                    <div class="col-md-3 type">
+                        <h6 class="text-light">Type</h6>
+                        <select id="type" class="btn btn-outline-light mb-4 w-75">
+                            <option value="signup">Signed-up Users</option>
+                            <option value="available">Available Users</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-2 p-3">
+                        <h6 class="text-light">Format</h6>
+                        <div class="row" id="">
+                            <div class="col-md-6">
+                                <input class="form-check-input" type="radio" name="format" value="month"
+                                    id="format_month">
+                                <label class="form-check-label text-light" for=""> Month </label>
+                            </div>
+
+                            <div class="col-md-6">
+                                <input class="form-check-input" type="radio" name="format" value="day" id="format_day">
+                                <label class="form-check-label text-light" for=""> Days</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br>
+                    <div class="col-md-3 text-light ps-1 pe-5 pb-3">
+                        <div class="row">
+                            <div class="col-6">
+                                <small class="">Start-Date</small>
+                                <input id="start_date" type="date"
+                                    class="btn btn-outline-light form-control text-center" />
+                            </div>
+
+                            <div class="col-6">
+                                <small class="">End-Date</small>
+                                <input id="end_date" type="date"
+                                    class="btn btn-outline-light form-control text-center" />
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <br>
+                <!--Map  -->
+                <div class="row" id="maprow">
+                    <div class="col-md-7 bigbox2 m-1" id="bigbox2">
+                        <div class="mapouter" id="mapping">
+                            <div class="d-flex justify-content-center">
+                                <div class="spinner-border text-light"
+                                    style="margin-top: 5rem; width: 4rem; height: 4rem" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 smallbox2 m-1" id="smallbox2">
+                        <div class="table-responsive rest" id="countrytableid">
+                            <table class="table text-center">
+                                <thead id="countrytable_head" class="text-light"></thead>
+                                <tbody id="countrytable_data" class="text-light"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <br>
+                <!--Chart  -->
+                <div class="row">
+                    <div class="col-md-7 bigbox m-1">
+                        <div class="text-light mb-3" id="line_div">
+                            <div class="d-flex justify-content-center">
+                                <div class="spinner-border text-light"
+                                    style="margin-top: 1rem; width: 4rem; height: 4rem" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 smallbox m-1">
+                        <div class="d-flex align-items-start">
+                            <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist"
+                                aria-orientation="vertical"></div>
+                            <div class="tab-content w-100" id="v-pills-tabContent"></div>
+                        </div>
+                    </div>
+                </div>
+                <p class="p-3 footer" style="color: rgb(126, 128, 129);">
+                    &copy; 2023 - <a href="https://smswithoutborders.com/"><span>SMSWithoutBorders</span></a> .
+                </p>
+            </div>
         </div>
-      </div>
-    </div>
+    </section>
 
-    <!-- data table -->
-    <div class="col-md-5 pe-5">
-      <h5 id="table_header"></h5>
-      <div class="table-responsive rest mb-3 " id="table">
-        <table class="table table-bordered border-secondary text-center">
-          <thead id="table_head" class="table-light border-dark"></thead>
-          <tbody id="table_data" class="text-light"></tbody>
-        </table>
-      </div>
-    </div>
-  </div>
+    <!-- Any chart map -->
+    <script src="https://cdn.anychart.com/releases/8.9.0/js/anychart-base.min.js"></script>
+    <script src="https://cdn.anychart.com/releases/8.9.0/js/anychart-map.min.js"></script>
+    <script src="https://cdn.anychart.com/geodata/latest/custom/world/world.js"></script>
+    <script src="https://cdn.anychart.com/releases/8.9.0/js/anychart-data-adapter.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.3.15/proj4.js"></script>
+    <script src="https://cdn.anychart.com/releases/8.9.0/js/anychart-exports.min.js"></script>
+    <script src="https://cdn.anychart.com/releases/8.9.0/js/anychart-ui.min.js"></script>
+    <script src="https://cdn.anychart.com/themes/2.0.0/dark_blue.min.js"></script>
 
-  <!-- Any chart map -->
-  <script src="https://cdn.anychart.com/releases/8.9.0/js/anychart-base.min.js"></script>
-  <script src="https://cdn.anychart.com/releases/8.9.0/js/anychart-map.min.js"></script>
-  <script src="https://cdn.anychart.com/geodata/latest/custom/world/world.js"></script>
-  <script src="https://cdn.anychart.com/releases/8.9.0/js/anychart-data-adapter.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.3.15/proj4.js"></script>
-  <script src="https://cdn.anychart.com/releases/8.9.0/js/anychart-exports.min.js"></script>
-  <script src="https://cdn.anychart.com/releases/8.9.0/js/anychart-ui.min.js"></script>
-  <script src="https://cdn.anychart.com/themes/2.0.0/dark_blue.min.js"></script>
+    <!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
-  <!--Load the AJAX API-->
-  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <!-- My JS -->
+    <script src="assets/js/controller.js"></script>
+    <script src="assets/js/main.js"></script>
 
-  <!-- My JS -->
-  <script src="assets/js/controller.js"></script>
-  <script src="assets/js/main.js"></script>
-
-  <!-- Bootstrap -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
-  </script>
+    <!-- Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
+    </script>
 
 </body>
 
