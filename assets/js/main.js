@@ -116,6 +116,10 @@ function run(
   if (yearData.length < 1) {
     line([]);
     document.getElementById("v-pills-tabContent").innerHTML = `<h5 class="text-danger text-center" style="margin-top: 10rem;">Sorry No Data To Display!</h5>`;
+    
+    new ResizeObserver(function () {
+      line([]);
+    }).observe(document.getElementById("line_div"));
   } else {
     yearData.forEach((item, index) => {
       let selected_data = data[item]

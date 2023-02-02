@@ -8,6 +8,11 @@ body {
   overflow-y: auto;
 }
 
+.footer a{
+  text-decoration: none;
+  color: white;
+}
+
 #download {
   font-size: 30px;
 }
