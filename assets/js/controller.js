@@ -1,4 +1,4 @@
-const baseUrl = "https://smswithoutborders.com:11000"
+const baseUrl = "https://vault.smswithoutborders.com/v2"
 
 window.onload = () => {
     let getFormat = () => {
